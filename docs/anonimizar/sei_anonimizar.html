@@ -1,0 +1,1952 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.6">
+<title>anonimizar.sei_anonimizar API documentation</title>
+<meta name="description" content="Módulo sei_anonimizar …">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source > summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin:1em 0}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>anonimizar.sei_anonimizar</code></h1>
+</header>
+<section id="section-intro">
+<p>Módulo sei_anonimizar.</p>
+<p>Este módulo fornece funcionalidades para detecção e anonimização de entidades sensíveis
+em textos, utilizando modelos spaCy treinados e padrões regex personalizáveis. É especialmente
+útil para anonimizar documentos que contenham informações pessoais como CPF, RG, e-mails,
+telefones, dados bancários, endereços, entre outros.</p>
+<p>O módulo combina duas abordagens:
+1. Detecção por modelo de Machine Learning (spaCy NER)
+2. Detecção por padrões regex customizáveis</p>
+<p><strong>Classes:</strong>
+SeiAnonimizar: Classe principal para anonimização de entidades nomeadas e sensíveis.</p>
+<p><strong>Exemplo básico de uso:</strong></p>
+<pre><code>&gt;&gt;&gt; from anonimizar.sei_anonimizar import SeiAnonimizar
+&gt;&gt;&gt; # Inicializar o anonimizador
+&gt;&gt;&gt; anonymizer = SeiAnonimizar(model_path="pt_core_news_lg")
+&gt;&gt;&gt;
+&gt;&gt;&gt; # Configurar padrões de detecção
+&gt;&gt;&gt; anonymizer.add_apply_patterns(['CPF', 'EMAIL', 'TELEFONE'])
+&gt;&gt;&gt;
+&gt;&gt;&gt; # Processar texto
+&gt;&gt;&gt; texto = "Meu CPF é 123.456.789-00 e meu e-mail é exemplo@dominio.com"
+&gt;&gt;&gt; entidades = anonymizer.extract_entities(text_or_path=texto, return_type="label_detail")
+&gt;&gt;&gt; texto_anonimizado = anonymizer.anonymize_text(texto, entidades)
+&gt;&gt;&gt;
+&gt;&gt;&gt; print(f"Original: {texto}")
+&gt;&gt;&gt; print(f"Anonimizado: {texto_anonimizado}")
+"Anonimizado: Meu CPF é &lt;CPF&gt; e meu e-mail é &lt;EMAIL&gt;"
+</code></pre>
+<p><strong>Exemplos avançados de uso:</strong></p>
+<pre><code>**Exemplo 1: Controle de labels na inicialização**
+
+    &gt;&gt;&gt; # Inicializar com labels específicos - apenas RG será detectado pelo modelo
+    &gt;&gt;&gt; from anonimizar.sei_anonimizar import SeiAnonimizar
+    &gt;&gt;&gt; anonymizer = SeiAnonimizar("pt_core_news_lg", labels=['RG'])
+    &gt;&gt;&gt; text = "Olá meu nome é matheus e meu cpf é 123.456.789-09"
+    &gt;&gt;&gt; anonymizer.extract_entities(text, return_type='label_detail')
+    []  # Retorna vazio pois não tem nenhum caso de RG
+    &gt;&gt;&gt; # Adicionar padrões regex para CPF
+    &gt;&gt;&gt; anonymizer.add_apply_patterns(['CPF'])
+    &gt;&gt;&gt; anonymizer.extract_entities(text, return_type="label_detail")
+    [{'label': 'CPF',
+    'start_position': 35,
+    'end_position': 49,
+    'text': '123.456.789-09',
+    'detected_by': re.compile(r'\\d{3}[.]\\d{3}[.]\\d{3}[-.\\/]\\d{2}', re.UNICODE)}]
+
+**Exemplo 2: Detecção por modelo sem labels específicos**
+
+    &gt;&gt;&gt; # Inicializar sem labels específicos - todos os labels serão ativados
+    &gt;&gt;&gt; anonymizer = SeiAnonimizar("pt_core_news_lg")
+    &gt;&gt;&gt; text = "Olá meu nome é matheus e meu cpf é 123.456.789-09"
+    &gt;&gt;&gt; anonymizer.extract_entities(text, return_type='label_detail')
+    [{'label': 'CPF',
+    'start_position': 35,
+    'end_position': 49,
+    'text': '123.456.789-09',
+    'detected_by': 'modelo'}]
+
+
+**Exemplo 3: Usando use_model_labels para ativar detecção por modelo**
+
+    &gt;&gt;&gt; # Ativar todos os labels do modelo
+    &gt;&gt;&gt; anonymizer = SeiAnonimizar("pt_core_news_lg")
+    &gt;&gt;&gt; text = "Olá meu nome é matheus e meu cpf é 123.456.789-09"
+    &gt;&gt;&gt; anonymizer.add_apply_patterns(use_model_labels=True)
+    &gt;&gt;&gt; anonymizer.extract_entities(text, return_type='label_detail')
+    [{'label': 'CPF',
+    'start_position': 35,
+    'end_position': 49,
+    'text': '123.456.789-09',
+    'detected_by': 'modelo'}]
+
+
+**Exemplo 4: Combinando labels específicos com use_model_labels**
+
+    &gt;&gt;&gt; # Inicializar com label específico e usar apenas esse label
+    &gt;&gt;&gt; anonymizer = SeiAnonimizar("pt_core_news_lg", labels=['RG'])
+    &gt;&gt;&gt; text = "Olá meu nome é matheus e meu cpf é 123.456.789-09"
+    &gt;&gt;&gt; anonymizer.add_apply_patterns(use_model_labels=True)
+    &gt;&gt;&gt; anonymizer.extract_entities(text, return_type='label_detail')
+    []  # Retorna vazio pois só RG está ativo e não há RG no texto
+
+
+**Exemplo 5: Substituição de padrões com replace_patterns**
+
+    &gt;&gt;&gt; # Adicionar padrões e depois substituir completamente
+    &gt;&gt;&gt; anonymizer = SeiAnonimizar("pt_core_news_lg")
+    &gt;&gt;&gt; anonymizer.add_apply_patterns(['CPF'])
+    &gt;&gt;&gt; len(anonymizer.patterns)  # Vários padrões para CPF
+    11
+    &gt;&gt;&gt; # Adicionar RG sem substituir
+    &gt;&gt;&gt; anonymizer.add_apply_patterns(['RG'])
+    &gt;&gt;&gt; len(anonymizer.patterns)  # CPF + RG
+    15
+    &gt;&gt;&gt; # Substituir todos os padrões por apenas EMAIL
+    &gt;&gt;&gt; anonymizer.add_apply_patterns(['EMAIL'], replace_patterns=True)
+    &gt;&gt;&gt; len(anonymizer.patterns)  # Apenas EMAIL
+    1
+    &gt;&gt;&gt; anonymizer.patterns
+    [{'label': 'EMAIL',
+    'pattern': {'REGEX': '[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+'}}]
+
+
+**Exemplo 6: Padrões customizados**
+
+    &gt;&gt;&gt; # Adicionar padrão customizado
+    &gt;&gt;&gt; custom_patterns = [
+    ...     {"label": "CODIGO_PRODUTO", "regex": r"PROD-\\d{4}",
+    ...      "description": "Códigos de produto"}
+    ... ]
+    &gt;&gt;&gt; anonymizer.add_apply_patterns(['CPF'], custom_patterns=custom_patterns)
+    &gt;&gt;&gt; text = "Pedido PROD-1234 com CPF 123.456.789-00"
+    &gt;&gt;&gt; entidades = anonymizer.extract_entities(text, return_type="label_detail")
+    &gt;&gt;&gt; texto_anonimizado = anonymizer.anonymize_text(text, entidades)
+    &gt;&gt;&gt; print(texto_anonimizado)
+    "Pedido &lt;CODIGO_PRODUTO&gt; com CPF &lt;CPF&gt;"
+
+
+**Exemplo 7: Verificação de configuração ativa**
+
+    &gt;&gt;&gt; # Verificar quais labels e padrões estão ativos
+    &gt;&gt;&gt; anonymizer.get_active_labels()
+    {
+        'model_labels': ['CPF', 'RG', 'EMAIL'],
+        'regex_summary': {'CPF': 11, 'EMAIL': 1, 'CODIGO_PRODUTO': 1},
+        'regex_patterns': 13,
+        'total_patterns': 16
+    }
+
+**Exemplo 8: Validação de CPF com modelo**
+
+    &gt;&gt;&gt; from sei_anonimizar import SeiAnonimizar
+    &gt;&gt;&gt; anonymizer = SeiAnonimizar("pt_core_news_lg", labels=['CPF'], use_cpf_validator=True)
+    &gt;&gt;&gt; text = "Ola meu nome é matheus e meu cpf é 000.000.000-00"
+    &gt;&gt;&gt; anonymizer.extract_entities(text, return_type='label_detail')
+    []  # Retorna vazio pois 000.000.000-00 não é válido
+    &gt;&gt;&gt; # Desabilitar validação de CPF
+    &gt;&gt;&gt; anonymizer.use_cpf_validator = False
+    &gt;&gt;&gt; anonymizer.extract_entities(text, return_type='label_detail')
+    [{'label': 'CPF',
+    'start_position': 35,
+    'end_position': 49,
+    'text': '000.000.000-00',
+    'detected_by': 'modelo'}]
+
+
+**Exemplo 9: Validação de CPF com regex**
+
+    &gt;&gt;&gt; anonymizer = SeiAnonimizar("pt_core_news_lg", labels=['RG'], use_cpf_validator=True)
+    &gt;&gt;&gt; anonymizer.add_apply_patterns(['CPF'])
+    &gt;&gt;&gt; text = "Ola meu nome é matheus e meu cpf é 000.000.000-00"
+    &gt;&gt;&gt; anonymizer.extract_entities(text, return_type='label_detail')
+    []  # Retorna vazio pois 000.000.000-00 não é válido
+    &gt;&gt;&gt; # Desabilitar validação de CPF
+    &gt;&gt;&gt; anonymizer.use_cpf_validator = False
+    &gt;&gt;&gt; anonymizer.extract_entities(text, return_type='label_detail')
+    [{'label': 'CPF',
+    'start_position': 35,
+    'end_position': 49,
+    'text': '000.000.000-00',
+    'detected_by': re.compile(r'\\d{3}[.]\\d{3}[.]\\d{3}[-.\\/]\\d{2}', re.UNICODE)}]
+</code></pre>
+<p><strong>Métodos principais:</strong>
+- <strong>add_custom_pattern:</strong> Adiciona um padrão REGEX customizado para detecção de entidades.
+- <strong>add_pattern_cpf:</strong> Adiciona os padrões de regex para CPF.
+- <strong>add_pattern_rg:</strong> Adiciona os padrões de regex para RG.
+- <strong>add_pattern_titulo_eleitor:</strong> Adiciona os padrões de regex para título de eleitor.
+- <strong>add_pattern_passaporte:</strong> Adiciona os padrões de regex para passaporte.
+- <strong>add_pattern_siape:</strong> Adiciona os padrões de regex para SIAPE.
+- <strong>add_pattern_cnh:</strong> Adiciona os padrões de regex para CNH.
+- <strong>add_pattern_dados_bancarios:</strong> Adiciona os padrões de regex para dados bancários.
+- <strong>add_pattern_email:</strong> Adiciona os padrões de regex para email.
+- <strong>add_pattern_telefone:</strong> Adiciona os padrões de regex para telefone.
+- <strong>add_pattern_data_nascimento:</strong> Adiciona os padrões de regex para data de nascimento.
+- <strong>add_pattern_endereco:</strong> Adiciona os padrões de regex para endereços/CEP.
+- <strong>add_apply_patterns:</strong> Aplica os padrões de regex para as entidades especificadas.
+- <strong>list_patterns:</strong> Retorna os padrões de regex organizados por categoria (built-in e customizados).
+- <strong>verify_entities_unified:</strong> Verifica se as entidades encontradas pelo modelo fazem sentido.
+- <strong>remove_overlap_positions:</strong> Remove entidades que se sobrepõem, priorizando aquelas com maior abrangência.
+- <strong>extract_entities:</strong> Extrai entidades do texto usando o modelo treinado e padrões regex.
+- <strong>extract_entities_regex_re:</strong> Extrai entidades do texto utilizando exclusivamente regex.
+- <strong>anonymize_text:</strong> Anonimiza o texto substituindo entidades detectadas por suas tags.
+- <strong>get_tokens:</strong> Retorna o texto tokenizado pelo spaCy.
+- <strong>get_active_labels:</strong> Retorna informações detalhadas sobre labels e padrões ativos.
+- <strong>valida_cpf:</strong> Valida um CPF completo (com ou sem formatação), incluindo dígitos verificadores.
+- <strong>valida_titulo_eleitor:</strong> Valida Título de Eleitor (12 dígitos) conforme regra do TSE.
+- <strong>valida_cnpj:</strong> Valida um CNPJ completo (com ou sem formatação), incluindo dígitos verificadores.
+- <strong>_create_default_logger:</strong> Cria logger padrão quando não fornecido.</p>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="anonimizar.sei_anonimizar.SeiAnonimizar"><code class="flex name class">
+<span>class <span class="ident">SeiAnonimizar</span></span>
+<span>(</span><span>model_path: str = '',<br>*,<br>labels: list | None = None,<br>use_cpf_validator: bool = True,<br>use_titulo_validator: bool = True,<br>use_cnh_validator: bool = True,<br>logger: logging.Logger | None = None)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class SeiAnonimizar:
+    &#34;&#34;&#34;Classe para anonimização.&#34;&#34;&#34;
+
+    def __init__(
+        self,
+        model_path: str = &#34;&#34;,
+        *,
+        labels: list | None = None,
+        use_cpf_validator: bool = True,
+        use_titulo_validator: bool = True,
+        use_cnh_validator: bool = True,
+        logger: logging.Logger | None = None,
+    ) -&gt; None:
+        &#34;&#34;&#34;Inicializa o anonimizador SEI com um modelo spaCy.
+
+        Carrega o modelo spaCy especificado e configura as definições padrão para
+        processamento de texto e detecção de entidades. O modelo deve ser um modelo
+        spaCy treinado para reconhecimento de entidades nomeadas em português.
+
+        Este construtor carrega um modelo spaCy (público ou treinado pelo
+        ``SeiAnonimizarNERTrainer``), configura labels permitidos e define
+        parâmetros de validação.
+
+        Args:
+            model_path (str): Caminho para o modelo spaCy pré-treinado.
+                Exemplos: &#34;pt_core_news_sm&#34;, &#34;./meu_modelo_ner&#34;
+                ou caminho para modelo customizado.
+            labels (list, optional): Lista de labels específicos para detecção.
+            use_cpf_validator (bool): Se True, aplica validação algorítmica de CPF nas entidades
+                detectadas.
+            use_titulo_validator (bool): Se True, aplica validação algorítmica de Titulo de eleitor
+                nas entidades detectadas.
+            use_cnh_validator (bool): Se True, aplica validação algorítmica de CNH
+                nas entidades detectadas.
+            logger (logging.Logger, optional): Logger personalizado para usar.
+
+        Raises:
+            ValueError: Se model_path estiver vazio ou não especificado.
+            OSError: Se o modelo especificado não puder ser carregado.
+
+        Note:
+        - O limite máximo de caracteres por texto é definido como 3.000.000
+        - Labels ignoradas por padrão: [&#34;LOC&#34;, &#34;MISC&#34;, &#34;ORG&#34;, &#34;PER&#34;]
+        - É necessário ter o modelo spaCy instalado: `python -m spacy download pt_core_news_lg`
+
+        Examples:
+        &gt;&gt;&gt; anonymizer = SeiAnonimizar(&#34;./meu_modelo_ner&#34;, labels=[&#34;CPF&#34;, &#34;EMAIL&#34;])
+        &gt;&gt;&gt; anonymizer.add_apply_patterns([&#39;CPF&#39;, &#39;EMAIL&#39;])
+        &gt;&gt;&gt; anonymizer.extract_entities(&#34;Meu CPF é 123.456.789-09.&#34;)
+        [{&#39;label&#39;: &#39;CPF&#39;, &#39;start_position&#39;: 10, &#39;end_position&#39;: 24, ...}]
+        &#34;&#34;&#34;
+        self.logger = logger or create_default_logger(__name__)
+        self.logger.info(f&#34;Inicializando SeiAnonimizar com model_path: {model_path}&#34;)
+        self.model_path = model_path
+        if self.model_path == &#34;&#34;:
+            msg = &#34;É necessario ter o model_path preenchido.&#34;
+            self.logger.exception(msg)
+            raise ValueError(msg)
+        try:
+            self.logger.debug(f&#34;Carregando modelo spaCy: {model_path}&#34;)
+            self.nlp_trained = spacy.load(self.model_path)
+            self.nlp_trained.max_length = 3000000
+            self.patterns = []
+            self.labels = set(labels) if labels else set()
+            self.use_cpf_validator = use_cpf_validator
+            self.use_titulo_validator = use_titulo_validator
+            self.use_cnh_validator = use_cnh_validator
+            if labels is None or len(labels) == 0:
+                if &#34;ner&#34; in self.nlp_trained.pipe_names:
+                    model_labels = list(self.nlp_trained.get_pipe(&#34;ner&#34;).labels)
+                    self.labels = set(model_labels)
+                    self.logger.debug(f&#34;Labels extraídos do modelo: {model_labels}&#34;)
+                else:
+                    msg = &#34;Modelo não possui componente NER, usando labels padrão&#34;
+                    self.logger.error(msg)
+                    raise TypeError(msg)
+            else:
+                self.labels = set(labels)
+
+            self.logger.info(&#34;Modelo carregado com sucesso.&#34;)
+            self.logger.debug(&#34;\tMax length: {self.nlp_trained.max_length}&#34;)
+
+            self.logger.debug(f&#34;\tLabels configurados: {self.labels}&#34;)
+            self.logger.debug(f&#34;\tValidação de CPF ativa: {self.use_cpf_validator}&#34;)
+            self.logger.debug(f&#34;\tValidação de TITULO_ELEITOR ativa: {self.use_titulo_validator}&#34;)
+            self.logger.debug(f&#34;\tValidação de CNH ativa: {self.use_cnh_validator}&#34;)
+
+        except OSError as e:
+            self.logger.exception(f&#34;Erro ao carregar modelo spaCy &#39;{model_path}&#39;: {e}&#34;)  # noqa: TRY401
+            raise
+        except Exception as e:
+            self.logger.exception(f&#34;Erro inesperado durante inicialização: {e}&#34;)  # noqa: TRY401
+            raise
+
+    def add_custom_pattern(self, label: str, regex_pattern: str, description: str = &#34;&#34;) -&gt; None:
+        &#34;&#34;&#34;Adiciona padrão REGEX customizado. Wrapper para _patterns.custom.add_custom_pattern.&#34;&#34;&#34;
+        _add_custom_pattern(self.patterns, label, regex_pattern, description, self.logger)
+
+    def add_pattern_cid(self) -&gt; None:
+        &#34;&#34;&#34;Registra padrões regex para CID. Wrapper para _patterns.builtin.add_pattern_cid.&#34;&#34;&#34;
+        _bp_add_pattern_cid(self.patterns, self.logger)
+
+    def add_pattern_cpf(self) -&gt; None:
+        &#34;&#34;&#34;Registra padrões regex para CPF. Wrapper para _patterns.builtin.add_pattern_cpf.&#34;&#34;&#34;
+        _bp_add_pattern_cpf(self.patterns, self.logger)
+
+    def add_pattern_endereco(self) -&gt; None:
+        &#34;&#34;&#34;Registra padrões regex para CEPs. Wrapper para _patterns.builtin.add_pattern_endereco.&#34;&#34;&#34;
+        _bp_add_pattern_endereco(self.patterns, self.logger)
+
+    def add_pattern_geo_coord(self) -&gt; None:
+        &#34;&#34;&#34;Registra padrões regex para coordenadas. Wrapper para _patterns.builtin.add_pattern_geo_coord.&#34;&#34;&#34;
+        _bp_add_pattern_geo_coord(self.patterns, self.logger)
+
+    def add_pattern_rg(self) -&gt; None:
+        &#34;&#34;&#34;Registra padrões regex para RG. Wrapper para _patterns.builtin.add_pattern_rg.&#34;&#34;&#34;
+        _bp_add_pattern_rg(self.patterns, self.logger)
+
+    def add_pattern_titulo_eleitor(self) -&gt; None:
+        &#34;&#34;&#34;Registra padrões regex para Título de Eleitor. Wrapper.&#34;&#34;&#34;
+        _bp_add_pattern_titulo_eleitor(self.patterns, self.logger)
+
+    def add_pattern_passaporte(self) -&gt; None:
+        &#34;&#34;&#34;Registra padrões regex para passaportes brasileiros. Wrapper.&#34;&#34;&#34;
+        _bp_add_pattern_passaporte(self.patterns, self.logger)
+
+    def add_pattern_passaporte_est(self) -&gt; None:
+        &#34;&#34;&#34;Registra padrões regex para passaportes estrangeiros. Wrapper.&#34;&#34;&#34;
+        _bp_add_pattern_passaporte_est(self.patterns, self.logger)
+
+    def add_pattern_siape(self) -&gt; None:
+        &#34;&#34;&#34;Registra padrões regex para SIAPE. Wrapper.&#34;&#34;&#34;
+        _bp_add_pattern_siape(self.patterns, self.logger)
+
+    def add_pattern_cnh(self) -&gt; None:
+        &#34;&#34;&#34;Registra padrões regex para CNH. Wrapper.&#34;&#34;&#34;
+        _bp_add_pattern_cnh(self.patterns, self.logger)
+
+    def add_pattern_dados_bancarios(self) -&gt; None:
+        &#34;&#34;&#34;Registra padrões regex para dados bancários. Wrapper.&#34;&#34;&#34;
+        _bp_add_pattern_dados_bancarios(self.patterns, self.logger)
+
+    def add_pattern_email(self) -&gt; None:
+        &#34;&#34;&#34;Registra padrões regex para e-mail. Wrapper.&#34;&#34;&#34;
+        _bp_add_pattern_email(self.patterns, self.logger)
+
+    def add_pattern_telefone(self) -&gt; None:
+        &#34;&#34;&#34;Registra padrões regex para telefones. Wrapper.&#34;&#34;&#34;
+        _bp_add_pattern_telefone(self.patterns, self.logger)
+
+    def add_pattern_data_nascimento(self) -&gt; None:
+        &#34;&#34;&#34;Registra padrões regex para datas de nascimento. Wrapper.&#34;&#34;&#34;
+        _bp_add_pattern_data_nascimento(self.patterns, self.logger)
+
+    def add_apply_patterns(
+        self,
+        labels: list | None = None,
+        custom_patterns: list[dict] | None = None,
+        *,
+        replace_patterns: bool = False,
+        use_model_labels: bool = False,
+        foreign_passport: bool = False,
+    ) -&gt; None:
+        r&#34;&#34;&#34;Adiciona e aplica padrões de regex para detecção de entidades, incluindo padrões customizados.
+
+        Este método permite configurar quais tipos de entidades serão detectadas pelo anonimizador,
+        combinando padrões pré-definidos (como CPF, RG, etc.), padrões personalizados e, opcionalmente,
+        entidades reconhecidas por um modelo spaCy.
+
+        Args:
+            labels (list, optional): Lista de rótulos dos padrões pré-definidos a serem aplicados.
+                Valores suportados: &#39;CPF&#39;, &#39;RG&#39;, &#39;TITULO_ELEITOR&#39;, &#39;PASSAPORTE&#39;,
+                &#39;SIAPE&#39;, &#39;DADOS_BANCARIOS&#39;, &#39;EMAIL&#39;, &#39;TELEFONE&#39;, &#39;DATA_NASCIMENTO&#39;,
+                &#39;CNH&#39;, &#39;ENDEREÇO&#39;.
+
+                - Quando `use_model_labels` for False, este argumento é obrigatório e não pode ser vazio.
+                - Quando `use_model_labels` for True, este argumento é opcional e será combinado aos
+                  rótulos fornecidos pelo modelo (`self.labels`), se presentes.
+
+            custom_patterns (list[dict], optional): Lista de padrões customizados no formato:
+                [{&#34;label&#34;: &#34;MEU_PADRAO&#34;, &#34;regex&#34;: &#34;meu-regex&#34;, &#34;description&#34;: &#34;Descrição opcional&#34;}].
+                O campo `&#34;label&#34;` e `&#34;regex&#34;` são obrigatórios para cada padrão.
+                Defaults to None.
+
+            replace_patterns (bool, optional): Se True, remove todos os padrões previamente
+                adicionados antes de aplicar os novos padrões especificados. Se False,
+                os novos padrões são adicionados aos já existentes.
+                Útil para reconfigurar completamente o anonimizador ou para evitar duplicação de padrões.
+                Defaults to False.
+
+            use_model_labels (bool, optional): Se True, ativa a detecção por modelo spaCy
+                para os tipos de entidade definidos em `self.labels`. Caso o argumento `labels` também
+                seja fornecido, os dois serão combinados.
+                Defaults to False.
+
+            foreign_passport (bool, optinal): Se True e a label `PASSAPORTE` ativada irá adicionar
+                os regex de passaporte estrangeiro.
+                Defaults to False.
+
+        Raises:
+            ValueError:
+                - Se `labels` estiver vazio ou None quando `use_model_labels` for False.
+                - Se algum rótulo em `labels` não for suportado.
+                - Se algum padrão customizado não possuir os campos obrigatórios (`label`, `regex`).
+
+        Examples:
+            Aplicar padrões básicos:
+            &gt;&gt;&gt; anonymizer = SeiAnonimizar(model_path=&#34;pt_core_news_lg&#34;)
+            &gt;&gt;&gt; anonymizer.add_apply_patterns([&#39;CPF&#39;, &#39;EMAIL&#39;])
+
+            Substituir padrões existentes:
+            &gt;&gt;&gt; anonymizer.add_apply_patterns([&#39;RG&#39;, &#39;TELEFONE&#39;], replace_patterns=True)
+
+            Adicionar padrões customizados:
+            &gt;&gt;&gt; custom = [{&#34;label&#34;: &#34;CODIGO_PRODUTO&#34;, &#34;regex&#34;: r&#34;PROD-\d{4}&#34;,
+            ...            &#34;description&#34;: &#34;Códigos de produto&#34;}]
+            &gt;&gt;&gt; anonymizer.add_apply_patterns([&#39;CPF&#39;], custom_patterns=custom)
+
+            Reconfigurar completamente com novos padrões:
+            &gt;&gt;&gt; anonymizer.add_apply_patterns([&#39;EMAIL&#39;, &#39;TELEFONE&#39;],
+            ...                              custom_patterns=custom,
+            ...                              replace_patterns=True)
+
+            Usar labels do modelo e combinar com outros padrões:
+            &gt;&gt;&gt; anonymizer.add_apply_patterns([&#39;EMAIL&#39;], use_model_labels=True)
+        &#34;&#34;&#34;
+        _registry_add_apply_patterns(
+            self.patterns,
+            labels,
+            list(self.labels),
+            self.logger,
+            replace_patterns=replace_patterns,
+            use_model_labels=use_model_labels,
+            foreign_passport=foreign_passport,
+            custom_patterns=custom_patterns,
+        )
+
+    def list_patterns(self) -&gt; dict:
+        &#34;&#34;&#34;Retorna todos os padrões regex registrados, organizados por categoria.
+
+        Fornece uma visão completa dos padrões disponíveis, separando entre padrões
+        pré-definidos (built-in) e padrões customizados adicionados pelo usuário.
+
+        Returns:
+            dict: Dicionário com duas chaves:
+                - &#34;builtin&#34;: Lista de padrões pré-definidos do sistema
+                - &#34;custom&#34;: Lista de padrões customizados adicionados pelo usuário
+
+                Cada padrão contém:
+                - label: Rótulo da entidade
+                - pattern: Dicionário com a regex
+                - description: Descrição do padrão (se disponível)
+
+        Note:
+            - Padrões built-in incluem: CPF, RG, EMAIL, TELEFONE, etc.
+            - Padrões custom são adicionados via add_custom_pattern()
+            - Útil para debug e auditoria dos padrões ativos
+        &#34;&#34;&#34;
+        return _registry_list_patterns(self.patterns, list(self.labels))
+
+    def get_entity_attribute(self, entity: dict, attr_name: str) -&gt; str:
+        &#34;&#34;&#34;Obtém atributo de uma entidade, seja dict ou objeto.&#34;&#34;&#34;
+        try:
+            return getattr(entity, attr_name)
+        except AttributeError:
+            return entity[attr_name]
+
+    def verify_entities_unified(self, entity: dict, text: str) -&gt; bool | str:  # noqa: C901, PLR0911, PLR0912, PLR0915
+        &#34;&#34;&#34;Valida entidades detectadas pelo modelo spaCy ou regex com base no contexto textual.
+
+        A heurística verifica palavras-chave próximas, tamanhos máximos,
+        dígitos verificadores (para CPF) e outros critérios específicos
+        descritos abaixo.
+
+        Args:
+            entity (dict): Objeto de entidade spaCy contendo:
+                - label_: Rótulo da entidade detectada
+                - start_char: Posição inicial no texto
+                - end_char: Posição final no texto
+            text (str): Texto completo onde a entidade foi encontrada.
+
+        Returns:
+            bool | str:
+                - True: Se a entidade foi validada com o rótulo original
+                - False: Se a entidade deve ser desconsiderada
+                - str: Novo rótulo da entidade (reclassificação)
+
+        Note:
+            Validações específicas por tipo:
+            - CPF: Verifica contexto &#34;cpf&#34;, &#34;fistel&#34;, &#34;cnh&#34; e limites de tamanho
+            - CNH: Busca palavra &#34;cnh&#34; no contexto
+            - SIAPE: Procura &#34;siape&#34; vs &#34;sei&#34; no contexto
+            - DATA_NASCIMENTO: Identifica palavras como &#34;nascimento&#34;, &#34;emissor&#34;
+            - PASSAPORTE: Valida comprimento máximo
+        &#34;&#34;&#34;
+        return _verify_unified(
+            entity,
+            text,
+            self.logger,
+            use_cpf_validator=self.use_cpf_validator,
+            use_cnh_validator=self.use_cnh_validator,
+            use_titulo_validator=self.use_titulo_validator,
+        )
+
+    def remove_overlap_positions(self, entities: list[dict]) -&gt; list[dict]:
+        &#34;&#34;&#34;Remove as entidades com overlap deixando apenas a entidade com maior abrangência.
+
+        Este método é um wrapper para a função standalone em _common.overlap.
+        Mantido para compatibilidade com código existente.
+
+        Args:
+            entities: Lista com as entidades detectadas.
+
+        Returns:
+            Lista de entidades sem overlaps.
+        &#34;&#34;&#34;
+        return remove_overlap_positions(entities, logger=self.logger)
+
+    def extract_entities_from_markdown_tables(self, text: str, return_type: str = &#34;label_position&#34;) -&gt; list[dict]:
+        &#34;&#34;&#34;Extrai entidades de colunas sensíveis em tabelas markdown.
+
+        Detecta automaticamente tabelas markdown no texto e extrai entidades de colunas
+        que contenham nomes relacionados a dados sensíveis (CPF, RG, Titulo, Documento).
+
+        Args:
+            text (str): Texto contendo tabelas markdown
+            return_type (str): Formato de retorno das entidades
+
+        Returns:
+            list[dict]: Lista de entidades encontradas nas tabelas
+        &#34;&#34;&#34;
+        return _extract_markdown_tables(text, return_type, self.logger)
+
+    def extract_entities(self, text_or_path: str, return_type: str = &#34;label_position&#34;) -&gt; list[dict]:
+        &#34;&#34;&#34;Extrai entidades sensíveis de texto usando modelo spaCy e padrões regex.
+
+        Combina detecção por modelo de Machine Learning com padrões regex personalizados
+        para identificar entidades como CPF, RG, e-mail, telefone, etc. Remove sobreposições
+        automáticamente e valida entidades com base no contexto.
+
+        Fluxo simplificado:
+            1. Carrega texto (string ou arquivo `.md`).
+            2. Executa o modelo spaCy filtrando pelos labels ativos.
+            3. Aplica todos os REGEX cadastrados.
+            4. Remove sobreposições e converte no formato solicitado.
+
+        Args:
+            text_or_path (str): Texto a ser processado ou caminho para arquivo .md
+                contendo o texto. Se for um caminho de arquivo, deve ter extensão .md.
+            return_type (str, optional): Formato do retorno das entidades encontradas.
+                Opções disponíveis:
+                - &#34;label_position&#34;: {&#39;label&#39;: str, &#39;start_position&#39;: int, &#39;end_position&#39;: int}
+                - &#34;label_text&#34;: {&#39;label&#39;: str, &#39;text&#39;: str}
+                - &#34;label_detail&#34;: Inclui todos os campos + &#39;detected_by&#39;
+                Defaults to &#34;label_position&#34;.
+
+        Returns:
+            list[dict]: Lista de entidades encontradas no formato especificado:
+                - label_position: Posições das entidades no texto
+                - label_text: Textos das entidades sem posições
+                - label_detail: Informações completas incluindo método de detecção
+
+        Raises:
+            ValueError: Se o arquivo não for .md ou return_type for inválido.
+            FileNotFoundError: Se o arquivo especificado não existir.
+
+        Note:
+            - Entidades sobrepostas são automaticamente removidas
+            - Validação contextual é aplicada a todas as entidades
+            - Combina resultados de modelo spaCy e regex
+            - Labels ignoradas: [&#34;LOC&#34;, &#34;MISC&#34;, &#34;ORG&#34;, &#34;PER&#34;]
+
+        &#34;&#34;&#34;
+        return _extract_entities_pipeline(
+            self.nlp_trained,
+            text_or_path,
+            self.labels,
+            self.patterns,
+            return_type,
+            self.verify_entities_unified,
+            self.logger,
+        )
+
+    def extract_entities_regex_re(self, text: str, return_type: str = &#34;label_position&#34;) -&gt; list[dict]:
+        &#34;&#34;&#34;Extrai entidades do texto usando exclusivamente padrões regex configurados.
+
+        Aplica todos os padrões regex registrados ao texto e valida cada entidade encontrada
+        através de análise contextual. Este método é usado internamente por extract_entities
+        mas pode ser chamado independentemente para detecção apenas por regex.
+
+        Args:
+            text (str): Texto a ser processado para extração de entidades.
+            return_type (str, optional): Formato de retorno das entidades:
+                - &#34;label_text&#34;: {&#39;label&#39;: str, &#39;text&#39;: str}
+                - &#34;label_position&#34;: {&#39;label&#39;: str, &#39;start_position&#39;: int, &#39;end_position&#39;: int}
+                - &#34;label_detail&#34;: Informações completas + objeto regex usado
+                Defaults to &#34;label_position&#34;.
+
+        Returns:
+            list[dict]: Lista de entidades encontradas pelos padrões regex.
+                O formato específico depende do return_type:
+                - label_text: Apenas rótulo e texto da entidade
+                - label_position: Rótulo e posições no texto
+                - label_detail: Todos os campos + referência ao regex usado
+
+        Note:
+            - Cada padrão regex é aplicado independentemente
+            - Validação contextual é aplicada via verify_entities_regex()
+            - Entidades inválidas são automaticamente filtradas
+            - Posições são ajustadas para remover espaços extras
+        &#34;&#34;&#34;
+        return _extract_regex(text, self.patterns, return_type, self.verify_entities_unified, self.logger)
+
+    def anonymize_text(self, text: str, entities_list: list) -&gt; str:
+        &#34;&#34;&#34;Substitui entidades detectadas no texto por tags de anonimização.
+
+        Processa uma lista de entidades extraídas e substitui cada ocorrência no texto
+        original por uma tag formatada. As substituições são feitas em ordem reversa
+        para preservar as posições corretas dos caracteres.
+
+        Args:
+            text (str): Texto original a ser anonimizado.
+            entities_list (list[dict]): Lista de entidades extraídas usando return_type
+                &#34;label_position&#34; ou &#34;label_detail&#34;. Cada entidade deve conter:
+                - &#39;start_position&#39;: posição inicial no texto
+                - &#39;end_position&#39;: posição final no texto
+                - &#39;label&#39;: tipo da entidade
+
+        Returns:
+            str: Texto anonimizado onde entidades são substituídas por tags no formato
+                &lt;TIPO_ENTIDADE&gt;. Exemplo: &lt;CPF&gt;, &lt;EMAIL&gt;, &lt;TELEFONE&gt;
+
+        Note:
+            - Substituições são feitas em ordem reversa (do fim para o início)
+            - Entidades com labels em ignore_labels são puladas
+            - Preserva formatação e espaçamento do texto original
+            - Tags seguem padrão: &lt;LABEL&gt;
+
+        Examples:
+            &gt;&gt;&gt; text = &#34;João, CPF 123.456.789-00, email: joao@email.com&#34;
+            &gt;&gt;&gt; entities = [
+            ...     {&#39;label&#39;: &#39;CPF&#39;, &#39;start_position&#39;: 6, &#39;end_position&#39;: 20},
+            ...     {&#39;label&#39;: &#39;EMAIL&#39;, &#39;start_position&#39;: 28, &#39;end_position&#39;: 42}
+            ... ]
+            &gt;&gt;&gt; result = anonymizer.anonymize_text(text, entities)
+            &gt;&gt;&gt; print(result)
+            &#34;João, &lt;CPF&gt;, email: &lt;EMAIL&gt;&#34;
+
+            &gt;&gt;&gt; # Com múltiplas entidades
+            &gt;&gt;&gt; text = &#34;Contato: (11) 99999-9999, RG: 12.345.678-9&#34;
+            &gt;&gt;&gt; entities = [
+            ...     {&#39;label&#39;: &#39;TELEFONE&#39;, &#39;start_position&#39;: 9, &#39;end_position&#39;: 24},
+            ...     {&#39;label&#39;: &#39;RG&#39;, &#39;start_position&#39;: 30, &#39;end_position&#39;: 42}
+            ... ]
+            &gt;&gt;&gt; result = anonymizer.anonymize_text(text, entities)
+            &gt;&gt;&gt; print(result)
+            &#34;Contato: &lt;TELEFONE&gt;, RG: &lt;RG&gt;&#34;
+        &#34;&#34;&#34;
+        return _anonymize_text(text, entities_list, self.logger)
+
+    def get_tokens(self, text: str) -&gt; list:
+        r&#34;&#34;&#34;Retorna o texto tokenizado usando o modelo spaCy carregado.
+
+        Processa o texto através do pipeline spaCy e retorna uma lista de tokens
+        mantendo espaços e formatação original. Útil para análise detalhada do
+        texto ou processamento posterior.
+
+        Args:
+            text (str): Texto a ser tokenizado.
+
+        Returns:
+            list: Lista de strings contendo cada token com seus espaços preservados.
+                Cada elemento mantém a formatação original (espaços, quebras de linha).
+
+        Note:
+            - Utiliza o modelo spaCy carregado na inicialização
+            - Preserva espaços em branco e formatação
+            - Tokens incluem pontuação como elementos separados
+
+        Examples:
+            &gt;&gt;&gt; tokens = anonymizer.get_tokens(&#34;Olá, mundo! Como vai?&#34;)
+            &gt;&gt;&gt; print(tokens)
+            [&#39;Olá&#39;, &#39;,&#39;, &#39; &#39;, &#39;mundo&#39;, &#39;!&#39;, &#39; &#39;, &#39;Como&#39;, &#39; &#39;, &#39;vai&#39;, &#39;?&#39;]
+
+            &gt;&gt;&gt; # Com quebras de linha
+            &gt;&gt;&gt; tokens = anonymizer.get_tokens(&#34;Primeira linha\\nSegunda linha&#34;)
+            &gt;&gt;&gt; print(tokens)
+            [&#39;Primeira&#39;, &#39; &#39;, &#39;linha&#39;, &#39;\\n&#39;, &#39;Segunda&#39;, &#39; &#39;, &#39;linha&#39;]
+        &#34;&#34;&#34;
+        try:
+            self.logger.debug(&#34;Tokenizando texto (len=%d)&#34;, len(text))
+            doc = self.nlp_trained(text)
+            tokens = [token.text_with_ws for token in doc]
+            self.logger.debug(&#34;Total de tokens gerados: %d&#34;, len(tokens))
+            return tokens
+        except Exception as e:
+            self.logger.exception(&#34;Erro ao tokenizar texto: %s&#34;, e)
+            raise e from e
+
+    def get_active_labels(self) -&gt; dict:
+        &#34;&#34;&#34;Retorna informações detalhadas sobre labels ativos no anonimizador.
+
+        Returns:
+            dict: Dicionário contendo:
+                - &#34;model_labels&#34;: Lista de labels ativos para detecção por modelo spaCy
+                - &#34;regex_summary&#34;: Dicionário com labels e quantidade de padrões regex por label
+                - &#34;regex_patterns&#34;: Número total de padrões regex registrados
+                - &#34;total_patterns&#34;: Soma de labels do modelo com total de padrões regex
+
+        Examples:
+            &gt;&gt;&gt; anonymizer = SeiAnonimizar(model_path=&#34;pt_core_news_lg&#34;)
+            &gt;&gt;&gt; anonymizer.add_apply_patterns([&#39;CPF&#39;, &#39;EMAIL&#39;], use_model_labels=True)
+            &gt;&gt;&gt; info = anonymizer.get_active_labels()
+            &gt;&gt;&gt; print(info)
+            {
+                &#39;model_labels&#39;: [&#39;CPF&#39;, &#39;EMAIL&#39;],
+                &#39;regex_summary&#39;: {&#39;CPF&#39;: 3, &#39;EMAIL&#39;: 2},
+                &#39;regex_patterns&#39;: 5,
+                &#39;total_patterns&#39;: 7
+            }
+        &#34;&#34;&#34;
+        return _registry_get_active_labels(self.patterns, list(self.labels))
+
+    @staticmethod
+    def valida_cpf(cpf: str) -&gt; bool:
+        &#34;&#34;&#34;Valida CPF. Wrapper para _validators.documents.valida_cpf.&#34;&#34;&#34;
+        return _valida_cpf(cpf)
+
+    @staticmethod
+    def valida_titulo_eleitor(numero: str) -&gt; bool:
+        &#34;&#34;&#34;Valida Título de Eleitor. Wrapper para _validators.documents.valida_titulo_eleitor.&#34;&#34;&#34;
+        return _valida_titulo_eleitor(numero)
+
+    @staticmethod
+    def valida_cnh(numero: str) -&gt; bool:
+        &#34;&#34;&#34;Valida CNH. Wrapper para _validators.documents.valida_cnh.&#34;&#34;&#34;
+        return _valida_cnh(numero)
+
+    @staticmethod
+    def valida_cnpj(cnpj: str) -&gt; bool:
+        &#34;&#34;&#34;Valida CNPJ. Wrapper para _validators.documents.valida_cnpj.&#34;&#34;&#34;
+        return _valida_cnpj(cnpj)</code></pre>
+</details>
+<div class="desc"><p>Classe para anonimização.</p>
+<p>Inicializa o anonimizador SEI com um modelo spaCy.</p>
+<p>Carrega o modelo spaCy especificado e configura as definições padrão para
+processamento de texto e detecção de entidades. O modelo deve ser um modelo
+spaCy treinado para reconhecimento de entidades nomeadas em português.</p>
+<p>Este construtor carrega um modelo spaCy (público ou treinado pelo
+<code>SeiAnonimizarNERTrainer</code>), configura labels permitidos e define
+parâmetros de validação.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>model_path</code></strong> :&ensp;<code>str</code></dt>
+<dd>Caminho para o modelo spaCy pré-treinado.
+Exemplos: "pt_core_news_sm", "./meu_modelo_ner"
+ou caminho para modelo customizado.</dd>
+<dt><strong><code>labels</code></strong> :&ensp;<code>list</code>, optional</dt>
+<dd>Lista de labels específicos para detecção.</dd>
+<dt><strong><code>use_cpf_validator</code></strong> :&ensp;<code>bool</code></dt>
+<dd>Se True, aplica validação algorítmica de CPF nas entidades
+detectadas.</dd>
+<dt><strong><code>use_titulo_validator</code></strong> :&ensp;<code>bool</code></dt>
+<dd>Se True, aplica validação algorítmica de Titulo de eleitor
+nas entidades detectadas.</dd>
+<dt><strong><code>use_cnh_validator</code></strong> :&ensp;<code>bool</code></dt>
+<dd>Se True, aplica validação algorítmica de CNH
+nas entidades detectadas.</dd>
+<dt><strong><code>logger</code></strong> :&ensp;<code>logging.Logger</code>, optional</dt>
+<dd>Logger personalizado para usar.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>ValueError</code></dt>
+<dd>Se model_path estiver vazio ou não especificado.</dd>
+<dt><code>OSError</code></dt>
+<dd>Se o modelo especificado não puder ser carregado.</dd>
+</dl>
+<p>Note:
+- O limite máximo de caracteres por texto é definido como 3.000.000
+- Labels ignoradas por padrão: ["LOC", "MISC", "ORG", "PER"]
+- É necessário ter o modelo spaCy instalado: <code>python -m spacy download pt_core_news_lg</code></p>
+<p>Examples:</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; anonymizer = SeiAnonimizar(&quot;./meu_modelo_ner&quot;, labels=[&quot;CPF&quot;, &quot;EMAIL&quot;])
+&gt;&gt;&gt; anonymizer.add_apply_patterns(['CPF', 'EMAIL'])
+&gt;&gt;&gt; anonymizer.extract_entities(&quot;Meu CPF é 123.456.789-09.&quot;)
+[{'label': 'CPF', 'start_position': 10, 'end_position': 24, ...}]
+</code></pre></div>
+<h3>Static methods</h3>
+<dl>
+<dt id="anonimizar.sei_anonimizar.SeiAnonimizar.valida_cnh"><code class="name flex">
+<span>def <span class="ident">valida_cnh</span></span>(<span>numero: str) ‑> bool</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@staticmethod
+def valida_cnh(numero: str) -&gt; bool:
+    &#34;&#34;&#34;Valida CNH. Wrapper para _validators.documents.valida_cnh.&#34;&#34;&#34;
+    return _valida_cnh(numero)</code></pre>
+</details>
+<div class="desc"><p>Valida CNH. Wrapper para _validators.documents.valida_cnh.</p></div>
+</dd>
+<dt id="anonimizar.sei_anonimizar.SeiAnonimizar.valida_cnpj"><code class="name flex">
+<span>def <span class="ident">valida_cnpj</span></span>(<span>cnpj: str) ‑> bool</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@staticmethod
+def valida_cnpj(cnpj: str) -&gt; bool:
+    &#34;&#34;&#34;Valida CNPJ. Wrapper para _validators.documents.valida_cnpj.&#34;&#34;&#34;
+    return _valida_cnpj(cnpj)</code></pre>
+</details>
+<div class="desc"><p>Valida CNPJ. Wrapper para _validators.documents.valida_cnpj.</p></div>
+</dd>
+<dt id="anonimizar.sei_anonimizar.SeiAnonimizar.valida_cpf"><code class="name flex">
+<span>def <span class="ident">valida_cpf</span></span>(<span>cpf: str) ‑> bool</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@staticmethod
+def valida_cpf(cpf: str) -&gt; bool:
+    &#34;&#34;&#34;Valida CPF. Wrapper para _validators.documents.valida_cpf.&#34;&#34;&#34;
+    return _valida_cpf(cpf)</code></pre>
+</details>
+<div class="desc"><p>Valida CPF. Wrapper para _validators.documents.valida_cpf.</p></div>
+</dd>
+<dt id="anonimizar.sei_anonimizar.SeiAnonimizar.valida_titulo_eleitor"><code class="name flex">
+<span>def <span class="ident">valida_titulo_eleitor</span></span>(<span>numero: str) ‑> bool</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@staticmethod
+def valida_titulo_eleitor(numero: str) -&gt; bool:
+    &#34;&#34;&#34;Valida Título de Eleitor. Wrapper para _validators.documents.valida_titulo_eleitor.&#34;&#34;&#34;
+    return _valida_titulo_eleitor(numero)</code></pre>
+</details>
+<div class="desc"><p>Valida Título de Eleitor. Wrapper para _validators.documents.valida_titulo_eleitor.</p></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="anonimizar.sei_anonimizar.SeiAnonimizar.add_apply_patterns"><code class="name flex">
+<span>def <span class="ident">add_apply_patterns</span></span>(<span>self,<br>labels: list | None = None,<br>custom_patterns: list[dict] | None = None,<br>*,<br>replace_patterns: bool = False,<br>use_model_labels: bool = False,<br>foreign_passport: bool = False) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def add_apply_patterns(
+    self,
+    labels: list | None = None,
+    custom_patterns: list[dict] | None = None,
+    *,
+    replace_patterns: bool = False,
+    use_model_labels: bool = False,
+    foreign_passport: bool = False,
+) -&gt; None:
+    r&#34;&#34;&#34;Adiciona e aplica padrões de regex para detecção de entidades, incluindo padrões customizados.
+
+    Este método permite configurar quais tipos de entidades serão detectadas pelo anonimizador,
+    combinando padrões pré-definidos (como CPF, RG, etc.), padrões personalizados e, opcionalmente,
+    entidades reconhecidas por um modelo spaCy.
+
+    Args:
+        labels (list, optional): Lista de rótulos dos padrões pré-definidos a serem aplicados.
+            Valores suportados: &#39;CPF&#39;, &#39;RG&#39;, &#39;TITULO_ELEITOR&#39;, &#39;PASSAPORTE&#39;,
+            &#39;SIAPE&#39;, &#39;DADOS_BANCARIOS&#39;, &#39;EMAIL&#39;, &#39;TELEFONE&#39;, &#39;DATA_NASCIMENTO&#39;,
+            &#39;CNH&#39;, &#39;ENDEREÇO&#39;.
+
+            - Quando `use_model_labels` for False, este argumento é obrigatório e não pode ser vazio.
+            - Quando `use_model_labels` for True, este argumento é opcional e será combinado aos
+              rótulos fornecidos pelo modelo (`self.labels`), se presentes.
+
+        custom_patterns (list[dict], optional): Lista de padrões customizados no formato:
+            [{&#34;label&#34;: &#34;MEU_PADRAO&#34;, &#34;regex&#34;: &#34;meu-regex&#34;, &#34;description&#34;: &#34;Descrição opcional&#34;}].
+            O campo `&#34;label&#34;` e `&#34;regex&#34;` são obrigatórios para cada padrão.
+            Defaults to None.
+
+        replace_patterns (bool, optional): Se True, remove todos os padrões previamente
+            adicionados antes de aplicar os novos padrões especificados. Se False,
+            os novos padrões são adicionados aos já existentes.
+            Útil para reconfigurar completamente o anonimizador ou para evitar duplicação de padrões.
+            Defaults to False.
+
+        use_model_labels (bool, optional): Se True, ativa a detecção por modelo spaCy
+            para os tipos de entidade definidos em `self.labels`. Caso o argumento `labels` também
+            seja fornecido, os dois serão combinados.
+            Defaults to False.
+
+        foreign_passport (bool, optinal): Se True e a label `PASSAPORTE` ativada irá adicionar
+            os regex de passaporte estrangeiro.
+            Defaults to False.
+
+    Raises:
+        ValueError:
+            - Se `labels` estiver vazio ou None quando `use_model_labels` for False.
+            - Se algum rótulo em `labels` não for suportado.
+            - Se algum padrão customizado não possuir os campos obrigatórios (`label`, `regex`).
+
+    Examples:
+        Aplicar padrões básicos:
+        &gt;&gt;&gt; anonymizer = SeiAnonimizar(model_path=&#34;pt_core_news_lg&#34;)
+        &gt;&gt;&gt; anonymizer.add_apply_patterns([&#39;CPF&#39;, &#39;EMAIL&#39;])
+
+        Substituir padrões existentes:
+        &gt;&gt;&gt; anonymizer.add_apply_patterns([&#39;RG&#39;, &#39;TELEFONE&#39;], replace_patterns=True)
+
+        Adicionar padrões customizados:
+        &gt;&gt;&gt; custom = [{&#34;label&#34;: &#34;CODIGO_PRODUTO&#34;, &#34;regex&#34;: r&#34;PROD-\d{4}&#34;,
+        ...            &#34;description&#34;: &#34;Códigos de produto&#34;}]
+        &gt;&gt;&gt; anonymizer.add_apply_patterns([&#39;CPF&#39;], custom_patterns=custom)
+
+        Reconfigurar completamente com novos padrões:
+        &gt;&gt;&gt; anonymizer.add_apply_patterns([&#39;EMAIL&#39;, &#39;TELEFONE&#39;],
+        ...                              custom_patterns=custom,
+        ...                              replace_patterns=True)
+
+        Usar labels do modelo e combinar com outros padrões:
+        &gt;&gt;&gt; anonymizer.add_apply_patterns([&#39;EMAIL&#39;], use_model_labels=True)
+    &#34;&#34;&#34;
+    _registry_add_apply_patterns(
+        self.patterns,
+        labels,
+        list(self.labels),
+        self.logger,
+        replace_patterns=replace_patterns,
+        use_model_labels=use_model_labels,
+        foreign_passport=foreign_passport,
+        custom_patterns=custom_patterns,
+    )</code></pre>
+</details>
+<div class="desc"><p>Adiciona e aplica padrões de regex para detecção de entidades, incluindo padrões customizados.</p>
+<p>Este método permite configurar quais tipos de entidades serão detectadas pelo anonimizador,
+combinando padrões pré-definidos (como CPF, RG, etc.), padrões personalizados e, opcionalmente,
+entidades reconhecidas por um modelo spaCy.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>labels</code></strong> :&ensp;<code>list</code>, optional</dt>
+<dd>
+<p>Lista de rótulos dos padrões pré-definidos a serem aplicados.
+Valores suportados: 'CPF', 'RG', 'TITULO_ELEITOR', 'PASSAPORTE',
+'SIAPE', 'DADOS_BANCARIOS', 'EMAIL', 'TELEFONE', 'DATA_NASCIMENTO',
+'CNH', 'ENDEREÇO'.</p>
+<ul>
+<li>Quando <code>use_model_labels</code> for False, este argumento é obrigatório e não pode ser vazio.</li>
+<li>Quando <code>use_model_labels</code> for True, este argumento é opcional e será combinado aos
+rótulos fornecidos pelo modelo (<code>self.labels</code>), se presentes.</li>
+</ul>
+</dd>
+<dt><strong><code>custom_patterns</code></strong> :&ensp;<code>list[dict]</code>, optional</dt>
+<dd>Lista de padrões customizados no formato:
+[{"label": "MEU_PADRAO", "regex": "meu-regex", "description": "Descrição opcional"}].
+O campo <code>"label"</code> e <code>"regex"</code> são obrigatórios para cada padrão.
+Defaults to None.</dd>
+<dt><strong><code>replace_patterns</code></strong> :&ensp;<code>bool</code>, optional</dt>
+<dd>Se True, remove todos os padrões previamente
+adicionados antes de aplicar os novos padrões especificados. Se False,
+os novos padrões são adicionados aos já existentes.
+Útil para reconfigurar completamente o anonimizador ou para evitar duplicação de padrões.
+Defaults to False.</dd>
+<dt><strong><code>use_model_labels</code></strong> :&ensp;<code>bool</code>, optional</dt>
+<dd>Se True, ativa a detecção por modelo spaCy
+para os tipos de entidade definidos em <code>self.labels</code>. Caso o argumento <code>labels</code> também
+seja fornecido, os dois serão combinados.
+Defaults to False.</dd>
+<dt><strong><code>foreign_passport</code></strong> :&ensp;<code>bool, optinal</code></dt>
+<dd>Se True e a label <code>PASSAPORTE</code> ativada irá adicionar
+os regex de passaporte estrangeiro.
+Defaults to False.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<p>ValueError:
+- Se <code>labels</code> estiver vazio ou None quando <code>use_model_labels</code> for False.
+- Se algum rótulo em <code>labels</code> não for suportado.
+- Se algum padrão customizado não possuir os campos obrigatórios (<code>label</code>, <code>regex</code>).</p>
+<h2 id="examples">Examples</h2>
+<p>Aplicar padrões básicos:</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; anonymizer = SeiAnonimizar(model_path=&quot;pt_core_news_lg&quot;)
+&gt;&gt;&gt; anonymizer.add_apply_patterns(['CPF', 'EMAIL'])
+</code></pre>
+<p>Substituir padrões existentes:</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; anonymizer.add_apply_patterns(['RG', 'TELEFONE'], replace_patterns=True)
+</code></pre>
+<p>Adicionar padrões customizados:</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; custom = [{&quot;label&quot;: &quot;CODIGO_PRODUTO&quot;, &quot;regex&quot;: r&quot;PROD-\d{4}&quot;,
+...            &quot;description&quot;: &quot;Códigos de produto&quot;}]
+&gt;&gt;&gt; anonymizer.add_apply_patterns(['CPF'], custom_patterns=custom)
+</code></pre>
+<p>Reconfigurar completamente com novos padrões:</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; anonymizer.add_apply_patterns(['EMAIL', 'TELEFONE'],
+...                              custom_patterns=custom,
+...                              replace_patterns=True)
+</code></pre>
+<p>Usar labels do modelo e combinar com outros padrões:</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; anonymizer.add_apply_patterns(['EMAIL'], use_model_labels=True)
+</code></pre></div>
+</dd>
+<dt id="anonimizar.sei_anonimizar.SeiAnonimizar.add_custom_pattern"><code class="name flex">
+<span>def <span class="ident">add_custom_pattern</span></span>(<span>self, label: str, regex_pattern: str, description: str = '') ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def add_custom_pattern(self, label: str, regex_pattern: str, description: str = &#34;&#34;) -&gt; None:
+    &#34;&#34;&#34;Adiciona padrão REGEX customizado. Wrapper para _patterns.custom.add_custom_pattern.&#34;&#34;&#34;
+    _add_custom_pattern(self.patterns, label, regex_pattern, description, self.logger)</code></pre>
+</details>
+<div class="desc"><p>Adiciona padrão REGEX customizado. Wrapper para _patterns.custom.add_custom_pattern.</p></div>
+</dd>
+<dt id="anonimizar.sei_anonimizar.SeiAnonimizar.add_pattern_cid"><code class="name flex">
+<span>def <span class="ident">add_pattern_cid</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def add_pattern_cid(self) -&gt; None:
+    &#34;&#34;&#34;Registra padrões regex para CID. Wrapper para _patterns.builtin.add_pattern_cid.&#34;&#34;&#34;
+    _bp_add_pattern_cid(self.patterns, self.logger)</code></pre>
+</details>
+<div class="desc"><p>Registra padrões regex para CID. Wrapper para _patterns.builtin.add_pattern_cid.</p></div>
+</dd>
+<dt id="anonimizar.sei_anonimizar.SeiAnonimizar.add_pattern_cnh"><code class="name flex">
+<span>def <span class="ident">add_pattern_cnh</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def add_pattern_cnh(self) -&gt; None:
+    &#34;&#34;&#34;Registra padrões regex para CNH. Wrapper.&#34;&#34;&#34;
+    _bp_add_pattern_cnh(self.patterns, self.logger)</code></pre>
+</details>
+<div class="desc"><p>Registra padrões regex para CNH. Wrapper.</p></div>
+</dd>
+<dt id="anonimizar.sei_anonimizar.SeiAnonimizar.add_pattern_cpf"><code class="name flex">
+<span>def <span class="ident">add_pattern_cpf</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def add_pattern_cpf(self) -&gt; None:
+    &#34;&#34;&#34;Registra padrões regex para CPF. Wrapper para _patterns.builtin.add_pattern_cpf.&#34;&#34;&#34;
+    _bp_add_pattern_cpf(self.patterns, self.logger)</code></pre>
+</details>
+<div class="desc"><p>Registra padrões regex para CPF. Wrapper para _patterns.builtin.add_pattern_cpf.</p></div>
+</dd>
+<dt id="anonimizar.sei_anonimizar.SeiAnonimizar.add_pattern_dados_bancarios"><code class="name flex">
+<span>def <span class="ident">add_pattern_dados_bancarios</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def add_pattern_dados_bancarios(self) -&gt; None:
+    &#34;&#34;&#34;Registra padrões regex para dados bancários. Wrapper.&#34;&#34;&#34;
+    _bp_add_pattern_dados_bancarios(self.patterns, self.logger)</code></pre>
+</details>
+<div class="desc"><p>Registra padrões regex para dados bancários. Wrapper.</p></div>
+</dd>
+<dt id="anonimizar.sei_anonimizar.SeiAnonimizar.add_pattern_data_nascimento"><code class="name flex">
+<span>def <span class="ident">add_pattern_data_nascimento</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def add_pattern_data_nascimento(self) -&gt; None:
+    &#34;&#34;&#34;Registra padrões regex para datas de nascimento. Wrapper.&#34;&#34;&#34;
+    _bp_add_pattern_data_nascimento(self.patterns, self.logger)</code></pre>
+</details>
+<div class="desc"><p>Registra padrões regex para datas de nascimento. Wrapper.</p></div>
+</dd>
+<dt id="anonimizar.sei_anonimizar.SeiAnonimizar.add_pattern_email"><code class="name flex">
+<span>def <span class="ident">add_pattern_email</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def add_pattern_email(self) -&gt; None:
+    &#34;&#34;&#34;Registra padrões regex para e-mail. Wrapper.&#34;&#34;&#34;
+    _bp_add_pattern_email(self.patterns, self.logger)</code></pre>
+</details>
+<div class="desc"><p>Registra padrões regex para e-mail. Wrapper.</p></div>
+</dd>
+<dt id="anonimizar.sei_anonimizar.SeiAnonimizar.add_pattern_endereco"><code class="name flex">
+<span>def <span class="ident">add_pattern_endereco</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def add_pattern_endereco(self) -&gt; None:
+    &#34;&#34;&#34;Registra padrões regex para CEPs. Wrapper para _patterns.builtin.add_pattern_endereco.&#34;&#34;&#34;
+    _bp_add_pattern_endereco(self.patterns, self.logger)</code></pre>
+</details>
+<div class="desc"><p>Registra padrões regex para CEPs. Wrapper para _patterns.builtin.add_pattern_endereco.</p></div>
+</dd>
+<dt id="anonimizar.sei_anonimizar.SeiAnonimizar.add_pattern_geo_coord"><code class="name flex">
+<span>def <span class="ident">add_pattern_geo_coord</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def add_pattern_geo_coord(self) -&gt; None:
+    &#34;&#34;&#34;Registra padrões regex para coordenadas. Wrapper para _patterns.builtin.add_pattern_geo_coord.&#34;&#34;&#34;
+    _bp_add_pattern_geo_coord(self.patterns, self.logger)</code></pre>
+</details>
+<div class="desc"><p>Registra padrões regex para coordenadas. Wrapper para _patterns.builtin.add_pattern_geo_coord.</p></div>
+</dd>
+<dt id="anonimizar.sei_anonimizar.SeiAnonimizar.add_pattern_passaporte"><code class="name flex">
+<span>def <span class="ident">add_pattern_passaporte</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def add_pattern_passaporte(self) -&gt; None:
+    &#34;&#34;&#34;Registra padrões regex para passaportes brasileiros. Wrapper.&#34;&#34;&#34;
+    _bp_add_pattern_passaporte(self.patterns, self.logger)</code></pre>
+</details>
+<div class="desc"><p>Registra padrões regex para passaportes brasileiros. Wrapper.</p></div>
+</dd>
+<dt id="anonimizar.sei_anonimizar.SeiAnonimizar.add_pattern_passaporte_est"><code class="name flex">
+<span>def <span class="ident">add_pattern_passaporte_est</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def add_pattern_passaporte_est(self) -&gt; None:
+    &#34;&#34;&#34;Registra padrões regex para passaportes estrangeiros. Wrapper.&#34;&#34;&#34;
+    _bp_add_pattern_passaporte_est(self.patterns, self.logger)</code></pre>
+</details>
+<div class="desc"><p>Registra padrões regex para passaportes estrangeiros. Wrapper.</p></div>
+</dd>
+<dt id="anonimizar.sei_anonimizar.SeiAnonimizar.add_pattern_rg"><code class="name flex">
+<span>def <span class="ident">add_pattern_rg</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def add_pattern_rg(self) -&gt; None:
+    &#34;&#34;&#34;Registra padrões regex para RG. Wrapper para _patterns.builtin.add_pattern_rg.&#34;&#34;&#34;
+    _bp_add_pattern_rg(self.patterns, self.logger)</code></pre>
+</details>
+<div class="desc"><p>Registra padrões regex para RG. Wrapper para _patterns.builtin.add_pattern_rg.</p></div>
+</dd>
+<dt id="anonimizar.sei_anonimizar.SeiAnonimizar.add_pattern_siape"><code class="name flex">
+<span>def <span class="ident">add_pattern_siape</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def add_pattern_siape(self) -&gt; None:
+    &#34;&#34;&#34;Registra padrões regex para SIAPE. Wrapper.&#34;&#34;&#34;
+    _bp_add_pattern_siape(self.patterns, self.logger)</code></pre>
+</details>
+<div class="desc"><p>Registra padrões regex para SIAPE. Wrapper.</p></div>
+</dd>
+<dt id="anonimizar.sei_anonimizar.SeiAnonimizar.add_pattern_telefone"><code class="name flex">
+<span>def <span class="ident">add_pattern_telefone</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def add_pattern_telefone(self) -&gt; None:
+    &#34;&#34;&#34;Registra padrões regex para telefones. Wrapper.&#34;&#34;&#34;
+    _bp_add_pattern_telefone(self.patterns, self.logger)</code></pre>
+</details>
+<div class="desc"><p>Registra padrões regex para telefones. Wrapper.</p></div>
+</dd>
+<dt id="anonimizar.sei_anonimizar.SeiAnonimizar.add_pattern_titulo_eleitor"><code class="name flex">
+<span>def <span class="ident">add_pattern_titulo_eleitor</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def add_pattern_titulo_eleitor(self) -&gt; None:
+    &#34;&#34;&#34;Registra padrões regex para Título de Eleitor. Wrapper.&#34;&#34;&#34;
+    _bp_add_pattern_titulo_eleitor(self.patterns, self.logger)</code></pre>
+</details>
+<div class="desc"><p>Registra padrões regex para Título de Eleitor. Wrapper.</p></div>
+</dd>
+<dt id="anonimizar.sei_anonimizar.SeiAnonimizar.anonymize_text"><code class="name flex">
+<span>def <span class="ident">anonymize_text</span></span>(<span>self, text: str, entities_list: list) ‑> str</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def anonymize_text(self, text: str, entities_list: list) -&gt; str:
+    &#34;&#34;&#34;Substitui entidades detectadas no texto por tags de anonimização.
+
+    Processa uma lista de entidades extraídas e substitui cada ocorrência no texto
+    original por uma tag formatada. As substituições são feitas em ordem reversa
+    para preservar as posições corretas dos caracteres.
+
+    Args:
+        text (str): Texto original a ser anonimizado.
+        entities_list (list[dict]): Lista de entidades extraídas usando return_type
+            &#34;label_position&#34; ou &#34;label_detail&#34;. Cada entidade deve conter:
+            - &#39;start_position&#39;: posição inicial no texto
+            - &#39;end_position&#39;: posição final no texto
+            - &#39;label&#39;: tipo da entidade
+
+    Returns:
+        str: Texto anonimizado onde entidades são substituídas por tags no formato
+            &lt;TIPO_ENTIDADE&gt;. Exemplo: &lt;CPF&gt;, &lt;EMAIL&gt;, &lt;TELEFONE&gt;
+
+    Note:
+        - Substituições são feitas em ordem reversa (do fim para o início)
+        - Entidades com labels em ignore_labels são puladas
+        - Preserva formatação e espaçamento do texto original
+        - Tags seguem padrão: &lt;LABEL&gt;
+
+    Examples:
+        &gt;&gt;&gt; text = &#34;João, CPF 123.456.789-00, email: joao@email.com&#34;
+        &gt;&gt;&gt; entities = [
+        ...     {&#39;label&#39;: &#39;CPF&#39;, &#39;start_position&#39;: 6, &#39;end_position&#39;: 20},
+        ...     {&#39;label&#39;: &#39;EMAIL&#39;, &#39;start_position&#39;: 28, &#39;end_position&#39;: 42}
+        ... ]
+        &gt;&gt;&gt; result = anonymizer.anonymize_text(text, entities)
+        &gt;&gt;&gt; print(result)
+        &#34;João, &lt;CPF&gt;, email: &lt;EMAIL&gt;&#34;
+
+        &gt;&gt;&gt; # Com múltiplas entidades
+        &gt;&gt;&gt; text = &#34;Contato: (11) 99999-9999, RG: 12.345.678-9&#34;
+        &gt;&gt;&gt; entities = [
+        ...     {&#39;label&#39;: &#39;TELEFONE&#39;, &#39;start_position&#39;: 9, &#39;end_position&#39;: 24},
+        ...     {&#39;label&#39;: &#39;RG&#39;, &#39;start_position&#39;: 30, &#39;end_position&#39;: 42}
+        ... ]
+        &gt;&gt;&gt; result = anonymizer.anonymize_text(text, entities)
+        &gt;&gt;&gt; print(result)
+        &#34;Contato: &lt;TELEFONE&gt;, RG: &lt;RG&gt;&#34;
+    &#34;&#34;&#34;
+    return _anonymize_text(text, entities_list, self.logger)</code></pre>
+</details>
+<div class="desc"><p>Substitui entidades detectadas no texto por tags de anonimização.</p>
+<p>Processa uma lista de entidades extraídas e substitui cada ocorrência no texto
+original por uma tag formatada. As substituições são feitas em ordem reversa
+para preservar as posições corretas dos caracteres.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>text</code></strong> :&ensp;<code>str</code></dt>
+<dd>Texto original a ser anonimizado.</dd>
+<dt><strong><code>entities_list</code></strong> :&ensp;<code>list[dict]</code></dt>
+<dd>Lista de entidades extraídas usando return_type
+"label_position" ou "label_detail". Cada entidade deve conter:
+- 'start_position': posição inicial no texto
+- 'end_position': posição final no texto
+- 'label': tipo da entidade</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>str</code></dt>
+<dd>Texto anonimizado onde entidades são substituídas por tags no formato
+<TIPO_ENTIDADE>. Exemplo: <CPF>, <EMAIL>, <TELEFONE></dd>
+</dl>
+<h2 id="note">Note</h2>
+<ul>
+<li>Substituições são feitas em ordem reversa (do fim para o início)</li>
+<li>Entidades com labels em ignore_labels são puladas</li>
+<li>Preserva formatação e espaçamento do texto original</li>
+<li>Tags seguem padrão: <LABEL></li>
+</ul>
+<h2 id="examples">Examples</h2>
+<pre><code class="language-python-repl">&gt;&gt;&gt; text = &quot;João, CPF 123.456.789-00, email: joao@email.com&quot;
+&gt;&gt;&gt; entities = [
+...     {'label': 'CPF', 'start_position': 6, 'end_position': 20},
+...     {'label': 'EMAIL', 'start_position': 28, 'end_position': 42}
+... ]
+&gt;&gt;&gt; result = anonymizer.anonymize_text(text, entities)
+&gt;&gt;&gt; print(result)
+&quot;João, &lt;CPF&gt;, email: &lt;EMAIL&gt;&quot;
+</code></pre>
+<pre><code class="language-python-repl">&gt;&gt;&gt; # Com múltiplas entidades
+&gt;&gt;&gt; text = &quot;Contato: (11) 99999-9999, RG: 12.345.678-9&quot;
+&gt;&gt;&gt; entities = [
+...     {'label': 'TELEFONE', 'start_position': 9, 'end_position': 24},
+...     {'label': 'RG', 'start_position': 30, 'end_position': 42}
+... ]
+&gt;&gt;&gt; result = anonymizer.anonymize_text(text, entities)
+&gt;&gt;&gt; print(result)
+&quot;Contato: &lt;TELEFONE&gt;, RG: &lt;RG&gt;&quot;
+</code></pre></div>
+</dd>
+<dt id="anonimizar.sei_anonimizar.SeiAnonimizar.extract_entities"><code class="name flex">
+<span>def <span class="ident">extract_entities</span></span>(<span>self, text_or_path: str, return_type: str = 'label_position') ‑> list[dict]</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def extract_entities(self, text_or_path: str, return_type: str = &#34;label_position&#34;) -&gt; list[dict]:
+    &#34;&#34;&#34;Extrai entidades sensíveis de texto usando modelo spaCy e padrões regex.
+
+    Combina detecção por modelo de Machine Learning com padrões regex personalizados
+    para identificar entidades como CPF, RG, e-mail, telefone, etc. Remove sobreposições
+    automáticamente e valida entidades com base no contexto.
+
+    Fluxo simplificado:
+        1. Carrega texto (string ou arquivo `.md`).
+        2. Executa o modelo spaCy filtrando pelos labels ativos.
+        3. Aplica todos os REGEX cadastrados.
+        4. Remove sobreposições e converte no formato solicitado.
+
+    Args:
+        text_or_path (str): Texto a ser processado ou caminho para arquivo .md
+            contendo o texto. Se for um caminho de arquivo, deve ter extensão .md.
+        return_type (str, optional): Formato do retorno das entidades encontradas.
+            Opções disponíveis:
+            - &#34;label_position&#34;: {&#39;label&#39;: str, &#39;start_position&#39;: int, &#39;end_position&#39;: int}
+            - &#34;label_text&#34;: {&#39;label&#39;: str, &#39;text&#39;: str}
+            - &#34;label_detail&#34;: Inclui todos os campos + &#39;detected_by&#39;
+            Defaults to &#34;label_position&#34;.
+
+    Returns:
+        list[dict]: Lista de entidades encontradas no formato especificado:
+            - label_position: Posições das entidades no texto
+            - label_text: Textos das entidades sem posições
+            - label_detail: Informações completas incluindo método de detecção
+
+    Raises:
+        ValueError: Se o arquivo não for .md ou return_type for inválido.
+        FileNotFoundError: Se o arquivo especificado não existir.
+
+    Note:
+        - Entidades sobrepostas são automaticamente removidas
+        - Validação contextual é aplicada a todas as entidades
+        - Combina resultados de modelo spaCy e regex
+        - Labels ignoradas: [&#34;LOC&#34;, &#34;MISC&#34;, &#34;ORG&#34;, &#34;PER&#34;]
+
+    &#34;&#34;&#34;
+    return _extract_entities_pipeline(
+        self.nlp_trained,
+        text_or_path,
+        self.labels,
+        self.patterns,
+        return_type,
+        self.verify_entities_unified,
+        self.logger,
+    )</code></pre>
+</details>
+<div class="desc"><p>Extrai entidades sensíveis de texto usando modelo spaCy e padrões regex.</p>
+<p>Combina detecção por modelo de Machine Learning com padrões regex personalizados
+para identificar entidades como CPF, RG, e-mail, telefone, etc. Remove sobreposições
+automáticamente e valida entidades com base no contexto.</p>
+<p>Fluxo simplificado:
+1. Carrega texto (string ou arquivo <code>.md</code>).
+2. Executa o modelo spaCy filtrando pelos labels ativos.
+3. Aplica todos os REGEX cadastrados.
+4. Remove sobreposições e converte no formato solicitado.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>text_or_path</code></strong> :&ensp;<code>str</code></dt>
+<dd>Texto a ser processado ou caminho para arquivo .md
+contendo o texto. Se for um caminho de arquivo, deve ter extensão .md.</dd>
+<dt><strong><code>return_type</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Formato do retorno das entidades encontradas.
+Opções disponíveis:
+- "label_position": {'label': str, 'start_position': int, 'end_position': int}
+- "label_text": {'label': str, 'text': str}
+- "label_detail": Inclui todos os campos + 'detected_by'
+Defaults to "label_position".</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>list[dict]</code></dt>
+<dd>Lista de entidades encontradas no formato especificado:
+- label_position: Posições das entidades no texto
+- label_text: Textos das entidades sem posições
+- label_detail: Informações completas incluindo método de detecção</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>ValueError</code></dt>
+<dd>Se o arquivo não for .md ou return_type for inválido.</dd>
+<dt><code>FileNotFoundError</code></dt>
+<dd>Se o arquivo especificado não existir.</dd>
+</dl>
+<h2 id="note">Note</h2>
+<ul>
+<li>Entidades sobrepostas são automaticamente removidas</li>
+<li>Validação contextual é aplicada a todas as entidades</li>
+<li>Combina resultados de modelo spaCy e regex</li>
+<li>Labels ignoradas: ["LOC", "MISC", "ORG", "PER"]</li>
+</ul></div>
+</dd>
+<dt id="anonimizar.sei_anonimizar.SeiAnonimizar.extract_entities_from_markdown_tables"><code class="name flex">
+<span>def <span class="ident">extract_entities_from_markdown_tables</span></span>(<span>self, text: str, return_type: str = 'label_position') ‑> list[dict]</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def extract_entities_from_markdown_tables(self, text: str, return_type: str = &#34;label_position&#34;) -&gt; list[dict]:
+    &#34;&#34;&#34;Extrai entidades de colunas sensíveis em tabelas markdown.
+
+    Detecta automaticamente tabelas markdown no texto e extrai entidades de colunas
+    que contenham nomes relacionados a dados sensíveis (CPF, RG, Titulo, Documento).
+
+    Args:
+        text (str): Texto contendo tabelas markdown
+        return_type (str): Formato de retorno das entidades
+
+    Returns:
+        list[dict]: Lista de entidades encontradas nas tabelas
+    &#34;&#34;&#34;
+    return _extract_markdown_tables(text, return_type, self.logger)</code></pre>
+</details>
+<div class="desc"><p>Extrai entidades de colunas sensíveis em tabelas markdown.</p>
+<p>Detecta automaticamente tabelas markdown no texto e extrai entidades de colunas
+que contenham nomes relacionados a dados sensíveis (CPF, RG, Titulo, Documento).</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>text</code></strong> :&ensp;<code>str</code></dt>
+<dd>Texto contendo tabelas markdown</dd>
+<dt><strong><code>return_type</code></strong> :&ensp;<code>str</code></dt>
+<dd>Formato de retorno das entidades</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>list[dict]</code></dt>
+<dd>Lista de entidades encontradas nas tabelas</dd>
+</dl></div>
+</dd>
+<dt id="anonimizar.sei_anonimizar.SeiAnonimizar.extract_entities_regex_re"><code class="name flex">
+<span>def <span class="ident">extract_entities_regex_re</span></span>(<span>self, text: str, return_type: str = 'label_position') ‑> list[dict]</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def extract_entities_regex_re(self, text: str, return_type: str = &#34;label_position&#34;) -&gt; list[dict]:
+    &#34;&#34;&#34;Extrai entidades do texto usando exclusivamente padrões regex configurados.
+
+    Aplica todos os padrões regex registrados ao texto e valida cada entidade encontrada
+    através de análise contextual. Este método é usado internamente por extract_entities
+    mas pode ser chamado independentemente para detecção apenas por regex.
+
+    Args:
+        text (str): Texto a ser processado para extração de entidades.
+        return_type (str, optional): Formato de retorno das entidades:
+            - &#34;label_text&#34;: {&#39;label&#39;: str, &#39;text&#39;: str}
+            - &#34;label_position&#34;: {&#39;label&#39;: str, &#39;start_position&#39;: int, &#39;end_position&#39;: int}
+            - &#34;label_detail&#34;: Informações completas + objeto regex usado
+            Defaults to &#34;label_position&#34;.
+
+    Returns:
+        list[dict]: Lista de entidades encontradas pelos padrões regex.
+            O formato específico depende do return_type:
+            - label_text: Apenas rótulo e texto da entidade
+            - label_position: Rótulo e posições no texto
+            - label_detail: Todos os campos + referência ao regex usado
+
+    Note:
+        - Cada padrão regex é aplicado independentemente
+        - Validação contextual é aplicada via verify_entities_regex()
+        - Entidades inválidas são automaticamente filtradas
+        - Posições são ajustadas para remover espaços extras
+    &#34;&#34;&#34;
+    return _extract_regex(text, self.patterns, return_type, self.verify_entities_unified, self.logger)</code></pre>
+</details>
+<div class="desc"><p>Extrai entidades do texto usando exclusivamente padrões regex configurados.</p>
+<p>Aplica todos os padrões regex registrados ao texto e valida cada entidade encontrada
+através de análise contextual. Este método é usado internamente por extract_entities
+mas pode ser chamado independentemente para detecção apenas por regex.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>text</code></strong> :&ensp;<code>str</code></dt>
+<dd>Texto a ser processado para extração de entidades.</dd>
+<dt><strong><code>return_type</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Formato de retorno das entidades:
+- "label_text": {'label': str, 'text': str}
+- "label_position": {'label': str, 'start_position': int, 'end_position': int}
+- "label_detail": Informações completas + objeto regex usado
+Defaults to "label_position".</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>list[dict]</code></dt>
+<dd>Lista de entidades encontradas pelos padrões regex.
+O formato específico depende do return_type:
+- label_text: Apenas rótulo e texto da entidade
+- label_position: Rótulo e posições no texto
+- label_detail: Todos os campos + referência ao regex usado</dd>
+</dl>
+<h2 id="note">Note</h2>
+<ul>
+<li>Cada padrão regex é aplicado independentemente</li>
+<li>Validação contextual é aplicada via verify_entities_regex()</li>
+<li>Entidades inválidas são automaticamente filtradas</li>
+<li>Posições são ajustadas para remover espaços extras</li>
+</ul></div>
+</dd>
+<dt id="anonimizar.sei_anonimizar.SeiAnonimizar.get_active_labels"><code class="name flex">
+<span>def <span class="ident">get_active_labels</span></span>(<span>self) ‑> dict</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_active_labels(self) -&gt; dict:
+    &#34;&#34;&#34;Retorna informações detalhadas sobre labels ativos no anonimizador.
+
+    Returns:
+        dict: Dicionário contendo:
+            - &#34;model_labels&#34;: Lista de labels ativos para detecção por modelo spaCy
+            - &#34;regex_summary&#34;: Dicionário com labels e quantidade de padrões regex por label
+            - &#34;regex_patterns&#34;: Número total de padrões regex registrados
+            - &#34;total_patterns&#34;: Soma de labels do modelo com total de padrões regex
+
+    Examples:
+        &gt;&gt;&gt; anonymizer = SeiAnonimizar(model_path=&#34;pt_core_news_lg&#34;)
+        &gt;&gt;&gt; anonymizer.add_apply_patterns([&#39;CPF&#39;, &#39;EMAIL&#39;], use_model_labels=True)
+        &gt;&gt;&gt; info = anonymizer.get_active_labels()
+        &gt;&gt;&gt; print(info)
+        {
+            &#39;model_labels&#39;: [&#39;CPF&#39;, &#39;EMAIL&#39;],
+            &#39;regex_summary&#39;: {&#39;CPF&#39;: 3, &#39;EMAIL&#39;: 2},
+            &#39;regex_patterns&#39;: 5,
+            &#39;total_patterns&#39;: 7
+        }
+    &#34;&#34;&#34;
+    return _registry_get_active_labels(self.patterns, list(self.labels))</code></pre>
+</details>
+<div class="desc"><p>Retorna informações detalhadas sobre labels ativos no anonimizador.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>dict</code></dt>
+<dd>Dicionário contendo:
+- "model_labels": Lista de labels ativos para detecção por modelo spaCy
+- "regex_summary": Dicionário com labels e quantidade de padrões regex por label
+- "regex_patterns": Número total de padrões regex registrados
+- "total_patterns": Soma de labels do modelo com total de padrões regex</dd>
+</dl>
+<h2 id="examples">Examples</h2>
+<pre><code class="language-python-repl">&gt;&gt;&gt; anonymizer = SeiAnonimizar(model_path=&quot;pt_core_news_lg&quot;)
+&gt;&gt;&gt; anonymizer.add_apply_patterns(['CPF', 'EMAIL'], use_model_labels=True)
+&gt;&gt;&gt; info = anonymizer.get_active_labels()
+&gt;&gt;&gt; print(info)
+{
+    'model_labels': ['CPF', 'EMAIL'],
+    'regex_summary': {'CPF': 3, 'EMAIL': 2},
+    'regex_patterns': 5,
+    'total_patterns': 7
+}
+</code></pre></div>
+</dd>
+<dt id="anonimizar.sei_anonimizar.SeiAnonimizar.get_entity_attribute"><code class="name flex">
+<span>def <span class="ident">get_entity_attribute</span></span>(<span>self, entity: dict, attr_name: str) ‑> str</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_entity_attribute(self, entity: dict, attr_name: str) -&gt; str:
+    &#34;&#34;&#34;Obtém atributo de uma entidade, seja dict ou objeto.&#34;&#34;&#34;
+    try:
+        return getattr(entity, attr_name)
+    except AttributeError:
+        return entity[attr_name]</code></pre>
+</details>
+<div class="desc"><p>Obtém atributo de uma entidade, seja dict ou objeto.</p></div>
+</dd>
+<dt id="anonimizar.sei_anonimizar.SeiAnonimizar.get_tokens"><code class="name flex">
+<span>def <span class="ident">get_tokens</span></span>(<span>self, text: str) ‑> list</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_tokens(self, text: str) -&gt; list:
+    r&#34;&#34;&#34;Retorna o texto tokenizado usando o modelo spaCy carregado.
+
+    Processa o texto através do pipeline spaCy e retorna uma lista de tokens
+    mantendo espaços e formatação original. Útil para análise detalhada do
+    texto ou processamento posterior.
+
+    Args:
+        text (str): Texto a ser tokenizado.
+
+    Returns:
+        list: Lista de strings contendo cada token com seus espaços preservados.
+            Cada elemento mantém a formatação original (espaços, quebras de linha).
+
+    Note:
+        - Utiliza o modelo spaCy carregado na inicialização
+        - Preserva espaços em branco e formatação
+        - Tokens incluem pontuação como elementos separados
+
+    Examples:
+        &gt;&gt;&gt; tokens = anonymizer.get_tokens(&#34;Olá, mundo! Como vai?&#34;)
+        &gt;&gt;&gt; print(tokens)
+        [&#39;Olá&#39;, &#39;,&#39;, &#39; &#39;, &#39;mundo&#39;, &#39;!&#39;, &#39; &#39;, &#39;Como&#39;, &#39; &#39;, &#39;vai&#39;, &#39;?&#39;]
+
+        &gt;&gt;&gt; # Com quebras de linha
+        &gt;&gt;&gt; tokens = anonymizer.get_tokens(&#34;Primeira linha\\nSegunda linha&#34;)
+        &gt;&gt;&gt; print(tokens)
+        [&#39;Primeira&#39;, &#39; &#39;, &#39;linha&#39;, &#39;\\n&#39;, &#39;Segunda&#39;, &#39; &#39;, &#39;linha&#39;]
+    &#34;&#34;&#34;
+    try:
+        self.logger.debug(&#34;Tokenizando texto (len=%d)&#34;, len(text))
+        doc = self.nlp_trained(text)
+        tokens = [token.text_with_ws for token in doc]
+        self.logger.debug(&#34;Total de tokens gerados: %d&#34;, len(tokens))
+        return tokens
+    except Exception as e:
+        self.logger.exception(&#34;Erro ao tokenizar texto: %s&#34;, e)
+        raise e from e</code></pre>
+</details>
+<div class="desc"><p>Retorna o texto tokenizado usando o modelo spaCy carregado.</p>
+<p>Processa o texto através do pipeline spaCy e retorna uma lista de tokens
+mantendo espaços e formatação original. Útil para análise detalhada do
+texto ou processamento posterior.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>text</code></strong> :&ensp;<code>str</code></dt>
+<dd>Texto a ser tokenizado.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>list</code></dt>
+<dd>Lista de strings contendo cada token com seus espaços preservados.
+Cada elemento mantém a formatação original (espaços, quebras de linha).</dd>
+</dl>
+<h2 id="note">Note</h2>
+<ul>
+<li>Utiliza o modelo spaCy carregado na inicialização</li>
+<li>Preserva espaços em branco e formatação</li>
+<li>Tokens incluem pontuação como elementos separados</li>
+</ul>
+<h2 id="examples">Examples</h2>
+<pre><code class="language-python-repl">&gt;&gt;&gt; tokens = anonymizer.get_tokens(&quot;Olá, mundo! Como vai?&quot;)
+&gt;&gt;&gt; print(tokens)
+['Olá', ',', ' ', 'mundo', '!', ' ', 'Como', ' ', 'vai', '?']
+</code></pre>
+<pre><code class="language-python-repl">&gt;&gt;&gt; # Com quebras de linha
+&gt;&gt;&gt; tokens = anonymizer.get_tokens(&quot;Primeira linha\\nSegunda linha&quot;)
+&gt;&gt;&gt; print(tokens)
+['Primeira', ' ', 'linha', '\\n', 'Segunda', ' ', 'linha']
+</code></pre></div>
+</dd>
+<dt id="anonimizar.sei_anonimizar.SeiAnonimizar.list_patterns"><code class="name flex">
+<span>def <span class="ident">list_patterns</span></span>(<span>self) ‑> dict</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def list_patterns(self) -&gt; dict:
+    &#34;&#34;&#34;Retorna todos os padrões regex registrados, organizados por categoria.
+
+    Fornece uma visão completa dos padrões disponíveis, separando entre padrões
+    pré-definidos (built-in) e padrões customizados adicionados pelo usuário.
+
+    Returns:
+        dict: Dicionário com duas chaves:
+            - &#34;builtin&#34;: Lista de padrões pré-definidos do sistema
+            - &#34;custom&#34;: Lista de padrões customizados adicionados pelo usuário
+
+            Cada padrão contém:
+            - label: Rótulo da entidade
+            - pattern: Dicionário com a regex
+            - description: Descrição do padrão (se disponível)
+
+    Note:
+        - Padrões built-in incluem: CPF, RG, EMAIL, TELEFONE, etc.
+        - Padrões custom são adicionados via add_custom_pattern()
+        - Útil para debug e auditoria dos padrões ativos
+    &#34;&#34;&#34;
+    return _registry_list_patterns(self.patterns, list(self.labels))</code></pre>
+</details>
+<div class="desc"><p>Retorna todos os padrões regex registrados, organizados por categoria.</p>
+<p>Fornece uma visão completa dos padrões disponíveis, separando entre padrões
+pré-definidos (built-in) e padrões customizados adicionados pelo usuário.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>dict</code></dt>
+<dd>
+<p>Dicionário com duas chaves:
+- "builtin": Lista de padrões pré-definidos do sistema
+- "custom": Lista de padrões customizados adicionados pelo usuário</p>
+<p>Cada padrão contém:
+- label: Rótulo da entidade
+- pattern: Dicionário com a regex
+- description: Descrição do padrão (se disponível)</p>
+</dd>
+</dl>
+<h2 id="note">Note</h2>
+<ul>
+<li>Padrões built-in incluem: CPF, RG, EMAIL, TELEFONE, etc.</li>
+<li>Padrões custom são adicionados via add_custom_pattern()</li>
+<li>Útil para debug e auditoria dos padrões ativos</li>
+</ul></div>
+</dd>
+<dt id="anonimizar.sei_anonimizar.SeiAnonimizar.remove_overlap_positions"><code class="name flex">
+<span>def <span class="ident">remove_overlap_positions</span></span>(<span>self, entities: list[dict]) ‑> list[dict]</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def remove_overlap_positions(self, entities: list[dict]) -&gt; list[dict]:
+    &#34;&#34;&#34;Remove as entidades com overlap deixando apenas a entidade com maior abrangência.
+
+    Este método é um wrapper para a função standalone em _common.overlap.
+    Mantido para compatibilidade com código existente.
+
+    Args:
+        entities: Lista com as entidades detectadas.
+
+    Returns:
+        Lista de entidades sem overlaps.
+    &#34;&#34;&#34;
+    return remove_overlap_positions(entities, logger=self.logger)</code></pre>
+</details>
+<div class="desc"><p>Remove as entidades com overlap deixando apenas a entidade com maior abrangência.</p>
+<p>Este método é um wrapper para a função standalone em _common.overlap.
+Mantido para compatibilidade com código existente.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>entities</code></strong></dt>
+<dd>Lista com as entidades detectadas.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>Lista de entidades sem overlaps.</p></div>
+</dd>
+<dt id="anonimizar.sei_anonimizar.SeiAnonimizar.verify_entities_unified"><code class="name flex">
+<span>def <span class="ident">verify_entities_unified</span></span>(<span>self, entity: dict, text: str) ‑> bool | str</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def verify_entities_unified(self, entity: dict, text: str) -&gt; bool | str:  # noqa: C901, PLR0911, PLR0912, PLR0915
+    &#34;&#34;&#34;Valida entidades detectadas pelo modelo spaCy ou regex com base no contexto textual.
+
+    A heurística verifica palavras-chave próximas, tamanhos máximos,
+    dígitos verificadores (para CPF) e outros critérios específicos
+    descritos abaixo.
+
+    Args:
+        entity (dict): Objeto de entidade spaCy contendo:
+            - label_: Rótulo da entidade detectada
+            - start_char: Posição inicial no texto
+            - end_char: Posição final no texto
+        text (str): Texto completo onde a entidade foi encontrada.
+
+    Returns:
+        bool | str:
+            - True: Se a entidade foi validada com o rótulo original
+            - False: Se a entidade deve ser desconsiderada
+            - str: Novo rótulo da entidade (reclassificação)
+
+    Note:
+        Validações específicas por tipo:
+        - CPF: Verifica contexto &#34;cpf&#34;, &#34;fistel&#34;, &#34;cnh&#34; e limites de tamanho
+        - CNH: Busca palavra &#34;cnh&#34; no contexto
+        - SIAPE: Procura &#34;siape&#34; vs &#34;sei&#34; no contexto
+        - DATA_NASCIMENTO: Identifica palavras como &#34;nascimento&#34;, &#34;emissor&#34;
+        - PASSAPORTE: Valida comprimento máximo
+    &#34;&#34;&#34;
+    return _verify_unified(
+        entity,
+        text,
+        self.logger,
+        use_cpf_validator=self.use_cpf_validator,
+        use_cnh_validator=self.use_cnh_validator,
+        use_titulo_validator=self.use_titulo_validator,
+    )</code></pre>
+</details>
+<div class="desc"><p>Valida entidades detectadas pelo modelo spaCy ou regex com base no contexto textual.</p>
+<p>A heurística verifica palavras-chave próximas, tamanhos máximos,
+dígitos verificadores (para CPF) e outros critérios específicos
+descritos abaixo.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>entity</code></strong> :&ensp;<code>dict</code></dt>
+<dd>Objeto de entidade spaCy contendo:
+- label_: Rótulo da entidade detectada
+- start_char: Posição inicial no texto
+- end_char: Posição final no texto</dd>
+<dt><strong><code>text</code></strong> :&ensp;<code>str</code></dt>
+<dd>Texto completo onde a entidade foi encontrada.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>bool | str:
+- True: Se a entidade foi validada com o rótulo original
+- False: Se a entidade deve ser desconsiderada
+- str: Novo rótulo da entidade (reclassificação)</p>
+<h2 id="note">Note</h2>
+<p>Validações específicas por tipo:
+- CPF: Verifica contexto "cpf", "fistel", "cnh" e limites de tamanho
+- CNH: Busca palavra "cnh" no contexto
+- SIAPE: Procura "siape" vs "sei" no contexto
+- DATA_NASCIMENTO: Identifica palavras como "nascimento", "emissor"
+- PASSAPORTE: Valida comprimento máximo</p></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="anonimizar" href="index.html">anonimizar</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="anonimizar.sei_anonimizar.SeiAnonimizar" href="#anonimizar.sei_anonimizar.SeiAnonimizar">SeiAnonimizar</a></code></h4>
+<ul class="">
+<li><code><a title="anonimizar.sei_anonimizar.SeiAnonimizar.add_apply_patterns" href="#anonimizar.sei_anonimizar.SeiAnonimizar.add_apply_patterns">add_apply_patterns</a></code></li>
+<li><code><a title="anonimizar.sei_anonimizar.SeiAnonimizar.add_custom_pattern" href="#anonimizar.sei_anonimizar.SeiAnonimizar.add_custom_pattern">add_custom_pattern</a></code></li>
+<li><code><a title="anonimizar.sei_anonimizar.SeiAnonimizar.add_pattern_cid" href="#anonimizar.sei_anonimizar.SeiAnonimizar.add_pattern_cid">add_pattern_cid</a></code></li>
+<li><code><a title="anonimizar.sei_anonimizar.SeiAnonimizar.add_pattern_cnh" href="#anonimizar.sei_anonimizar.SeiAnonimizar.add_pattern_cnh">add_pattern_cnh</a></code></li>
+<li><code><a title="anonimizar.sei_anonimizar.SeiAnonimizar.add_pattern_cpf" href="#anonimizar.sei_anonimizar.SeiAnonimizar.add_pattern_cpf">add_pattern_cpf</a></code></li>
+<li><code><a title="anonimizar.sei_anonimizar.SeiAnonimizar.add_pattern_dados_bancarios" href="#anonimizar.sei_anonimizar.SeiAnonimizar.add_pattern_dados_bancarios">add_pattern_dados_bancarios</a></code></li>
+<li><code><a title="anonimizar.sei_anonimizar.SeiAnonimizar.add_pattern_data_nascimento" href="#anonimizar.sei_anonimizar.SeiAnonimizar.add_pattern_data_nascimento">add_pattern_data_nascimento</a></code></li>
+<li><code><a title="anonimizar.sei_anonimizar.SeiAnonimizar.add_pattern_email" href="#anonimizar.sei_anonimizar.SeiAnonimizar.add_pattern_email">add_pattern_email</a></code></li>
+<li><code><a title="anonimizar.sei_anonimizar.SeiAnonimizar.add_pattern_endereco" href="#anonimizar.sei_anonimizar.SeiAnonimizar.add_pattern_endereco">add_pattern_endereco</a></code></li>
+<li><code><a title="anonimizar.sei_anonimizar.SeiAnonimizar.add_pattern_geo_coord" href="#anonimizar.sei_anonimizar.SeiAnonimizar.add_pattern_geo_coord">add_pattern_geo_coord</a></code></li>
+<li><code><a title="anonimizar.sei_anonimizar.SeiAnonimizar.add_pattern_passaporte" href="#anonimizar.sei_anonimizar.SeiAnonimizar.add_pattern_passaporte">add_pattern_passaporte</a></code></li>
+<li><code><a title="anonimizar.sei_anonimizar.SeiAnonimizar.add_pattern_passaporte_est" href="#anonimizar.sei_anonimizar.SeiAnonimizar.add_pattern_passaporte_est">add_pattern_passaporte_est</a></code></li>
+<li><code><a title="anonimizar.sei_anonimizar.SeiAnonimizar.add_pattern_rg" href="#anonimizar.sei_anonimizar.SeiAnonimizar.add_pattern_rg">add_pattern_rg</a></code></li>
+<li><code><a title="anonimizar.sei_anonimizar.SeiAnonimizar.add_pattern_siape" href="#anonimizar.sei_anonimizar.SeiAnonimizar.add_pattern_siape">add_pattern_siape</a></code></li>
+<li><code><a title="anonimizar.sei_anonimizar.SeiAnonimizar.add_pattern_telefone" href="#anonimizar.sei_anonimizar.SeiAnonimizar.add_pattern_telefone">add_pattern_telefone</a></code></li>
+<li><code><a title="anonimizar.sei_anonimizar.SeiAnonimizar.add_pattern_titulo_eleitor" href="#anonimizar.sei_anonimizar.SeiAnonimizar.add_pattern_titulo_eleitor">add_pattern_titulo_eleitor</a></code></li>
+<li><code><a title="anonimizar.sei_anonimizar.SeiAnonimizar.anonymize_text" href="#anonimizar.sei_anonimizar.SeiAnonimizar.anonymize_text">anonymize_text</a></code></li>
+<li><code><a title="anonimizar.sei_anonimizar.SeiAnonimizar.extract_entities" href="#anonimizar.sei_anonimizar.SeiAnonimizar.extract_entities">extract_entities</a></code></li>
+<li><code><a title="anonimizar.sei_anonimizar.SeiAnonimizar.extract_entities_from_markdown_tables" href="#anonimizar.sei_anonimizar.SeiAnonimizar.extract_entities_from_markdown_tables">extract_entities_from_markdown_tables</a></code></li>
+<li><code><a title="anonimizar.sei_anonimizar.SeiAnonimizar.extract_entities_regex_re" href="#anonimizar.sei_anonimizar.SeiAnonimizar.extract_entities_regex_re">extract_entities_regex_re</a></code></li>
+<li><code><a title="anonimizar.sei_anonimizar.SeiAnonimizar.get_active_labels" href="#anonimizar.sei_anonimizar.SeiAnonimizar.get_active_labels">get_active_labels</a></code></li>
+<li><code><a title="anonimizar.sei_anonimizar.SeiAnonimizar.get_entity_attribute" href="#anonimizar.sei_anonimizar.SeiAnonimizar.get_entity_attribute">get_entity_attribute</a></code></li>
+<li><code><a title="anonimizar.sei_anonimizar.SeiAnonimizar.get_tokens" href="#anonimizar.sei_anonimizar.SeiAnonimizar.get_tokens">get_tokens</a></code></li>
+<li><code><a title="anonimizar.sei_anonimizar.SeiAnonimizar.list_patterns" href="#anonimizar.sei_anonimizar.SeiAnonimizar.list_patterns">list_patterns</a></code></li>
+<li><code><a title="anonimizar.sei_anonimizar.SeiAnonimizar.remove_overlap_positions" href="#anonimizar.sei_anonimizar.SeiAnonimizar.remove_overlap_positions">remove_overlap_positions</a></code></li>
+<li><code><a title="anonimizar.sei_anonimizar.SeiAnonimizar.valida_cnh" href="#anonimizar.sei_anonimizar.SeiAnonimizar.valida_cnh">valida_cnh</a></code></li>
+<li><code><a title="anonimizar.sei_anonimizar.SeiAnonimizar.valida_cnpj" href="#anonimizar.sei_anonimizar.SeiAnonimizar.valida_cnpj">valida_cnpj</a></code></li>
+<li><code><a title="anonimizar.sei_anonimizar.SeiAnonimizar.valida_cpf" href="#anonimizar.sei_anonimizar.SeiAnonimizar.valida_cpf">valida_cpf</a></code></li>
+<li><code><a title="anonimizar.sei_anonimizar.SeiAnonimizar.valida_titulo_eleitor" href="#anonimizar.sei_anonimizar.SeiAnonimizar.valida_titulo_eleitor">valida_titulo_eleitor</a></code></li>
+<li><code><a title="anonimizar.sei_anonimizar.SeiAnonimizar.verify_entities_unified" href="#anonimizar.sei_anonimizar.SeiAnonimizar.verify_entities_unified">verify_entities_unified</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.6</a>.</p>
+</footer>
+</body>
+</html>

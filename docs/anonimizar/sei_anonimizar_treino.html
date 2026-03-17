@@ -1,0 +1,2367 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.6">
+<title>anonimizar.sei_anonimizar_treino API documentation</title>
+<meta name="description" content="Módulo SeiAnonimizarNERTrainer …">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source > summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin:1em 0}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>anonimizar.sei_anonimizar_treino</code></h1>
+</header>
+<section id="section-intro">
+<p>Módulo SeiAnonimizarNERTrainer.</p>
+<p>Este módulo fornece funcionalidades robustas para o treinamento de modelos NER (Named Entity Recognition)
+usando spaCy, com foco em anonimização de dados sensíveis do SEI (Sistema Eletrônico de Informações).</p>
+<p>O módulo oferece validação avançada de dados, incluindo verificação de esquema BILUO, transformação
+de dados de diferentes formatos, controle flexível de erros durante o processo de treinamento, e suporte
+completo para importação/exportação de anotações no formato JSONL (Doccano).</p>
+<p>Labels suportados por padrão:
+- CPF, RG, SIAPE, ENDEREÇO, TELEFONE, EMAIL, GEO_COORD, CID
+- DADOS_BANCARIOS, CNH, PASSAPORTE, TITULO_ELEITOR, DATA_NASCIMENTO</p>
+<p>Principais funcionalidades:
+- Suporte a modelos pré-treinados do spaCy ou criação de modelo em branco
+- Validação rigorosa de dados com esquema BILUO
+- Múltiplos formatos de entrada (dicionário, lista, DataFrame Pandas, JSONL)
+- Importação/exportação de anotações no formato JSONL (compatível com Doccano)
+- Estratégias flexíveis de tratamento de erros ('raise', 'coerce', 'ignore')
+- Limpeza automática de entidades com resolução de conflitos
+- Cross-validation estratificada com paralelização opcional
+- Holdout test set para avaliação consistente entre folds
+- Rastreabilidade completa de IDs de documentos em cada fold (JSON e CSV)
+- Logging detalhado do processo de treinamento
+- Divisão automática de dados para treino e validação
+- Integração direta com SeiAnonimizarEvaluation
+- Suporte nativo para formato JSONL (Doccano) em add_data e cross_validate
+- Métodos load_from_doccano_jsonl e save_to_doccano_jsonl
+- Método _load_jsonl_to_dataframes para conversão JSONL → DataFrames
+- Parâmetro holdout_test_size no cross_validate para separar conjunto de teste fixo
+- Parâmetro holdout_stratify para estratificar o holdout test
+- Salvamento de IDs de documentos por fold (fold_ids.json, train_ids.csv, val_ids.csv)
+- Salvamento de métricas detalhadas do holdout test
+- Validação adicional: start &gt;= end e start &lt; 0 em validate_data</p>
+<h2 id="exemplos">Exemplos</h2>
+<p>Exemplo de uso básico:</p>
+<pre><code>&gt;&gt;&gt; import pandas as pd
+&gt;&gt;&gt; from SeiAnonimizarNERTrainer import SeiAnonimizarNERTrainer
+&gt;&gt;&gt;
+&gt;&gt;&gt; # Inicializar treinador
+&gt;&gt;&gt; trainer = SeiAnonimizarNERTrainer(
+...     model_name="pt_core_news_sm",
+...     output_dir="./meu_modelo_ner",
+...     labels=["CPF", "RG", "EMAIL"]
+... )
+&gt;&gt;&gt;
+&gt;&gt;&gt; # Adicionar dados de treinamento
+&gt;&gt;&gt; dados = [
+...     {
+...         "text": "João Silva, CPF 123.456.789-00, email: joao@email.com",
+...         "entities": [(12, 26, "CPF"), (35, 50, "EMAIL")]
+...     },
+...     {
+...         "text": "Maria Santos, RG 12.345.678-9",
+...         "entities": [(14, 26, "RG")]
+...     }
+... ]
+&gt;&gt;&gt; trainer.add_data(dados, errors='coerce')
+&gt;&gt;&gt;
+&gt;&gt;&gt; # Treinar modelo
+&gt;&gt;&gt; trainer.train(n_iter=20, validation_split=0.2)
+&gt;&gt;&gt;
+&gt;&gt;&gt; # Salvar modelo treinado
+&gt;&gt;&gt; trainer.save_model()
+</code></pre>
+<p>Exemplo com resolução automática de conflitos:</p>
+<pre><code>&gt;&gt;&gt; # Dados com entidades problemáticas
+&gt;&gt;&gt; dados_conflitos = [
+...     {
+...         "text": "João Silva com CPF duplicado",
+...         "entities": [(15, 25, "CPF"), (15, 25, "CPF")]  # Duplicata
+...     },
+...     {
+...         "text": "Maria com sobreposição de dados",
+...         "entities": [(10, 20, "CPF"), (15, 25, "RG")]  # Sobreposição
+...     }
+... ]
+&gt;&gt;&gt;
+&gt;&gt;&gt; # Limpeza automática com resolução de conflitos
+&gt;&gt;&gt; trainer.add_data(
+...     dados_conflitos,
+...     auto_clean=True,
+...     strict_clean=False,
+...     resolve_conflicts='coerce'  # Resolve automaticamente
+... )
+</code></pre>
+<p>Exemplo com DataFrame Pandas:</p>
+<pre><code>&gt;&gt;&gt; import pandas as pd
+&gt;&gt;&gt;
+&gt;&gt;&gt; df = pd.DataFrame({
+...     'text': [
+...         "Pedro Oliveira, SIAPE 1234567",
+...         "Ana Costa, telefone (11) 98765-4321"
+...     ],
+...     'entities': [
+...         [(17, 24, "SIAPE")],
+...         [(20, 36, "TELEFONE")]
+...     ]
+... })
+&gt;&gt;&gt;
+&gt;&gt;&gt; trainer.add_data(df, errors='ignore', keep_empty_entities=False)
+</code></pre>
+<p>Exemplo com tratamento de erros:</p>
+<pre><code>&gt;&gt;&gt; # Dados com problemas intencionais
+&gt;&gt;&gt; dados_problematicos = [
+...     {
+...         "text": "Teste com label inválido",
+...         "entities": [(0, 5, "LABEL_INEXISTENTE")]
+...     }
+... ]
+&gt;&gt;&gt;
+&gt;&gt;&gt; # Diferentes estratégias de erro
+&gt;&gt;&gt; trainer.add_data(dados_problematicos, errors='ignore')  # Ignora erros
+&gt;&gt;&gt; trainer.add_data(dados_problematicos, errors='coerce')  # Corrige/remove erros
+&gt;&gt;&gt; trainer.add_data(dados_problematicos, errors='raise')   # Lança exceção
+</code></pre>
+<p>Exemplo com JSONL/Doccano:</p>
+<pre><code>&gt;&gt;&gt; # Importar dados de arquivo JSONL (Doccano)
+&gt;&gt;&gt; trainer = SeiAnonimizarNERTrainer(labels=['CPF', 'EMAIL', 'TELEFONE'])
+&gt;&gt;&gt; trainer.add_data("./anotacoes_doccano.jsonl", errors='coerce')
+&gt;&gt;&gt; print(f"Dados carregados: {len(trainer.training_data)} exemplos")
+&gt;&gt;&gt;
+&gt;&gt;&gt; # Exportar dados de treinamento para JSONL
+&gt;&gt;&gt; trainer.save_to_doccano_jsonl("./dados_exportados.jsonl")
+&gt;&gt;&gt;
+&gt;&gt;&gt; # Converter JSONL em DataFrames para análise
+&gt;&gt;&gt; df_textos, df_entidades = trainer._load_jsonl_to_dataframes("./anotacoes.jsonl")
+&gt;&gt;&gt; print(f"Textos: {len(df_textos)}, Entidades: {len(df_entidades)}")
+&gt;&gt;&gt; # df_entidades tem colunas: id, start, end, entidade
+</code></pre>
+<p>Exemplo com Cross-Validation básico:</p>
+<pre><code>&gt;&gt;&gt; # Exemplo de uso completo
+&gt;&gt;&gt; trainer = SeiAnonimizarNERTrainer(
+...     model_name=None,  # modelo em branco
+...     output_dir="./base_model",
+...     labels=['CPF', 'RG', 'EMAIL', 'TELEFONE', 'SIAPE']
+... )
+&gt;&gt;&gt;
+&gt;&gt;&gt; # Parâmetros de treinamento e avaliação
+&gt;&gt;&gt; train_params = {
+...     'n_iter': 30,
+...     'drop': 0.2,
+...     'batch_size': 8
+... }
+&gt;&gt;&gt;
+&gt;&gt;&gt; eval_params = {
+...     'overlap_threshold': 0.8,
+...     'beta': 2.0
+... }
+&gt;&gt;&gt;
+&gt;&gt;&gt; # Executa cross validation
+&gt;&gt;&gt; reports, summaries, results, holdout = trainer.cross_validate(
+...     df_entidades=df_entidades,
+...     df_textos=df_textos,
+...     n_splits=5,
+...     stratified=True,
+...     features=features,
+...     output_dir="./cv_results",
+...     n_jobs=3,
+...     train_params={'n_iter': 30, 'drop': 0.2, 'batch_size': 8},
+...     eval_params={'overlap_threshold': 0.8, 'beta': 2.0},
+...     add_data_params={'errors': 'coerce', 'auto_clean': True, 'strict_clean': True, 'keep_empty_entities': False},
+... )
+&gt;&gt;&gt;
+&gt;&gt;&gt; # Análise dos resultados
+&gt;&gt;&gt; print("Métricas por fold:")
+&gt;&gt;&gt; for summary in summaries:
+&gt;&gt;&gt;     if summary:
+&gt;&gt;&gt;         print(f"Fold {summary['fold']}: F1={summary['fbeta']:.3f}")
+</code></pre>
+<p>Exemplo com cross-validation estratificada avançada:</p>
+<pre><code>&gt;&gt;&gt; # Cross-validation com balanceamento por tipo de entidade
+&gt;&gt;&gt; reports, summaries, results, holdout = trainer.cross_validate(
+...     df_entidades=df_entidades,
+...     df_textos=df_textos,
+...     n_splits=5,
+...     stratified=True,
+...     features=['CPF', 'EMAIL', 'TELEFONE'],  # Estratificar por estes tipos
+...     output_dir="./cv_estratificado",
+...     n_jobs=2,  # Paralelização
+...     random_state=42,
+...     add_data_params={
+...         'auto_clean': True,
+...         'resolve_conflicts': 'coerce',
+...         'strict_clean': False
+...     },
+...     replace=True  # Substitui diretório existente
+... )
+&gt;&gt;&gt;
+&gt;&gt;&gt; # Análise detalhada dos resultados
+&gt;&gt;&gt; for fold_idx, summary in enumerate(summaries, 1):
+...     if summary:
+...         print(f"Fold {fold_idx}:")
+...         print(f"  Precision: {summary['precision']:.3f}")
+...         print(f"  Recall: {summary['recall']:.3f}")
+...         print(f"  F-beta: {summary['fbeta']:.3f}")
+</code></pre>
+<p>Exemplo com Cross-Validation + Holdout Test:</p>
+<pre><code>&gt;&gt;&gt; # CV com holdout test set separado (20% dos dados)
+&gt;&gt;&gt; reports, summaries, results, holdout_results = trainer.cross_validate(
+...     df_entidades=df_entidades,
+...     df_textos=df_textos,
+...     n_splits=5,
+...     output_dir="./cv_with_holdout",
+...     holdout_test_size=0.2,  # Separar 20% para test fixo
+...     holdout_stratify=True,   # Estratificar o holdout também
+...     train_params={'n_iter': 25},
+...     replace=True
+... )
+&gt;&gt;&gt;
+&gt;&gt;&gt; # Analisar métricas no holdout test (comparável entre folds)
+&gt;&gt;&gt; if holdout_results is not None:
+&gt;&gt;&gt;     print("
+</code></pre>
+<p>=== Métricas no Holdout Test ===")
+&gt;&gt;&gt;
+for result in holdout_results:
+&gt;&gt;&gt;
+print(f"Fold {result['fold']}: F-beta={result['fbeta']:.3f}")</p>
+<pre><code>Exemplo com CV usando JSONL:
+
+    &gt;&gt;&gt; # Cross-validation direto de arquivo JSONL
+    &gt;&gt;&gt; reports, summaries, _, _ = trainer.cross_validate(
+    ...     df_entidades="./anotacoes_completas.jsonl",  # Arquivo JSONL
+    ...     df_textos=None,  # Mesmo arquivo contém textos e entidades
+    ...     n_splits=5,
+    ...     output_dir="./cv_from_jsonl",
+    ...     train_params={'n_iter': 15},
+    ...     replace=True
+    ... )
+
+
+Exemplo de rastreabilidade de folds:
+
+    &gt;&gt;&gt; # Após executar CV, verificar IDs usados em cada fold
+    &gt;&gt;&gt; import json
+    &gt;&gt;&gt; from pathlib import Path
+    &gt;&gt;&gt;
+    &gt;&gt;&gt; cv_dir = Path("./cv_results")
+    &gt;&gt;&gt; for fold_dir in sorted(cv_dir.glob("fold_*")):
+    &gt;&gt;&gt;     if fold_dir.is_dir():
+    &gt;&gt;&gt;         # Carregar metadados do fold
+    &gt;&gt;&gt;         with open(fold_dir / "fold_ids.json", 'r') as f:
+    &gt;&gt;&gt;             fold_info = json.load(f)
+    &gt;&gt;&gt;
+    &gt;&gt;&gt;         print(f"
+</code></pre>
+<p>{fold_dir.name}:")
+&gt;&gt;&gt;
+print(f"
+Train IDs: {len(fold_info['train_ids'])} docs")
+&gt;&gt;&gt;
+print(f"
+Val IDs: {len(fold_info['val_ids'])} docs")
+&gt;&gt;&gt;
+&gt;&gt;&gt;
+# Também disponível em CSV
+&gt;&gt;&gt;
+train_csv = pd.read_csv(fold_dir / "train_ids.csv")
+&gt;&gt;&gt;
+val_csv = pd.read_csv(fold_dir / "val_ids.csv")</p>
+<p>Estrutura de arquivos gerados pelo Cross-Validation:
+cv_results/
+├── fold_1/
+│
+├── model/
+# Modelo treinado no fold 1
+│
+├── fold_ids.json
+# Metadados (train_ids, val_ids, counts)
+│
+├── train_ids.csv
+# IDs de treino (com coluna 'split')
+│
+├── val_ids.csv
+# IDs de validação
+│
+├── detailed_report.parquet
+# Relatório detalhado do fold
+│
+└── summary.json
+# Métricas agregadas do fold
+├── fold_2/
+│
+└── &hellip;
+├── all_folds_detailed.parquet
+# Todos os folds consolidados
+├── fold_summaries.parquet
+# Sumário de todos os folds
+├── holdout_test_ids.json
+# IDs separados para holdout test (se usado)
+├── holdout_test_ids.csv
+# IDs do holdout em CSV
+├── holdout_test_summary.parquet
+# Métricas agregadas no holdout
+└── holdout_test_stats.json
+# Estatísticas gerais do holdout</p>
+<p>Métodos principais:
+- _create_default_logger: Cria logger padrão quando não fornecido.
+- _add_labels: Adiciona labels ao pipeline NER do spaCy.
+- add_data: Adiciona dados de treinamento (dict, lista, DataFrame, ou JSONL) com validação.
+- _validate_data: Valida dados de entrada com verificação de labels e posições.
+- _validate_biluo_tags: Valida entidades usando esquema BILUO do spaCy.
+- _transform_data_from_pandas: Transforma DataFrame Pandas para formato spaCy.
+- train: Executa o treinamento iterativo do modelo NER.
+- save_model: Salva o modelo treinado em disco.
+- split_data: Divide dados em conjuntos de treino e validação.
+- val_data_to_evaluation: Transforma dados de validação para formato do SeiAnonimizarEvaluation
+- validate_entities: Valida entidades anotadas retornando True/False
+- clean_entities: Limpa e corrige entidades automaticamente incluindo resolução de conflitos
+- detect_entity_conflicts: Detecta conflitos entre entidades (duplicatas e sobreposições)
+- debug_entities: Debug detalhado de problemas em offsets/labels
+- make_folds_by_id: Cria folds baseados em IDs de documento para cross-validation
+- make_stratified_folds_by_id: Cria folds estratificados balanceando distribuição de entidades
+- cross_validate: Executa cross validation completo com paralelização opcional
+- load_from_doccano_jsonl: Carrega dados de arquivo JSONL (formato Doccano) [NOVO v0.0.9]
+- save_to_doccano_jsonl: Salva training_data em arquivo JSONL (formato Doccano) [NOVO v0.0.9]
+- _load_jsonl_to_dataframes: Converte JSONL em DataFrames (textos e entidades) [NOVO v0.0.9]</p>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="anonimizar.sei_anonimizar_treino.SeiAnonimizarNERTrainer"><code class="flex name class">
+<span>class <span class="ident">SeiAnonimizarNERTrainer</span></span>
+<span>(</span><span>model_name: str | None = None,<br>output_dir: str = './trained_model',<br>logger: logging.Logger | None = None,<br>labels: list[str] | None = None)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class SeiAnonimizarNERTrainer:
+    &#34;&#34;&#34;Classe para treinamento de modelos NER especializados em anonimização de dados sensíveis.
+
+    Esta classe oferece funcionalidades completas para treinar modelos de reconhecimento
+    de entidades nomeadas (NER) usando spaCy, com foco em identificação de dados pessoais
+    e sensíveis para anonimização.
+
+    Attributes:
+        model_name (str | None): Nome do modelo base do spaCy ou None para modelo em branco
+        output_dir (Path): Diretório onde o modelo treinado será salvo
+        logger (logging.Logger): Logger para registro de atividades
+        labels (list[str]): Lista de labels suportados pelo modelo
+        nlp (spacy.Language): Pipeline spaCy configurado
+        ner (spacy.pipeline.EntityRecognizer): Componente NER do pipeline
+        training_data (list): Dados de treinamento no formato spaCy
+        train_data (list): Dados de treinamento após divisão
+        val_data (list): Dados de validação após divisão
+        supported_labels (list[str]): Lista de labels suportados pelo modelo (novo nome para &#39;labels&#39;)
+
+    Example:
+        &gt;&gt;&gt; trainer = SeiAnonimizarNERTrainer(
+        ...     model_name=&#34;pt_core_news_sm&#34;,
+        ...     output_dir=&#34;./modelo_personalizado&#34;,
+        ...     labels=[&#34;CPF&#34;, &#34;RG&#34;, &#34;EMAIL&#34;]
+        ... )
+        &gt;&gt;&gt; dados = {&#34;text&#34;: &#34;João, CPF 123.456.789-00&#34;, &#34;entities&#34;: [(6, 20, &#34;CPF&#34;)]}
+        &gt;&gt;&gt; trainer.add_data(dados)
+        &gt;&gt;&gt; trainer.train(n_iter=10)
+        &gt;&gt;&gt; trainer.save_model()
+    &#34;&#34;&#34;
+
+    def __init__(
+        self,
+        model_name: str | None = None,
+        output_dir: str = DEFAULT_OUTPUT_DIR,
+        logger: logging.Logger | None = None,
+        labels: list[str] | None = None,
+    ) -&gt; None:
+        &#34;&#34;&#34;Inicializa o treinador NER com configurações personalizadas.
+
+        Args:
+            model_name (str | None, optional): Nome do modelo base do spaCy (ex: &#34;pt_core_news_sm&#34;),
+                ou caminho de um modelo ja treinado.
+                Se None, cria um modelo em branco. Defaults to None.
+            output_dir (str, optional): Diretório para salvar o modelo treinado.
+                Defaults to &#34;./trained_model&#34;.
+            logger (logging.Logger | None, optional): Logger personalizado para registro de atividades.
+                Se None, cria um logger padrão. Defaults to None.
+            labels (list[str] | None, optional): Lista de labels personalizados para o modelo.
+                Se None, usa labels padrão para documentos do SEI. Defaults to None.
+
+        Raises:
+            OSError: Se o modelo especificado em model_name não for encontrado
+            ValueError: Se os labels fornecidos forem inválidos
+
+        Example:
+            &gt;&gt;&gt; # Modelo com configuração padrão
+            &gt;&gt;&gt; trainer = SeiAnonimizarNERTrainer()
+            &gt;&gt;&gt;
+            &gt;&gt;&gt; # Modelo com configuração personalizada
+            &gt;&gt;&gt; trainer = SeiAnonimizarNERTrainer(
+            ...     model_name=&#34;pt_core_news_lg&#34;,
+            ...     output_dir=&#34;./meu_modelo&#34;,
+            ...     labels=[&#34;CPF&#34;, &#34;RG&#34;, &#34;EMAIL&#34;, &#34;TELEFONE&#34;]
+            ... )
+        &#34;&#34;&#34;
+        self.model_name = model_name
+        self.output_dir = Path(output_dir)
+        self.logger = logger or create_default_logger(__name__)
+        self.logger.info(&#34;Inicializando Treinamento para o SeiAnonimizar&#34;)
+        self.logger.debug(f&#34;\tO modelo será salvo em: {self.output_dir}&#34;)
+        self._blank_nlp = spacy.blank(SPACY_LANGUAGE)
+
+        if not model_name:
+            self.logger.warning(&#34;\tInicializando pipeline spaCy em branco para &#39;pt&#39;. Nenhum modelo base fornecido.&#34;)
+            self.nlp = spacy.blank(SPACY_LANGUAGE)
+        else:
+            self.logger.debug(f&#34;\tModel_name: {self.model_name}&#34;)
+            self.nlp = spacy.load(model_name)
+
+        if &#34;ner&#34; not in self.nlp.pipe_names:
+            self.nlp.add_pipe(&#34;ner&#34;)
+        self.other_pipes = [pipe for pipe in self.nlp.pipe_names if pipe != &#34;ner&#34;]
+        self.ner = self.nlp.get_pipe(&#34;ner&#34;)
+
+        self.training_data = []
+        if labels:
+            self.supported_labels = labels
+        else:
+            msg = &#34;Nao foram definidos labels, serão usados os labels padrão&#34;
+            self.logger.warning(msg)
+            self.supported_labels = list(DEFAULT_SUPPORTED_LABELS)
+        self._add_labels()
+        self.logger.debug(f&#34;Serão tratadas as labels: {self.supported_labels}&#34;)
+
+        # Inicializar gerenciador de dados centralizado
+        self._data_manager = _NERDataManager(
+            supported_labels=self.supported_labels,
+            logger=self.logger,
+        )
+
+        # Inicializar gerenciador de cross-validation
+        self._cv_manager = _NERCrossValidator(logger=self.logger)
+
+    def validate_entities(self, text: str, entities: list[tuple[int, int, str]]) -&gt; bool:
+        &#34;&#34;&#34;Valida entidades anotadas com base no texto.
+
+        Retorna True se todas estiverem corretas,
+        ou False se houver qualquer erro (offset inválido, label não suportado, desalinhamento BILUO etc.).
+
+        Args:
+            text (str): Texto completo a ser inspecionado.
+            entities (list[tuple[int, int, str]]): Lista de tuplas (start, end, label).
+
+        Returns:
+            bool: True se todas as entidades forem válidas, False caso contrário.
+
+        Examples:
+            Validar entidades corretas:
+
+                &gt;&gt;&gt; trainer = SeiAnonimizarNERTrainer(labels=[&#34;CPF&#34;])
+                &gt;&gt;&gt; text = &#34;CPF: 123.456.789-00&#34;
+                &gt;&gt;&gt; entities = [(5, 19, &#34;CPF&#34;)]  # 14 caracteres: 123.456.789-00
+                &gt;&gt;&gt; trainer.validate_entities(text, entities)
+                True
+
+            Validar entidades com problemas:
+
+                &gt;&gt;&gt; # Offset com espaços extras
+                &gt;&gt;&gt; text = &#34;CPF: 123.456.789-00  &#34;
+                &gt;&gt;&gt; entities = [(5, 21, &#34;CPF&#34;)]  # Inclui espaços extras
+                &gt;&gt;&gt; trainer.validate_entities(text, entities)
+                False
+
+                &gt;&gt;&gt; # Offset desalinhado aos tokens
+                &gt;&gt;&gt; text = &#34;EMAIL: teste@exemplo.com&#34;
+                &gt;&gt;&gt; entities = [(14, 21, &#34;EMAIL&#34;)]  # Não alinhado ao token
+                &gt;&gt;&gt; trainer.validate_entities(text, entities)
+                False
+        &#34;&#34;&#34;
+        return data_validator.validate_entities(text, entities, self.supported_labels, self.nlp, self.logger)
+
+    def _add_labels(self) -&gt; None:
+        &#34;&#34;&#34;Adiciona labels ao pipeline NER do spaCy.
+
+        Este método registra todos os labels suportados no componente NER do pipeline spaCy,
+        permitindo que o modelo reconheça essas entidades durante o treinamento.
+
+        Note:
+            - Método interno chamado automaticamente durante a inicialização
+            - Cada label é registrado individualmente no pipeline NER
+            - Labels duplicados são automaticamente ignorados pelo spaCy
+            - Logs informativos são gerados para cada label adicionado
+
+        Example:
+            &gt;&gt;&gt; # Chamado automaticamente durante inicialização
+            &gt;&gt;&gt; trainer = SeiAnonimizarNERTrainer(labels=[&#34;CPF&#34;, &#34;RG&#34;])
+            &gt;&gt;&gt; # Logs: &#34;Adicionado label CPF ao modelo&#34;, &#34;Adicionado label RG ao modelo&#34;
+        &#34;&#34;&#34;
+        for label in self.supported_labels:
+            self.ner.add_label(label)
+            self.logger.debug(f&#34;Adicionado label {label} ao modelo&#34;)
+
+    def train(
+        self,
+        n_iter: int = DEFAULT_N_ITER,
+        drop: float = DEFAULT_DROP,
+        batch_size: int = DEFAULT_BATCH_SIZE,
+        validation_split: float = DEFAULT_VALIDATION_SPLIT,
+        initial_base_frac: float = DEFAULT_INITIAL_BASE_FRAC,
+    ) -&gt; dict[str, Any] | None:
+        &#34;&#34;&#34;Treina o modelo NER usando os dados previamente carregados.
+
+        Args:
+            n_iter (int, optional): Número de iterações (épocas) de treinamento.
+                Padrão = 20.
+            drop (float, optional): Taxa de *dropout* aplicada durante a atualização
+                dos pesos. Padrão = 0.35.
+            batch_size (int, optional): Tamanho da minilote utilizada nas
+                atualizações. Padrão = 8.
+            validation_split (float, optional): Fração (0-1) dos dados reservada
+                para validação. Se 0, todo o conjunto é usado para treinamento.
+                Padrão = 0.2.
+            initial_base_frac (float, optional): Fração inicial do conjunto de
+                treinamento usada para compor o lote de exemplos passado a
+                ``nlp.initialize()``. Padrão = 1.0.
+
+        Raises:
+            ValueError: Se ``self.training_data`` estiver vazio.
+            Exception: Repassa qualquer exceção gerada durante o processo de
+                treinamento.
+
+        Returns:
+            dict[str, Any]: Dicionário com métricas de treinamento incluindo
+                &#39;final_loss&#39;, &#39;iterations&#39; e &#39;examples_count&#39;.
+        &#34;&#34;&#34;
+        try:
+            if not self.training_data:
+                msg = &#34;Nenhum dado de treinamento disponível&#34;
+                self.logger.exception(msg)
+                raise ValueError(msg)
+            if not 0.0 &lt;= validation_split &lt; 1.0:
+                msg = f&#34;validation_split deve estar entre 0.0 e 1.0(não incluso), recebido: {validation_split}&#34;
+                self.logger.exception(msg)
+                raise ValueError(msg)
+
+            # Preparar dados para treinamento
+            if validation_split &gt; 0:
+                self.split_data(train_ratio=1 - validation_split)
+                train_data = self.train_data
+            else:
+                train_data = self.training_data
+
+            self.logger.info(&#34;Delegando treinamento para módulo trainer especializado&#34;)
+
+            # Delegar treinamento para função standalone
+            self.nlp, metrics = _train_ner_model(
+                nlp=self.nlp,
+                train_data=train_data,
+                n_iter=n_iter,
+                drop=drop,
+                batch_size=batch_size,
+                validation_split=0.0,  # Já foi dividido acima
+                initial_base_frac=initial_base_frac,
+                logger=self.logger,
+                other_pipes=self.other_pipes,
+            )
+
+            self.logger.info(&#34;Treinamento concluído com sucesso via módulo trainer&#34;)
+            return metrics
+
+        except Exception as e:
+            self.logger.exception(f&#34;Erro durante treinamento: {e!s}&#34;)
+            raise
+
+    def _format_time(self, seconds: float) -&gt; str:
+        &#34;&#34;&#34;Formata tempo em segundos para formato legível.
+
+        Args:
+            seconds (float): Tempo em segundos
+
+        Returns:
+            str: Tempo formatado (ex: &#34;1h 23m 45s&#34;, &#34;2m 30s&#34;, &#34;15s&#34;)
+
+        Example:
+            &gt;&gt;&gt; self._format_time(3661.5)
+            &#39;1h 1m 1s&#39;
+            &gt;&gt;&gt; self._format_time(90.2)
+            &#39;1m 30s&#39;
+            &gt;&gt;&gt; self._format_time(15.8)
+            &#39;16s&#39;
+        &#34;&#34;&#34;
+        if seconds &lt; SECONDS_PER_MINUTE:
+            return f&#34;{int(seconds)}s&#34;
+        if seconds &lt; SECONDS_PER_HOUR:
+            minutes = int(seconds // SECONDS_PER_MINUTE)
+            secs = int(seconds % SECONDS_PER_MINUTE)
+            return f&#34;{minutes}m {secs}s&#34;
+        hours = int(seconds // SECONDS_PER_HOUR)
+        minutes = int((seconds % SECONDS_PER_HOUR) // SECONDS_PER_MINUTE)
+        secs = int(seconds % SECONDS_PER_MINUTE)
+        return f&#34;{hours}h {minutes}m {secs}s&#34;
+
+    def add_data(
+        self,
+        data: list | dict | pd.DataFrame | str | None = None,
+        *,
+        errors: str = &#34;raise&#34;,
+        keep_empty_entities: bool = False,
+        auto_clean: bool = True,
+        strict_clean: bool = True,
+        resolve_conflicts: str = &#34;coerce&#34;,
+    ) -&gt; None:
+        &#34;&#34;&#34;Adiciona dados de treinamento à classe com validação e limpeza opcional.
+
+        Args:
+            data: Dados a serem adicionados, caminho para arquivo .jsonl (Doccano).
+            errors: Política de tratamento de erro: &#34;raise&#34;, &#34;coerce&#34; ou &#34;ignore&#34;.
+                - &#34;raise&#34;: Lança exceção quando encontra entidades inválidas.
+                - &#34;coerce&#34;: Remove entidades inválidas silenciosamente.
+                - &#34;ignore&#34;: Mantém entidades como estão, sem correção.
+            keep_empty_entities: Se True, mantém textos mesmo quando todas as entidades
+                são descartadas na validação.
+            auto_clean: Se True, aplica limpeza automática nas entidades:
+                - Remove espaços extras nos limites das entidades.
+                - Valida alinhamento BILUO (offsets devem corresponder a tokens spaCy).
+                - Corrige offsets quando possível.
+            strict_clean: Se True, descarta exemplos onde alguma entidade foi removida
+                durante a limpeza. Se False, mantém exemplos mesmo com menos entidades.
+            resolve_conflicts: Como resolver conflitos de entidades:
+                - &#34;raise&#34;: Lança erro quando há conflitos (duplicatas ou sobreposições).
+                - &#34;ignore&#34;: Remove documentos com conflitos.
+                - &#34;coerce&#34;: Tenta resolver conflitos automaticamente.
+
+        Examples:
+            Adicionar dados com comportamento padrão (limpeza automática):
+
+                &gt;&gt;&gt; trainer.add_data([{&#34;text&#34;: &#34;CPF: 123.456.789-00&#34;, &#34;entities&#34;: [(5, 20, &#34;CPF&#34;)]}])
+
+            Ignorar erros (mantém dados inválidos sem correção):
+
+                &gt;&gt;&gt; trainer.add_data(bad_data, errors=&#34;ignore&#34;, auto_clean=False)
+                &gt;&gt;&gt; # Entidades inválidas são mantidas como estão
+
+            Ignorar erros com limpeza (corrige espaços mas não levanta erro):
+
+                &gt;&gt;&gt; trainer.add_data(bad_data, errors=&#34;ignore&#34;, auto_clean=True)
+                &gt;&gt;&gt; # Espaços são corrigidos, mas BILUO inválido é mantido
+
+            Corrigir erros automaticamente:
+
+                &gt;&gt;&gt; trainer.add_data(bad_data, errors=&#34;coerce&#34;, auto_clean=True)
+                &gt;&gt;&gt; # Espaços são corrigidos, entidades com BILUO inválido são removidas
+
+            Levantar erro em dados inválidos:
+
+                &gt;&gt;&gt; trainer.add_data(bad_data, errors=&#34;raise&#34;, auto_clean=True)
+                &gt;&gt;&gt; # Levanta ValueError se houver problemas não corrigíveis
+
+            Sem limpeza automática:
+
+                &gt;&gt;&gt; trainer.add_data(bad_data, errors=&#34;raise&#34;, auto_clean=False)
+                &gt;&gt;&gt; # Valida entidades sem aplicar correções automáticas
+
+            Resolver conflitos de entidades:
+
+                &gt;&gt;&gt; # Dados com sobreposição
+                &gt;&gt;&gt; data = [{&#34;text&#34;: &#34;CPF 123.456.789-00&#34;, &#34;entities&#34;: [(4, 16, &#34;CPF&#34;), (4, 20, &#34;CPF&#34;)]}]
+                &gt;&gt;&gt; trainer.add_data(data, resolve_conflicts=&#34;coerce&#34;)  # Remove duplicata
+        &#34;&#34;&#34;
+        if data is None:
+            self.logger.warning(&#34;Nenhum dado fornecido para adicionar.&#34;)
+            return
+
+        # Converter dados de entrada para formato interno
+        new_data = data_loader.convert_input_data(
+            data=data,
+            logger=self.logger,
+            transform_pandas_fn=lambda df: data_loader.transform_data_from_pandas(df, self.logger),
+            load_jsonl_fn=training_io.load_doccano_jsonl,
+            errors=errors,
+        )
+
+        # Aplicar limpeza automática se habilitada
+        if auto_clean:
+            # Contar entidades antes da limpeza para detectar perdas
+            original_entities_count = sum(len(annotations.get(&#34;entities&#34;, [])) for _, annotations in new_data)
+
+            new_data = data_loader.apply_auto_clean(
+                data=new_data,
+                clean_entities_fn=self.clean_entities,
+                strict_clean=strict_clean,
+                keep_empty_entities=keep_empty_entities,
+                resolve_conflicts=resolve_conflicts,
+                logger=self.logger,
+                errors=errors,
+            )
+
+            # Verificar se houve perda de entidades durante a limpeza
+            # Apenas levanta erro se errors=&#39;raise&#39; E houve perda de entidades
+            if errors == &#34;raise&#34; and original_entities_count &gt; 0:
+                final_entities_count = sum(len(annotations.get(&#34;entities&#34;, [])) for _, annotations in new_data)
+                if final_entities_count &lt; original_entities_count:
+                    msg = (
+                        f&#34;Entidades foram removidas durante a limpeza automática: &#34;
+                        f&#34;{original_entities_count} -&gt; {final_entities_count}. &#34;
+                        &#34;Use auto_clean=False ou errors=&#39;coerce&#39; para permitir &#34;
+                        &#34;remoção silenciosa de entidades inválidas.&#34;
+                    )
+                    self.logger.exception(msg)
+                    raise ValueError(msg)
+
+            # Validar após limpeza - pula BILUO apenas se errors != &#34;raise&#34;
+            # Quando errors=&#34;raise&#34;, queremos validar BILUO para detectar problemas remanescentes
+            # Quando errors=&#34;ignore&#34;, também pulamos BILUO pois já manteve entidades como estão
+            skip_biluo = errors in (&#34;coerce&#34;, &#34;ignore&#34;)
+            validated_data = self._validate_data(
+                new_data, errors=errors, keep_empty_entities=keep_empty_entities, skip_biluo=skip_biluo
+            )
+        else:
+            # Validar sem limpeza
+            validated_data = self._validate_data(new_data, errors=errors, keep_empty_entities=keep_empty_entities)
+
+        self.training_data.extend(validated_data)
+        # Sincronizar com o gerenciador de dados centralizado
+        self._data_manager.training_data = list(self.training_data)
+        self.logger.debug(
+            f&#34;Dados adicionados com sucesso. Exemplos válidos adicionados: {len(validated_data)}. &#34;
+            f&#34;Total de exemplos no conjunto de treinamento: {len(self.training_data)}&#34;
+        )
+
+    def _validate_data(
+        self,
+        data_to_validate: list,
+        *,
+        errors: str = &#34;raise&#34;,
+        keep_empty_entities: bool = False,
+        skip_biluo: bool = False,
+    ) -&gt; list:
+        &#34;&#34;&#34;Valida os dados de treinamento fornecidos.
+
+        Args:
+            data_to_validate: Lista de tuplas (text, annotations) para validar.
+            errors: &#39;raise&#39; para lançar erro, &#39;coerce&#39; para corrigir, &#39;ignore&#39; para ignorar.
+            keep_empty_entities: Se True, mantém textos mesmo quando todas as entidades são inválidas.
+                            Se False (padrão), descarta textos sem entidades válidas.
+            skip_biluo (bool) : se true nao faz validacao de biluo
+
+
+        Returns:
+            list: Lista de dados validados no formato [(text, {&#34;entities&#34;: [...]}), ...]
+
+        Raises:
+            ValueError: Quando ``errors=&#34;raise&#34;`` e é encontrada
+                inconsistência.
+        &#34;&#34;&#34;
+        return data_validator.validate_data(
+            data_to_validate,
+            self.supported_labels,
+            self._blank_nlp,
+            self.logger,
+            errors=errors,
+            keep_empty_entities=keep_empty_entities,
+            skip_biluo=skip_biluo,
+        )
+
+    def _validate_biluo_tags(self, text: str, entities: list, errors: str = &#34;raise&#34;) -&gt; list:
+        &#34;&#34;&#34;Valida entidades usando o esquema BILUO do spaCy.
+
+        Args:
+            text: Texto a ser validado
+            entities: Lista de tuplas (start, end, label)
+            errors:
+                • `&#34;raise&#34;`  - lança exceção na primeira entidade inválida.
+                • `&#34;coerce&#34;` - remove somente a entidade problemática.
+                • `&#34;ignore&#34;` - mantém todas, mesmo que inconsistentes.
+
+        Returns:
+            list: Lista de entidades válidas
+
+        Raises:
+            ValueError: Se ``errors=&#34;raise&#34;`` e algum problema BILUO é
+                encontrado.
+        &#34;&#34;&#34;
+        return data_validator.validate_biluo_tags(text, entities, self._blank_nlp, self.logger, errors)
+
+    def _transform_data_from_pandas(self, df: pd.DataFrame) -&gt; list:
+        &#34;&#34;&#34;Converte DataFrame para o formato spaCy.
+
+        Formatos aceitos:
+
+        1. Colunas ``text`` e ``entities``
+           - ``entities`` deve ser lista de tuplas.
+
+        2. Formato &#34;linha por entidade&#34;
+           - colunas ``texto``, ``start``, ``end`` e ``entidade``.
+
+        Args:
+            df: DataFrame a converter.
+
+        Returns:
+            list: Lista [(text, {&#34;entities&#34;: [...]})].
+
+        Raises:
+            ValueError: Se o DataFrame não seguir nenhum dos formatos.
+        &#34;&#34;&#34;
+        return data_loader.transform_data_from_pandas(df, self.logger)
+
+    def save_model(self, path: str | None = None) -&gt; None:
+        &#34;&#34;&#34;Persiste o modelo treinado em disco.
+
+        Args:
+            path (str | None, optional): Diretório de saída.
+                Se ``None``, usa ``self.output_dir``.
+        &#34;&#34;&#34;
+        save_path = Path(path) if path else self.output_dir
+        save_path.mkdir(parents=True, exist_ok=True)
+        self.nlp.to_disk(save_path)
+        self.logger.debug(f&#34;Modelo salvo em: {save_path}&#34;)
+
+    def split_data(self, train_ratio: float = DEFAULT_TRAIN_RATIO) -&gt; None:
+        &#34;&#34;&#34;Divide ``training_data`` em treino e validação.
+
+        Args:
+            train_ratio (float, optional): Proporção destinada a treino.
+                Default = ``0.8``.
+
+        Raises:
+            ValueError: Se houver menos de 2 exemplos.
+        &#34;&#34;&#34;
+        self.train_data, self.val_data = data_loader.split_data(self.training_data, train_ratio, self.logger)
+        # Sincronizar com o gerenciador de dados centralizado
+        self._data_manager.train_data = list(self.train_data)
+        self._data_manager.val_data = list(self.val_data)
+
+    def debug_entities(self, text: str, entities: list[tuple[int, int, str]]) -&gt; None:
+        &#34;&#34;&#34;Mostra detalhes de offsets/labels e verifica consistência BILUO.
+
+        A função imprime no *logger*:
+
+        • posição inicial/final de cada entidade
+        • texto capturado pelo *offset*
+        • possíveis problemas:
+            - offset fora dos limites do texto
+            - espaços à esquerda/direita
+            - label não suportado
+            - inconsistência BILUO (offset desalinhado aos tokens spaCy)
+
+        Args:
+            text (str): Texto completo a ser inspecionado.
+            entities (list[tuple[int, int, str]]): Lista ``(start, end, label)``.
+        &#34;&#34;&#34;
+        data_validator.debug_entities(text, entities, self.supported_labels, self.nlp, self.logger)
+
+    def val_data_to_evaluation(self) -&gt; tuple[pd.DataFrame, pd.DataFrame]:
+        &#34;&#34;&#34;Converte para o formato do SeiAnonimizarEvaluation.
+
+        Converte o conjunto de validação interno (`self.val_data`) para o
+        formato requerido pelo ``SeiAnonimizarEvaluation``.
+
+        Estrutura de saída
+        A função devolve **duas** tabelas `pandas.DataFrame`:
+
+        1. **df_texts**
+        • colunas: ``id``, ``text``
+        • cada linha contém o texto bruto que será avaliado.
+
+        2. **df_ground_truth**
+        • colunas: ``id``, ``tp_entidade``, ``start_entidade``, ``end_entidade``
+        • cada linha representa **uma** entidade de referência
+            (ground-truth) pertencente ao texto de mesmo ``id``.
+
+        O par (df_texts, df_ground_truth) pode ser passado diretamente a
+        ``SeiAnonimizarEvaluation.load_data()`` sem necessidade de ajustes
+        adicionais.
+
+        Returns:
+            tuple[pd.DataFrame, pd.DataFrame]
+            - **df_texts**        - DataFrame com os textos a validar
+            - **df_ground_truth** - DataFrame com as entidades de verdade-terreno
+
+        Raises:
+            ValueError
+            Se ``self.val_data`` ainda não tiver sido gerado (ou seja, o
+            método `split_data` não foi chamado ou não há dados
+            suficientes para divisão).
+
+        Example:
+        &gt;&gt;&gt; trainer.split_data(train_ratio=0.8)           # cria self.val_data
+        &gt;&gt;&gt; df_texts, df_gt = trainer.val_data_to_evaluation()
+        &gt;&gt;&gt; evaluator = SeiAnonimizarEvaluation()
+        &gt;&gt;&gt; evaluator.load_data(df_texts, df_gt)
+        &gt;&gt;&gt; evaluator.extract_predictions(anonymizer)
+        &gt;&gt;&gt; evaluator.evaluate_model()
+        &#34;&#34;&#34;
+        if not getattr(self, &#34;val_data&#34;, None):
+            msg = &#34;Não existem dados de validação. Execute split_data() antes de chamar val_data_to_evaluation().&#34;
+            self.logger.exception(msg)
+            raise ValueError(msg)
+
+        return data_loader.val_data_to_evaluation(self.val_data, self.logger)
+
+    def clean_entities(
+        self,
+        text: str,
+        entities: list[tuple[int, int, str]],
+        strict: bool = True,
+        resolve_conflicts: str = &#34;coerce&#34;,
+        errors: str = &#34;coerce&#34;,
+    ) -&gt; list[tuple[int, int, str]]:
+        &#34;&#34;&#34;Limpa e corrige entidades automaticamente, incluindo resolução de conflitos.
+
+        Args:
+            text (str): Texto completo onde as entidades estão localizadas.
+            entities (list[tuple[int, int, str]]): Lista de entidades no formato (start, end, label).
+            strict (bool): Se True, descarta exemplos onde alguma entidade foi removida.
+            resolve_conflicts (str): Como lidar com conflitos:
+                - &#34;raise&#34;: Lança erro quando há conflitos.
+                - &#34;ignore&#34;: Retorna lista vazia (remove documento).
+                - &#34;coerce&#34;: Tenta resolver conflitos automaticamente.
+            errors (str): Política de erros para validação BILUO:
+                - &#34;raise&#34;: Lança erro quando há problemas BILUO (offsets desalinhados).
+                - &#34;coerce&#34;: Remove entidades problemáticas silenciosamente.
+                - &#34;ignore&#34;: Mantém entidades como estão (sem correção).
+
+        Returns:
+            list[tuple[int, int, str]]: Lista de entidades limpas e válidas.
+
+        Raises:
+            ValueError: Se resolve_conflicts=&#34;raise&#34; e conflitos forem encontrados,
+                ou se errors=&#34;raise&#34; e problemas BILUO forem detectados.
+
+        Examples:
+            Limpar entidades com correção automática (padrão):
+
+                &gt;&gt;&gt; text = &#34;CPF: 123.456.789-00  &#34;
+                &gt;&gt;&gt; entities = [(5, 22, &#34;CPF&#34;)]  # Com espaços extras
+                &gt;&gt;&gt; trainer.clean_entities(text, entities)
+                [(5, 20, &#34;CPF&#34;)]  # Espaços removidos
+
+            Manter entidades inválidas (sem correção):
+
+                &gt;&gt;&gt; text = &#34;EMAIL: teste@exemplo.com&#34;
+                &gt;&gt;&gt; entities = [(14, 21, &#34;EMAIL&#34;)]  # BILUO desalinhado
+                &gt;&gt;&gt; trainer.clean_entities(text, entities, errors=&#34;ignore&#34;)
+                [(14, 21, &#34;EMAIL&#34;)]  # Mantido como está
+
+            Levantar erro em entidades inválidas:
+
+                &gt;&gt;&gt; text = &#34;EMAIL: teste@exemplo.com&#34;
+                &gt;&gt;&gt; entities = [(14, 21, &#34;EMAIL&#34;)]  # BILUO desalinhado
+                &gt;&gt;&gt; trainer.clean_entities(text, entities, errors=&#34;raise&#34;)
+                # ValueError: Offsets desalinhados aos tokens
+        &#34;&#34;&#34;
+        return data_validator.clean_entities(
+            text, entities, self.supported_labels, self.nlp, self.logger, strict, resolve_conflicts, errors
+        )
+
+    def detect_entity_conflicts(self, entities: list[tuple[int, int, str]]) -&gt; dict:
+        &#34;&#34;&#34;Detecta conflitos entre entidades (duplicatas e sobreposições).
+
+        Args:
+            entities: Lista de entidades (start, end, label)
+
+        Returns:
+            dict: Informações sobre conflitos encontrados
+                - &#39;duplicates&#39;: lista de índices de entidades duplicadas
+                - &#39;overlaps&#39;: lista de pares de índices com sobreposição
+                - &#39;has_conflicts&#39;: bool indicando se há conflitos
+        &#34;&#34;&#34;
+        return data_validator.detect_entity_conflicts(entities)
+
+    def make_folds_by_id(
+        self,
+        df_entidades: pd.DataFrame,
+        n_splits: int = DEFAULT_N_SPLITS,
+        *,
+        random_state: int = DEFAULT_RANDOM_STATE,
+        shuffle: bool = True,
+    ):
+        &#34;&#34;&#34;Cria folds baseados em IDs de documento para evitar vazamento de dados.
+
+        Args:
+            df_entidades: DataFrame com coluna &#39;id&#39; (ou &#39;id_doc&#39;) identificando documentos
+            n_splits: Número de folds para cross validation
+            random_state: Seed para reprodutibilidade
+            shuffle: Se deve embaralhar os dados antes da divisão
+
+        Returns:
+            list: Lista de tuplas (ids_train, ids_val) para cada fold
+        &#34;&#34;&#34;
+        return cv.make_folds_by_id(
+            df_entidades=df_entidades, n_splits=n_splits, random_state=random_state, shuffle=shuffle, logger=self.logger
+        )
+
+    def make_stratified_folds_by_id(
+        self,
+        df_entidades: pd.DataFrame,
+        features: list | None = None,
+        n_splits: int = DEFAULT_N_SPLITS,
+        *,
+        random_state: int = DEFAULT_RANDOM_STATE,
+        shuffle: bool = True,
+    ):
+        &#34;&#34;&#34;Cria folds estratificados para balancear a distribuição de entidades entre os folds.
+
+        Args:
+            df_entidades: DataFrame com entidades anotadas
+            features: Lista de tipos de entidades para estratificação
+            n_splits: Número de folds
+            random_state: Seed para reprodutibilidade
+            shuffle: Se deve embaralhar os dados
+
+        Returns:
+            list: Lista de tuplas (ids_train, ids_val) para cada fold
+        &#34;&#34;&#34;
+        return cv.make_stratified_folds_by_id(
+            df_entidades=df_entidades,
+            features=features,
+            n_splits=n_splits,
+            random_state=random_state,
+            shuffle=shuffle,
+            logger=self.logger,
+        )
+
+    def cross_validate(
+        self,
+        df_entidades: pd.DataFrame | str,
+        df_textos: pd.DataFrame | str | None = None,
+        n_splits: int = DEFAULT_N_SPLITS,
+        features: list | None = None,
+        output_dir: str | None = None,
+        n_jobs: int = DEFAULT_N_JOBS,
+        random_state: int = DEFAULT_RANDOM_STATE,
+        train_params: dict | None = None,
+        eval_params: dict | None = None,
+        add_data_params: dict | None = None,
+        *,
+        stratified: bool = True,
+        replace: bool = False,
+        holdout_test_size: float | None = None,
+        holdout_stratify: bool = True,
+    ):
+        &#34;&#34;&#34;Executa cross validation completo do modelo NER.
+
+        Args:
+            df_entidades: DataFrame com entidades anotadas OU caminho para arquivo .jsonl
+            df_textos: DataFrame com textos dos documentos OU caminho para arquivo .jsonl
+                       Se None e df_entidades for str, assume que é o mesmo arquivo JSONL
+            n_splits: Número de folds
+            stratified: Se deve usar estratificação por tipo de entidade
+            features: Lista de tipos de entidades para estratificação
+            output_dir: Diretório para salvar resultados
+            n_jobs: Número de processos paralelos (1 para sequencial)
+            random_state: Seed para reprodutibilidade
+            train_params: Parâmetros para treinamento
+            eval_params: Parâmetros para avaliação
+            add_data_params: Parâmetros para o método add_data (ex: {&#39;errors&#39;: &#39;coerce&#39;, &#39;auto_clean&#39;: True})
+            replace: Se True, substitui diretório existente
+            holdout_test_size: Fração (0-0.5) dos dados para separar como test fixo.
+                          Ex: 0.2 = 20% para test, 80% para CV.
+                          Se None, não separa holdout test.
+            holdout_stratify: Se True, estratifica o holdout test por tipo de entidade.
+
+        Returns:
+            tuple: (all_reports, summary_metrics, fold_results, holdout_results)
+        &#34;&#34;&#34;
+
+        def _trainer_factory(
+            model_name: str | None,
+            output_dir: str,
+            labels: list[str] | None,
+            logger: logging.Logger,
+        ) -&gt; &#34;SeiAnonimizarNERTrainer&#34;:
+            &#34;&#34;&#34;Cria instância de SeiAnonimizarNERTrainer para um fold.&#34;&#34;&#34;
+            return SeiAnonimizarNERTrainer(
+                model_name=model_name,
+                output_dir=output_dir,
+                labels=labels,
+                logger=logger,
+            )
+
+        return self._cv_manager.run(
+            df_entidades=df_entidades,
+            df_textos=df_textos,
+            trainer_factory=_trainer_factory,
+            n_splits=n_splits,
+            features=features or self.supported_labels,
+            output_dir=output_dir,
+            n_jobs=n_jobs,
+            random_state=random_state,
+            train_params=train_params,
+            eval_params=eval_params,
+            add_data_params=add_data_params,
+            supported_labels=self.supported_labels,
+            model_name=self.model_name,
+            output_path_base=self.output_dir,
+            stratified=stratified,
+            replace=replace,
+            holdout_test_size=holdout_test_size,
+            holdout_stratify=holdout_stratify,
+        )
+
+    def load_from_doccano_jsonl(self, jsonl_path: str) -&gt; list:
+        &#34;&#34;&#34;Carrega dados de arquivo JSONL exportado do Doccano.
+
+        Suporta dois formatos do Doccano:
+        - {&#34;text&#34;: &#34;...&#34;, &#34;labels&#34;: [[start, end, &#34;LABEL&#34;], ...]}
+        - {&#34;text&#34;: &#34;...&#34;, &#34;entities&#34;: [{&#34;start_offset&#34;: x, &#34;end_offset&#34;: y, &#34;label&#34;: &#34;L&#34;}]}
+
+        Args:
+            jsonl_path: Caminho para arquivo .jsonl
+
+        Returns:
+            list: Dados no formato [(text, {&#34;entities&#34;: [(start, end, label), ...]}), ...]
+        &#34;&#34;&#34;
+        return _load_jsonl(jsonl_path)
+
+    def save_to_doccano_jsonl(self, output_path: str, data: list | None = None, format_type: str = &#34;labels&#34;) -&gt; None:
+        &#34;&#34;&#34;Salva dados em formato JSONL compatível com Doccano.
+
+        Args:
+            output_path: Caminho para salvar o arquivo .jsonl
+            data: Dados para salvar. Se None, usa self.training_data
+            format_type: Tipo de formato:
+                - &#39;labels&#39;: {&#34;text&#34;: &#34;...&#34;, &#34;labels&#34;: [[start, end, &#34;LABEL&#34;]]}
+                - &#39;entities&#39;: {&#34;text&#34;: &#34;...&#34;, &#34;entities&#34;: [{&#34;start_offset&#34;: x, ...}]}
+        &#34;&#34;&#34;
+        if data is None:
+            if not self.training_data:
+                msg = &#34;Nenhum dado disponível para exportar&#34;
+                self.logger.exception(msg)
+                raise ValueError(msg)
+            data = self.training_data
+
+        _save_jsonl(output_path, data, format_type=format_type)
+
+    def _load_jsonl_to_dataframes(self, jsonl_path: str) -&gt; tuple[pd.DataFrame, pd.DataFrame]:
+        &#34;&#34;&#34;Converte arquivo JSONL do Doccano para formato de DataFrames usado no cross_validate.
+
+        Formato JSONL esperado:
+            {&#34;text&#34;: &#34;...&#34;, &#34;labels&#34;: [[start, end, &#34;LABEL&#34;], ...]}
+            ou
+            {&#34;text&#34;: &#34;...&#34;, &#34;entities&#34;: [{&#34;start_offset&#34;: x, &#34;end_offset&#34;: y, &#34;label&#34;: &#34;L&#34;}]}
+
+        Args:
+            jsonl_path: Caminho para arquivo .jsonl
+
+        Returns:
+            tuple: (df_textos, df_entidades)
+                - df_textos: DataFrame com colunas [id, text]
+                - df_entidades: DataFrame com colunas [id, start, end, entidade]
+        &#34;&#34;&#34;
+        return training_io.load_jsonl_to_dataframes(jsonl_path)</code></pre>
+</details>
+<div class="desc"><p>Classe para treinamento de modelos NER especializados em anonimização de dados sensíveis.</p>
+<p>Esta classe oferece funcionalidades completas para treinar modelos de reconhecimento
+de entidades nomeadas (NER) usando spaCy, com foco em identificação de dados pessoais
+e sensíveis para anonimização.</p>
+<h2 id="attributes">Attributes</h2>
+<dl>
+<dt><strong><code>model_name</code></strong> :&ensp;<code>str | None</code></dt>
+<dd>Nome do modelo base do spaCy ou None para modelo em branco</dd>
+<dt><strong><code>output_dir</code></strong> :&ensp;<code>Path</code></dt>
+<dd>Diretório onde o modelo treinado será salvo</dd>
+<dt><strong><code>logger</code></strong> :&ensp;<code>logging.Logger</code></dt>
+<dd>Logger para registro de atividades</dd>
+<dt><strong><code>labels</code></strong> :&ensp;<code>list[str]</code></dt>
+<dd>Lista de labels suportados pelo modelo</dd>
+<dt><strong><code>nlp</code></strong> :&ensp;<code>spacy.Language</code></dt>
+<dd>Pipeline spaCy configurado</dd>
+<dt><strong><code>ner</code></strong> :&ensp;<code>spacy.pipeline.EntityRecognizer</code></dt>
+<dd>Componente NER do pipeline</dd>
+<dt><strong><code>training_data</code></strong> :&ensp;<code>list</code></dt>
+<dd>Dados de treinamento no formato spaCy</dd>
+<dt><strong><code>train_data</code></strong> :&ensp;<code>list</code></dt>
+<dd>Dados de treinamento após divisão</dd>
+<dt><strong><code>val_data</code></strong> :&ensp;<code>list</code></dt>
+<dd>Dados de validação após divisão</dd>
+<dt><strong><code>supported_labels</code></strong> :&ensp;<code>list[str]</code></dt>
+<dd>Lista de labels suportados pelo modelo (novo nome para 'labels')</dd>
+</dl>
+<h2 id="example">Example</h2>
+<pre><code class="language-python-repl">&gt;&gt;&gt; trainer = SeiAnonimizarNERTrainer(
+...     model_name=&quot;pt_core_news_sm&quot;,
+...     output_dir=&quot;./modelo_personalizado&quot;,
+...     labels=[&quot;CPF&quot;, &quot;RG&quot;, &quot;EMAIL&quot;]
+... )
+&gt;&gt;&gt; dados = {&quot;text&quot;: &quot;João, CPF 123.456.789-00&quot;, &quot;entities&quot;: [(6, 20, &quot;CPF&quot;)]}
+&gt;&gt;&gt; trainer.add_data(dados)
+&gt;&gt;&gt; trainer.train(n_iter=10)
+&gt;&gt;&gt; trainer.save_model()
+</code></pre>
+<p>Inicializa o treinador NER com configurações personalizadas.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>model_name</code></strong> :&ensp;<code>str | None</code>, optional</dt>
+<dd>Nome do modelo base do spaCy (ex: "pt_core_news_sm"),
+ou caminho de um modelo ja treinado.
+Se None, cria um modelo em branco. Defaults to None.</dd>
+<dt><strong><code>output_dir</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Diretório para salvar o modelo treinado.
+Defaults to "./trained_model".</dd>
+<dt><strong><code>logger</code></strong> :&ensp;<code>logging.Logger | None</code>, optional</dt>
+<dd>Logger personalizado para registro de atividades.
+Se None, cria um logger padrão. Defaults to None.</dd>
+<dt><strong><code>labels</code></strong> :&ensp;<code>list[str] | None</code>, optional</dt>
+<dd>Lista de labels personalizados para o modelo.
+Se None, usa labels padrão para documentos do SEI. Defaults to None.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>OSError</code></dt>
+<dd>Se o modelo especificado em model_name não for encontrado</dd>
+<dt><code>ValueError</code></dt>
+<dd>Se os labels fornecidos forem inválidos</dd>
+</dl>
+<h2 id="example_1">Example</h2>
+<pre><code class="language-python-repl">&gt;&gt;&gt; # Modelo com configuração padrão
+&gt;&gt;&gt; trainer = SeiAnonimizarNERTrainer()
+&gt;&gt;&gt;
+&gt;&gt;&gt; # Modelo com configuração personalizada
+&gt;&gt;&gt; trainer = SeiAnonimizarNERTrainer(
+...     model_name=&quot;pt_core_news_lg&quot;,
+...     output_dir=&quot;./meu_modelo&quot;,
+...     labels=[&quot;CPF&quot;, &quot;RG&quot;, &quot;EMAIL&quot;, &quot;TELEFONE&quot;]
+... )
+</code></pre></div>
+<h3>Methods</h3>
+<dl>
+<dt id="anonimizar.sei_anonimizar_treino.SeiAnonimizarNERTrainer.add_data"><code class="name flex">
+<span>def <span class="ident">add_data</span></span>(<span>self,<br>data: list | dict | pandas.core.frame.DataFrame | str | None = None,<br>*,<br>errors: str = 'raise',<br>keep_empty_entities: bool = False,<br>auto_clean: bool = True,<br>strict_clean: bool = True,<br>resolve_conflicts: str = 'coerce') ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def add_data(
+    self,
+    data: list | dict | pd.DataFrame | str | None = None,
+    *,
+    errors: str = &#34;raise&#34;,
+    keep_empty_entities: bool = False,
+    auto_clean: bool = True,
+    strict_clean: bool = True,
+    resolve_conflicts: str = &#34;coerce&#34;,
+) -&gt; None:
+    &#34;&#34;&#34;Adiciona dados de treinamento à classe com validação e limpeza opcional.
+
+    Args:
+        data: Dados a serem adicionados, caminho para arquivo .jsonl (Doccano).
+        errors: Política de tratamento de erro: &#34;raise&#34;, &#34;coerce&#34; ou &#34;ignore&#34;.
+            - &#34;raise&#34;: Lança exceção quando encontra entidades inválidas.
+            - &#34;coerce&#34;: Remove entidades inválidas silenciosamente.
+            - &#34;ignore&#34;: Mantém entidades como estão, sem correção.
+        keep_empty_entities: Se True, mantém textos mesmo quando todas as entidades
+            são descartadas na validação.
+        auto_clean: Se True, aplica limpeza automática nas entidades:
+            - Remove espaços extras nos limites das entidades.
+            - Valida alinhamento BILUO (offsets devem corresponder a tokens spaCy).
+            - Corrige offsets quando possível.
+        strict_clean: Se True, descarta exemplos onde alguma entidade foi removida
+            durante a limpeza. Se False, mantém exemplos mesmo com menos entidades.
+        resolve_conflicts: Como resolver conflitos de entidades:
+            - &#34;raise&#34;: Lança erro quando há conflitos (duplicatas ou sobreposições).
+            - &#34;ignore&#34;: Remove documentos com conflitos.
+            - &#34;coerce&#34;: Tenta resolver conflitos automaticamente.
+
+    Examples:
+        Adicionar dados com comportamento padrão (limpeza automática):
+
+            &gt;&gt;&gt; trainer.add_data([{&#34;text&#34;: &#34;CPF: 123.456.789-00&#34;, &#34;entities&#34;: [(5, 20, &#34;CPF&#34;)]}])
+
+        Ignorar erros (mantém dados inválidos sem correção):
+
+            &gt;&gt;&gt; trainer.add_data(bad_data, errors=&#34;ignore&#34;, auto_clean=False)
+            &gt;&gt;&gt; # Entidades inválidas são mantidas como estão
+
+        Ignorar erros com limpeza (corrige espaços mas não levanta erro):
+
+            &gt;&gt;&gt; trainer.add_data(bad_data, errors=&#34;ignore&#34;, auto_clean=True)
+            &gt;&gt;&gt; # Espaços são corrigidos, mas BILUO inválido é mantido
+
+        Corrigir erros automaticamente:
+
+            &gt;&gt;&gt; trainer.add_data(bad_data, errors=&#34;coerce&#34;, auto_clean=True)
+            &gt;&gt;&gt; # Espaços são corrigidos, entidades com BILUO inválido são removidas
+
+        Levantar erro em dados inválidos:
+
+            &gt;&gt;&gt; trainer.add_data(bad_data, errors=&#34;raise&#34;, auto_clean=True)
+            &gt;&gt;&gt; # Levanta ValueError se houver problemas não corrigíveis
+
+        Sem limpeza automática:
+
+            &gt;&gt;&gt; trainer.add_data(bad_data, errors=&#34;raise&#34;, auto_clean=False)
+            &gt;&gt;&gt; # Valida entidades sem aplicar correções automáticas
+
+        Resolver conflitos de entidades:
+
+            &gt;&gt;&gt; # Dados com sobreposição
+            &gt;&gt;&gt; data = [{&#34;text&#34;: &#34;CPF 123.456.789-00&#34;, &#34;entities&#34;: [(4, 16, &#34;CPF&#34;), (4, 20, &#34;CPF&#34;)]}]
+            &gt;&gt;&gt; trainer.add_data(data, resolve_conflicts=&#34;coerce&#34;)  # Remove duplicata
+    &#34;&#34;&#34;
+    if data is None:
+        self.logger.warning(&#34;Nenhum dado fornecido para adicionar.&#34;)
+        return
+
+    # Converter dados de entrada para formato interno
+    new_data = data_loader.convert_input_data(
+        data=data,
+        logger=self.logger,
+        transform_pandas_fn=lambda df: data_loader.transform_data_from_pandas(df, self.logger),
+        load_jsonl_fn=training_io.load_doccano_jsonl,
+        errors=errors,
+    )
+
+    # Aplicar limpeza automática se habilitada
+    if auto_clean:
+        # Contar entidades antes da limpeza para detectar perdas
+        original_entities_count = sum(len(annotations.get(&#34;entities&#34;, [])) for _, annotations in new_data)
+
+        new_data = data_loader.apply_auto_clean(
+            data=new_data,
+            clean_entities_fn=self.clean_entities,
+            strict_clean=strict_clean,
+            keep_empty_entities=keep_empty_entities,
+            resolve_conflicts=resolve_conflicts,
+            logger=self.logger,
+            errors=errors,
+        )
+
+        # Verificar se houve perda de entidades durante a limpeza
+        # Apenas levanta erro se errors=&#39;raise&#39; E houve perda de entidades
+        if errors == &#34;raise&#34; and original_entities_count &gt; 0:
+            final_entities_count = sum(len(annotations.get(&#34;entities&#34;, [])) for _, annotations in new_data)
+            if final_entities_count &lt; original_entities_count:
+                msg = (
+                    f&#34;Entidades foram removidas durante a limpeza automática: &#34;
+                    f&#34;{original_entities_count} -&gt; {final_entities_count}. &#34;
+                    &#34;Use auto_clean=False ou errors=&#39;coerce&#39; para permitir &#34;
+                    &#34;remoção silenciosa de entidades inválidas.&#34;
+                )
+                self.logger.exception(msg)
+                raise ValueError(msg)
+
+        # Validar após limpeza - pula BILUO apenas se errors != &#34;raise&#34;
+        # Quando errors=&#34;raise&#34;, queremos validar BILUO para detectar problemas remanescentes
+        # Quando errors=&#34;ignore&#34;, também pulamos BILUO pois já manteve entidades como estão
+        skip_biluo = errors in (&#34;coerce&#34;, &#34;ignore&#34;)
+        validated_data = self._validate_data(
+            new_data, errors=errors, keep_empty_entities=keep_empty_entities, skip_biluo=skip_biluo
+        )
+    else:
+        # Validar sem limpeza
+        validated_data = self._validate_data(new_data, errors=errors, keep_empty_entities=keep_empty_entities)
+
+    self.training_data.extend(validated_data)
+    # Sincronizar com o gerenciador de dados centralizado
+    self._data_manager.training_data = list(self.training_data)
+    self.logger.debug(
+        f&#34;Dados adicionados com sucesso. Exemplos válidos adicionados: {len(validated_data)}. &#34;
+        f&#34;Total de exemplos no conjunto de treinamento: {len(self.training_data)}&#34;
+    )</code></pre>
+</details>
+<div class="desc"><p>Adiciona dados de treinamento à classe com validação e limpeza opcional.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>data</code></strong></dt>
+<dd>Dados a serem adicionados, caminho para arquivo .jsonl (Doccano).</dd>
+<dt><strong><code>errors</code></strong></dt>
+<dd>Política de tratamento de erro: "raise", "coerce" ou "ignore".
+- "raise": Lança exceção quando encontra entidades inválidas.
+- "coerce": Remove entidades inválidas silenciosamente.
+- "ignore": Mantém entidades como estão, sem correção.</dd>
+<dt><strong><code>keep_empty_entities</code></strong></dt>
+<dd>Se True, mantém textos mesmo quando todas as entidades
+são descartadas na validação.</dd>
+<dt><strong><code>auto_clean</code></strong></dt>
+<dd>Se True, aplica limpeza automática nas entidades:
+- Remove espaços extras nos limites das entidades.
+- Valida alinhamento BILUO (offsets devem corresponder a tokens spaCy).
+- Corrige offsets quando possível.</dd>
+<dt><strong><code>strict_clean</code></strong></dt>
+<dd>Se True, descarta exemplos onde alguma entidade foi removida
+durante a limpeza. Se False, mantém exemplos mesmo com menos entidades.</dd>
+<dt><strong><code>resolve_conflicts</code></strong></dt>
+<dd>Como resolver conflitos de entidades:
+- "raise": Lança erro quando há conflitos (duplicatas ou sobreposições).
+- "ignore": Remove documentos com conflitos.
+- "coerce": Tenta resolver conflitos automaticamente.</dd>
+</dl>
+<h2 id="examples">Examples</h2>
+<p>Adicionar dados com comportamento padrão (limpeza automática):</p>
+<pre><code>&gt;&gt;&gt; trainer.add_data([{"text": "CPF: 123.456.789-00", "entities": [(5, 20, "CPF")]}])
+</code></pre>
+<p>Ignorar erros (mantém dados inválidos sem correção):</p>
+<pre><code>&gt;&gt;&gt; trainer.add_data(bad_data, errors="ignore", auto_clean=False)
+&gt;&gt;&gt; # Entidades inválidas são mantidas como estão
+</code></pre>
+<p>Ignorar erros com limpeza (corrige espaços mas não levanta erro):</p>
+<pre><code>&gt;&gt;&gt; trainer.add_data(bad_data, errors="ignore", auto_clean=True)
+&gt;&gt;&gt; # Espaços são corrigidos, mas BILUO inválido é mantido
+</code></pre>
+<p>Corrigir erros automaticamente:</p>
+<pre><code>&gt;&gt;&gt; trainer.add_data(bad_data, errors="coerce", auto_clean=True)
+&gt;&gt;&gt; # Espaços são corrigidos, entidades com BILUO inválido são removidas
+</code></pre>
+<p>Levantar erro em dados inválidos:</p>
+<pre><code>&gt;&gt;&gt; trainer.add_data(bad_data, errors="raise", auto_clean=True)
+&gt;&gt;&gt; # Levanta ValueError se houver problemas não corrigíveis
+</code></pre>
+<p>Sem limpeza automática:</p>
+<pre><code>&gt;&gt;&gt; trainer.add_data(bad_data, errors="raise", auto_clean=False)
+&gt;&gt;&gt; # Valida entidades sem aplicar correções automáticas
+</code></pre>
+<p>Resolver conflitos de entidades:</p>
+<pre><code>&gt;&gt;&gt; # Dados com sobreposição
+&gt;&gt;&gt; data = [{"text": "CPF 123.456.789-00", "entities": [(4, 16, "CPF"), (4, 20, "CPF")]}]
+&gt;&gt;&gt; trainer.add_data(data, resolve_conflicts="coerce")  # Remove duplicata
+</code></pre></div>
+</dd>
+<dt id="anonimizar.sei_anonimizar_treino.SeiAnonimizarNERTrainer.clean_entities"><code class="name flex">
+<span>def <span class="ident">clean_entities</span></span>(<span>self,<br>text: str,<br>entities: list[tuple[int, int, str]],<br>strict: bool = True,<br>resolve_conflicts: str = 'coerce',<br>errors: str = 'coerce') ‑> list[tuple[int, int, str]]</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def clean_entities(
+    self,
+    text: str,
+    entities: list[tuple[int, int, str]],
+    strict: bool = True,
+    resolve_conflicts: str = &#34;coerce&#34;,
+    errors: str = &#34;coerce&#34;,
+) -&gt; list[tuple[int, int, str]]:
+    &#34;&#34;&#34;Limpa e corrige entidades automaticamente, incluindo resolução de conflitos.
+
+    Args:
+        text (str): Texto completo onde as entidades estão localizadas.
+        entities (list[tuple[int, int, str]]): Lista de entidades no formato (start, end, label).
+        strict (bool): Se True, descarta exemplos onde alguma entidade foi removida.
+        resolve_conflicts (str): Como lidar com conflitos:
+            - &#34;raise&#34;: Lança erro quando há conflitos.
+            - &#34;ignore&#34;: Retorna lista vazia (remove documento).
+            - &#34;coerce&#34;: Tenta resolver conflitos automaticamente.
+        errors (str): Política de erros para validação BILUO:
+            - &#34;raise&#34;: Lança erro quando há problemas BILUO (offsets desalinhados).
+            - &#34;coerce&#34;: Remove entidades problemáticas silenciosamente.
+            - &#34;ignore&#34;: Mantém entidades como estão (sem correção).
+
+    Returns:
+        list[tuple[int, int, str]]: Lista de entidades limpas e válidas.
+
+    Raises:
+        ValueError: Se resolve_conflicts=&#34;raise&#34; e conflitos forem encontrados,
+            ou se errors=&#34;raise&#34; e problemas BILUO forem detectados.
+
+    Examples:
+        Limpar entidades com correção automática (padrão):
+
+            &gt;&gt;&gt; text = &#34;CPF: 123.456.789-00  &#34;
+            &gt;&gt;&gt; entities = [(5, 22, &#34;CPF&#34;)]  # Com espaços extras
+            &gt;&gt;&gt; trainer.clean_entities(text, entities)
+            [(5, 20, &#34;CPF&#34;)]  # Espaços removidos
+
+        Manter entidades inválidas (sem correção):
+
+            &gt;&gt;&gt; text = &#34;EMAIL: teste@exemplo.com&#34;
+            &gt;&gt;&gt; entities = [(14, 21, &#34;EMAIL&#34;)]  # BILUO desalinhado
+            &gt;&gt;&gt; trainer.clean_entities(text, entities, errors=&#34;ignore&#34;)
+            [(14, 21, &#34;EMAIL&#34;)]  # Mantido como está
+
+        Levantar erro em entidades inválidas:
+
+            &gt;&gt;&gt; text = &#34;EMAIL: teste@exemplo.com&#34;
+            &gt;&gt;&gt; entities = [(14, 21, &#34;EMAIL&#34;)]  # BILUO desalinhado
+            &gt;&gt;&gt; trainer.clean_entities(text, entities, errors=&#34;raise&#34;)
+            # ValueError: Offsets desalinhados aos tokens
+    &#34;&#34;&#34;
+    return data_validator.clean_entities(
+        text, entities, self.supported_labels, self.nlp, self.logger, strict, resolve_conflicts, errors
+    )</code></pre>
+</details>
+<div class="desc"><p>Limpa e corrige entidades automaticamente, incluindo resolução de conflitos.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>text</code></strong> :&ensp;<code>str</code></dt>
+<dd>Texto completo onde as entidades estão localizadas.</dd>
+<dt><strong><code>entities</code></strong> :&ensp;<code>list[tuple[int, int, str]]</code></dt>
+<dd>Lista de entidades no formato (start, end, label).</dd>
+<dt><strong><code>strict</code></strong> :&ensp;<code>bool</code></dt>
+<dd>Se True, descarta exemplos onde alguma entidade foi removida.</dd>
+<dt><strong><code>resolve_conflicts</code></strong> :&ensp;<code>str</code></dt>
+<dd>Como lidar com conflitos:
+- "raise": Lança erro quando há conflitos.
+- "ignore": Retorna lista vazia (remove documento).
+- "coerce": Tenta resolver conflitos automaticamente.</dd>
+<dt><strong><code>errors</code></strong> :&ensp;<code>str</code></dt>
+<dd>Política de erros para validação BILUO:
+- "raise": Lança erro quando há problemas BILUO (offsets desalinhados).
+- "coerce": Remove entidades problemáticas silenciosamente.
+- "ignore": Mantém entidades como estão (sem correção).</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>list[tuple[int, int, str]]</code></dt>
+<dd>Lista de entidades limpas e válidas.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>ValueError</code></dt>
+<dd>Se resolve_conflicts="raise" e conflitos forem encontrados,
+ou se errors="raise" e problemas BILUO forem detectados.</dd>
+</dl>
+<h2 id="examples">Examples</h2>
+<p>Limpar entidades com correção automática (padrão):</p>
+<pre><code>&gt;&gt;&gt; text = "CPF: 123.456.789-00  "
+&gt;&gt;&gt; entities = [(5, 22, "CPF")]  # Com espaços extras
+&gt;&gt;&gt; trainer.clean_entities(text, entities)
+[(5, 20, "CPF")]  # Espaços removidos
+</code></pre>
+<p>Manter entidades inválidas (sem correção):</p>
+<pre><code>&gt;&gt;&gt; text = "EMAIL: teste@exemplo.com"
+&gt;&gt;&gt; entities = [(14, 21, "EMAIL")]  # BILUO desalinhado
+&gt;&gt;&gt; trainer.clean_entities(text, entities, errors="ignore")
+[(14, 21, "EMAIL")]  # Mantido como está
+</code></pre>
+<p>Levantar erro em entidades inválidas:</p>
+<pre><code>&gt;&gt;&gt; text = "EMAIL: teste@exemplo.com"
+&gt;&gt;&gt; entities = [(14, 21, "EMAIL")]  # BILUO desalinhado
+&gt;&gt;&gt; trainer.clean_entities(text, entities, errors="raise")
+# ValueError: Offsets desalinhados aos tokens
+</code></pre></div>
+</dd>
+<dt id="anonimizar.sei_anonimizar_treino.SeiAnonimizarNERTrainer.cross_validate"><code class="name flex">
+<span>def <span class="ident">cross_validate</span></span>(<span>self,<br>df_entidades: pandas.core.frame.DataFrame | str,<br>df_textos: pandas.core.frame.DataFrame | str | None = None,<br>n_splits: int = 5,<br>features: list | None = None,<br>output_dir: str | None = None,<br>n_jobs: int = 1,<br>random_state: int = 42,<br>train_params: dict | None = None,<br>eval_params: dict | None = None,<br>add_data_params: dict | None = None,<br>*,<br>stratified: bool = True,<br>replace: bool = False,<br>holdout_test_size: float | None = None,<br>holdout_stratify: bool = True)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def cross_validate(
+    self,
+    df_entidades: pd.DataFrame | str,
+    df_textos: pd.DataFrame | str | None = None,
+    n_splits: int = DEFAULT_N_SPLITS,
+    features: list | None = None,
+    output_dir: str | None = None,
+    n_jobs: int = DEFAULT_N_JOBS,
+    random_state: int = DEFAULT_RANDOM_STATE,
+    train_params: dict | None = None,
+    eval_params: dict | None = None,
+    add_data_params: dict | None = None,
+    *,
+    stratified: bool = True,
+    replace: bool = False,
+    holdout_test_size: float | None = None,
+    holdout_stratify: bool = True,
+):
+    &#34;&#34;&#34;Executa cross validation completo do modelo NER.
+
+    Args:
+        df_entidades: DataFrame com entidades anotadas OU caminho para arquivo .jsonl
+        df_textos: DataFrame com textos dos documentos OU caminho para arquivo .jsonl
+                   Se None e df_entidades for str, assume que é o mesmo arquivo JSONL
+        n_splits: Número de folds
+        stratified: Se deve usar estratificação por tipo de entidade
+        features: Lista de tipos de entidades para estratificação
+        output_dir: Diretório para salvar resultados
+        n_jobs: Número de processos paralelos (1 para sequencial)
+        random_state: Seed para reprodutibilidade
+        train_params: Parâmetros para treinamento
+        eval_params: Parâmetros para avaliação
+        add_data_params: Parâmetros para o método add_data (ex: {&#39;errors&#39;: &#39;coerce&#39;, &#39;auto_clean&#39;: True})
+        replace: Se True, substitui diretório existente
+        holdout_test_size: Fração (0-0.5) dos dados para separar como test fixo.
+                      Ex: 0.2 = 20% para test, 80% para CV.
+                      Se None, não separa holdout test.
+        holdout_stratify: Se True, estratifica o holdout test por tipo de entidade.
+
+    Returns:
+        tuple: (all_reports, summary_metrics, fold_results, holdout_results)
+    &#34;&#34;&#34;
+
+    def _trainer_factory(
+        model_name: str | None,
+        output_dir: str,
+        labels: list[str] | None,
+        logger: logging.Logger,
+    ) -&gt; &#34;SeiAnonimizarNERTrainer&#34;:
+        &#34;&#34;&#34;Cria instância de SeiAnonimizarNERTrainer para um fold.&#34;&#34;&#34;
+        return SeiAnonimizarNERTrainer(
+            model_name=model_name,
+            output_dir=output_dir,
+            labels=labels,
+            logger=logger,
+        )
+
+    return self._cv_manager.run(
+        df_entidades=df_entidades,
+        df_textos=df_textos,
+        trainer_factory=_trainer_factory,
+        n_splits=n_splits,
+        features=features or self.supported_labels,
+        output_dir=output_dir,
+        n_jobs=n_jobs,
+        random_state=random_state,
+        train_params=train_params,
+        eval_params=eval_params,
+        add_data_params=add_data_params,
+        supported_labels=self.supported_labels,
+        model_name=self.model_name,
+        output_path_base=self.output_dir,
+        stratified=stratified,
+        replace=replace,
+        holdout_test_size=holdout_test_size,
+        holdout_stratify=holdout_stratify,
+    )</code></pre>
+</details>
+<div class="desc"><p>Executa cross validation completo do modelo NER.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>df_entidades</code></strong></dt>
+<dd>DataFrame com entidades anotadas OU caminho para arquivo .jsonl</dd>
+<dt><strong><code>df_textos</code></strong></dt>
+<dd>DataFrame com textos dos documentos OU caminho para arquivo .jsonl
+Se None e df_entidades for str, assume que é o mesmo arquivo JSONL</dd>
+<dt><strong><code>n_splits</code></strong></dt>
+<dd>Número de folds</dd>
+<dt><strong><code>stratified</code></strong></dt>
+<dd>Se deve usar estratificação por tipo de entidade</dd>
+<dt><strong><code>features</code></strong></dt>
+<dd>Lista de tipos de entidades para estratificação</dd>
+<dt><strong><code>output_dir</code></strong></dt>
+<dd>Diretório para salvar resultados</dd>
+<dt><strong><code>n_jobs</code></strong></dt>
+<dd>Número de processos paralelos (1 para sequencial)</dd>
+<dt><strong><code>random_state</code></strong></dt>
+<dd>Seed para reprodutibilidade</dd>
+<dt><strong><code>train_params</code></strong></dt>
+<dd>Parâmetros para treinamento</dd>
+<dt><strong><code>eval_params</code></strong></dt>
+<dd>Parâmetros para avaliação</dd>
+<dt><strong><code>add_data_params</code></strong></dt>
+<dd>Parâmetros para o método add_data (ex: {'errors': 'coerce', 'auto_clean': True})</dd>
+<dt><strong><code>replace</code></strong></dt>
+<dd>Se True, substitui diretório existente</dd>
+<dt><strong><code>holdout_test_size</code></strong></dt>
+<dd>Fração (0-0.5) dos dados para separar como test fixo.
+Ex: 0.2 = 20% para test, 80% para CV.
+Se None, não separa holdout test.</dd>
+<dt><strong><code>holdout_stratify</code></strong></dt>
+<dd>Se True, estratifica o holdout test por tipo de entidade.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>tuple</code></dt>
+<dd>(all_reports, summary_metrics, fold_results, holdout_results)</dd>
+</dl></div>
+</dd>
+<dt id="anonimizar.sei_anonimizar_treino.SeiAnonimizarNERTrainer.debug_entities"><code class="name flex">
+<span>def <span class="ident">debug_entities</span></span>(<span>self, text: str, entities: list[tuple[int, int, str]]) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def debug_entities(self, text: str, entities: list[tuple[int, int, str]]) -&gt; None:
+    &#34;&#34;&#34;Mostra detalhes de offsets/labels e verifica consistência BILUO.
+
+    A função imprime no *logger*:
+
+    • posição inicial/final de cada entidade
+    • texto capturado pelo *offset*
+    • possíveis problemas:
+        - offset fora dos limites do texto
+        - espaços à esquerda/direita
+        - label não suportado
+        - inconsistência BILUO (offset desalinhado aos tokens spaCy)
+
+    Args:
+        text (str): Texto completo a ser inspecionado.
+        entities (list[tuple[int, int, str]]): Lista ``(start, end, label)``.
+    &#34;&#34;&#34;
+    data_validator.debug_entities(text, entities, self.supported_labels, self.nlp, self.logger)</code></pre>
+</details>
+<div class="desc"><p>Mostra detalhes de offsets/labels e verifica consistência BILUO.</p>
+<p>A função imprime no <em>logger</em>:</p>
+<p>• posição inicial/final de cada entidade
+• texto capturado pelo <em>offset</em>
+• possíveis problemas:
+- offset fora dos limites do texto
+- espaços à esquerda/direita
+- label não suportado
+- inconsistência BILUO (offset desalinhado aos tokens spaCy)</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>text</code></strong> :&ensp;<code>str</code></dt>
+<dd>Texto completo a ser inspecionado.</dd>
+<dt><strong><code>entities</code></strong> :&ensp;<code>list[tuple[int, int, str]]</code></dt>
+<dd>Lista <code>(start, end, label)</code>.</dd>
+</dl></div>
+</dd>
+<dt id="anonimizar.sei_anonimizar_treino.SeiAnonimizarNERTrainer.detect_entity_conflicts"><code class="name flex">
+<span>def <span class="ident">detect_entity_conflicts</span></span>(<span>self, entities: list[tuple[int, int, str]]) ‑> dict</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def detect_entity_conflicts(self, entities: list[tuple[int, int, str]]) -&gt; dict:
+    &#34;&#34;&#34;Detecta conflitos entre entidades (duplicatas e sobreposições).
+
+    Args:
+        entities: Lista de entidades (start, end, label)
+
+    Returns:
+        dict: Informações sobre conflitos encontrados
+            - &#39;duplicates&#39;: lista de índices de entidades duplicadas
+            - &#39;overlaps&#39;: lista de pares de índices com sobreposição
+            - &#39;has_conflicts&#39;: bool indicando se há conflitos
+    &#34;&#34;&#34;
+    return data_validator.detect_entity_conflicts(entities)</code></pre>
+</details>
+<div class="desc"><p>Detecta conflitos entre entidades (duplicatas e sobreposições).</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>entities</code></strong></dt>
+<dd>Lista de entidades (start, end, label)</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>dict</code></dt>
+<dd>Informações sobre conflitos encontrados
+- 'duplicates': lista de índices de entidades duplicadas
+- 'overlaps': lista de pares de índices com sobreposição
+- 'has_conflicts': bool indicando se há conflitos</dd>
+</dl></div>
+</dd>
+<dt id="anonimizar.sei_anonimizar_treino.SeiAnonimizarNERTrainer.load_from_doccano_jsonl"><code class="name flex">
+<span>def <span class="ident">load_from_doccano_jsonl</span></span>(<span>self, jsonl_path: str) ‑> list</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def load_from_doccano_jsonl(self, jsonl_path: str) -&gt; list:
+    &#34;&#34;&#34;Carrega dados de arquivo JSONL exportado do Doccano.
+
+    Suporta dois formatos do Doccano:
+    - {&#34;text&#34;: &#34;...&#34;, &#34;labels&#34;: [[start, end, &#34;LABEL&#34;], ...]}
+    - {&#34;text&#34;: &#34;...&#34;, &#34;entities&#34;: [{&#34;start_offset&#34;: x, &#34;end_offset&#34;: y, &#34;label&#34;: &#34;L&#34;}]}
+
+    Args:
+        jsonl_path: Caminho para arquivo .jsonl
+
+    Returns:
+        list: Dados no formato [(text, {&#34;entities&#34;: [(start, end, label), ...]}), ...]
+    &#34;&#34;&#34;
+    return _load_jsonl(jsonl_path)</code></pre>
+</details>
+<div class="desc"><p>Carrega dados de arquivo JSONL exportado do Doccano.</p>
+<p>Suporta dois formatos do Doccano:
+- {"text": "&hellip;", "labels": [[start, end, "LABEL"], &hellip;]}
+- {"text": "&hellip;", "entities": [{"start_offset": x, "end_offset": y, "label": "L"}]}</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>jsonl_path</code></strong></dt>
+<dd>Caminho para arquivo .jsonl</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>list</code></dt>
+<dd>Dados no formato [(text, {"entities": [(start, end, label), &hellip;]}), &hellip;]</dd>
+</dl></div>
+</dd>
+<dt id="anonimizar.sei_anonimizar_treino.SeiAnonimizarNERTrainer.make_folds_by_id"><code class="name flex">
+<span>def <span class="ident">make_folds_by_id</span></span>(<span>self,<br>df_entidades: pandas.core.frame.DataFrame,<br>n_splits: int = 5,<br>*,<br>random_state: int = 42,<br>shuffle: bool = True)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def make_folds_by_id(
+    self,
+    df_entidades: pd.DataFrame,
+    n_splits: int = DEFAULT_N_SPLITS,
+    *,
+    random_state: int = DEFAULT_RANDOM_STATE,
+    shuffle: bool = True,
+):
+    &#34;&#34;&#34;Cria folds baseados em IDs de documento para evitar vazamento de dados.
+
+    Args:
+        df_entidades: DataFrame com coluna &#39;id&#39; (ou &#39;id_doc&#39;) identificando documentos
+        n_splits: Número de folds para cross validation
+        random_state: Seed para reprodutibilidade
+        shuffle: Se deve embaralhar os dados antes da divisão
+
+    Returns:
+        list: Lista de tuplas (ids_train, ids_val) para cada fold
+    &#34;&#34;&#34;
+    return cv.make_folds_by_id(
+        df_entidades=df_entidades, n_splits=n_splits, random_state=random_state, shuffle=shuffle, logger=self.logger
+    )</code></pre>
+</details>
+<div class="desc"><p>Cria folds baseados em IDs de documento para evitar vazamento de dados.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>df_entidades</code></strong></dt>
+<dd>DataFrame com coluna 'id' (ou 'id_doc') identificando documentos</dd>
+<dt><strong><code>n_splits</code></strong></dt>
+<dd>Número de folds para cross validation</dd>
+<dt><strong><code>random_state</code></strong></dt>
+<dd>Seed para reprodutibilidade</dd>
+<dt><strong><code>shuffle</code></strong></dt>
+<dd>Se deve embaralhar os dados antes da divisão</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>list</code></dt>
+<dd>Lista de tuplas (ids_train, ids_val) para cada fold</dd>
+</dl></div>
+</dd>
+<dt id="anonimizar.sei_anonimizar_treino.SeiAnonimizarNERTrainer.make_stratified_folds_by_id"><code class="name flex">
+<span>def <span class="ident">make_stratified_folds_by_id</span></span>(<span>self,<br>df_entidades: pandas.core.frame.DataFrame,<br>features: list | None = None,<br>n_splits: int = 5,<br>*,<br>random_state: int = 42,<br>shuffle: bool = True)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def make_stratified_folds_by_id(
+    self,
+    df_entidades: pd.DataFrame,
+    features: list | None = None,
+    n_splits: int = DEFAULT_N_SPLITS,
+    *,
+    random_state: int = DEFAULT_RANDOM_STATE,
+    shuffle: bool = True,
+):
+    &#34;&#34;&#34;Cria folds estratificados para balancear a distribuição de entidades entre os folds.
+
+    Args:
+        df_entidades: DataFrame com entidades anotadas
+        features: Lista de tipos de entidades para estratificação
+        n_splits: Número de folds
+        random_state: Seed para reprodutibilidade
+        shuffle: Se deve embaralhar os dados
+
+    Returns:
+        list: Lista de tuplas (ids_train, ids_val) para cada fold
+    &#34;&#34;&#34;
+    return cv.make_stratified_folds_by_id(
+        df_entidades=df_entidades,
+        features=features,
+        n_splits=n_splits,
+        random_state=random_state,
+        shuffle=shuffle,
+        logger=self.logger,
+    )</code></pre>
+</details>
+<div class="desc"><p>Cria folds estratificados para balancear a distribuição de entidades entre os folds.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>df_entidades</code></strong></dt>
+<dd>DataFrame com entidades anotadas</dd>
+<dt><strong><code>features</code></strong></dt>
+<dd>Lista de tipos de entidades para estratificação</dd>
+<dt><strong><code>n_splits</code></strong></dt>
+<dd>Número de folds</dd>
+<dt><strong><code>random_state</code></strong></dt>
+<dd>Seed para reprodutibilidade</dd>
+<dt><strong><code>shuffle</code></strong></dt>
+<dd>Se deve embaralhar os dados</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>list</code></dt>
+<dd>Lista de tuplas (ids_train, ids_val) para cada fold</dd>
+</dl></div>
+</dd>
+<dt id="anonimizar.sei_anonimizar_treino.SeiAnonimizarNERTrainer.save_model"><code class="name flex">
+<span>def <span class="ident">save_model</span></span>(<span>self, path: str | None = None) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def save_model(self, path: str | None = None) -&gt; None:
+    &#34;&#34;&#34;Persiste o modelo treinado em disco.
+
+    Args:
+        path (str | None, optional): Diretório de saída.
+            Se ``None``, usa ``self.output_dir``.
+    &#34;&#34;&#34;
+    save_path = Path(path) if path else self.output_dir
+    save_path.mkdir(parents=True, exist_ok=True)
+    self.nlp.to_disk(save_path)
+    self.logger.debug(f&#34;Modelo salvo em: {save_path}&#34;)</code></pre>
+</details>
+<div class="desc"><p>Persiste o modelo treinado em disco.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>path</code></strong> :&ensp;<code>str | None</code>, optional</dt>
+<dd>Diretório de saída.
+Se <code>None</code>, usa <code>self.output_dir</code>.</dd>
+</dl></div>
+</dd>
+<dt id="anonimizar.sei_anonimizar_treino.SeiAnonimizarNERTrainer.save_to_doccano_jsonl"><code class="name flex">
+<span>def <span class="ident">save_to_doccano_jsonl</span></span>(<span>self, output_path: str, data: list | None = None, format_type: str = 'labels') ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def save_to_doccano_jsonl(self, output_path: str, data: list | None = None, format_type: str = &#34;labels&#34;) -&gt; None:
+    &#34;&#34;&#34;Salva dados em formato JSONL compatível com Doccano.
+
+    Args:
+        output_path: Caminho para salvar o arquivo .jsonl
+        data: Dados para salvar. Se None, usa self.training_data
+        format_type: Tipo de formato:
+            - &#39;labels&#39;: {&#34;text&#34;: &#34;...&#34;, &#34;labels&#34;: [[start, end, &#34;LABEL&#34;]]}
+            - &#39;entities&#39;: {&#34;text&#34;: &#34;...&#34;, &#34;entities&#34;: [{&#34;start_offset&#34;: x, ...}]}
+    &#34;&#34;&#34;
+    if data is None:
+        if not self.training_data:
+            msg = &#34;Nenhum dado disponível para exportar&#34;
+            self.logger.exception(msg)
+            raise ValueError(msg)
+        data = self.training_data
+
+    _save_jsonl(output_path, data, format_type=format_type)</code></pre>
+</details>
+<div class="desc"><p>Salva dados em formato JSONL compatível com Doccano.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>output_path</code></strong></dt>
+<dd>Caminho para salvar o arquivo .jsonl</dd>
+<dt><strong><code>data</code></strong></dt>
+<dd>Dados para salvar. Se None, usa self.training_data</dd>
+<dt><strong><code>format_type</code></strong></dt>
+<dd>Tipo de formato:
+- 'labels': {"text": "&hellip;", "labels": [[start, end, "LABEL"]]}
+- 'entities': {"text": "&hellip;", "entities": [{"start_offset": x, &hellip;}]}</dd>
+</dl></div>
+</dd>
+<dt id="anonimizar.sei_anonimizar_treino.SeiAnonimizarNERTrainer.split_data"><code class="name flex">
+<span>def <span class="ident">split_data</span></span>(<span>self, train_ratio: float = 0.8) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def split_data(self, train_ratio: float = DEFAULT_TRAIN_RATIO) -&gt; None:
+    &#34;&#34;&#34;Divide ``training_data`` em treino e validação.
+
+    Args:
+        train_ratio (float, optional): Proporção destinada a treino.
+            Default = ``0.8``.
+
+    Raises:
+        ValueError: Se houver menos de 2 exemplos.
+    &#34;&#34;&#34;
+    self.train_data, self.val_data = data_loader.split_data(self.training_data, train_ratio, self.logger)
+    # Sincronizar com o gerenciador de dados centralizado
+    self._data_manager.train_data = list(self.train_data)
+    self._data_manager.val_data = list(self.val_data)</code></pre>
+</details>
+<div class="desc"><p>Divide <code>training_data</code> em treino e validação.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>train_ratio</code></strong> :&ensp;<code>float</code>, optional</dt>
+<dd>Proporção destinada a treino.
+Default = <code>0.8</code>.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>ValueError</code></dt>
+<dd>Se houver menos de 2 exemplos.</dd>
+</dl></div>
+</dd>
+<dt id="anonimizar.sei_anonimizar_treino.SeiAnonimizarNERTrainer.train"><code class="name flex">
+<span>def <span class="ident">train</span></span>(<span>self,<br>n_iter: int = 20,<br>drop: float = 0.35,<br>batch_size: int = 8,<br>validation_split: float = 0.2,<br>initial_base_frac: float = 1.0) ‑> dict[str, typing.Any] | None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def train(
+    self,
+    n_iter: int = DEFAULT_N_ITER,
+    drop: float = DEFAULT_DROP,
+    batch_size: int = DEFAULT_BATCH_SIZE,
+    validation_split: float = DEFAULT_VALIDATION_SPLIT,
+    initial_base_frac: float = DEFAULT_INITIAL_BASE_FRAC,
+) -&gt; dict[str, Any] | None:
+    &#34;&#34;&#34;Treina o modelo NER usando os dados previamente carregados.
+
+    Args:
+        n_iter (int, optional): Número de iterações (épocas) de treinamento.
+            Padrão = 20.
+        drop (float, optional): Taxa de *dropout* aplicada durante a atualização
+            dos pesos. Padrão = 0.35.
+        batch_size (int, optional): Tamanho da minilote utilizada nas
+            atualizações. Padrão = 8.
+        validation_split (float, optional): Fração (0-1) dos dados reservada
+            para validação. Se 0, todo o conjunto é usado para treinamento.
+            Padrão = 0.2.
+        initial_base_frac (float, optional): Fração inicial do conjunto de
+            treinamento usada para compor o lote de exemplos passado a
+            ``nlp.initialize()``. Padrão = 1.0.
+
+    Raises:
+        ValueError: Se ``self.training_data`` estiver vazio.
+        Exception: Repassa qualquer exceção gerada durante o processo de
+            treinamento.
+
+    Returns:
+        dict[str, Any]: Dicionário com métricas de treinamento incluindo
+            &#39;final_loss&#39;, &#39;iterations&#39; e &#39;examples_count&#39;.
+    &#34;&#34;&#34;
+    try:
+        if not self.training_data:
+            msg = &#34;Nenhum dado de treinamento disponível&#34;
+            self.logger.exception(msg)
+            raise ValueError(msg)
+        if not 0.0 &lt;= validation_split &lt; 1.0:
+            msg = f&#34;validation_split deve estar entre 0.0 e 1.0(não incluso), recebido: {validation_split}&#34;
+            self.logger.exception(msg)
+            raise ValueError(msg)
+
+        # Preparar dados para treinamento
+        if validation_split &gt; 0:
+            self.split_data(train_ratio=1 - validation_split)
+            train_data = self.train_data
+        else:
+            train_data = self.training_data
+
+        self.logger.info(&#34;Delegando treinamento para módulo trainer especializado&#34;)
+
+        # Delegar treinamento para função standalone
+        self.nlp, metrics = _train_ner_model(
+            nlp=self.nlp,
+            train_data=train_data,
+            n_iter=n_iter,
+            drop=drop,
+            batch_size=batch_size,
+            validation_split=0.0,  # Já foi dividido acima
+            initial_base_frac=initial_base_frac,
+            logger=self.logger,
+            other_pipes=self.other_pipes,
+        )
+
+        self.logger.info(&#34;Treinamento concluído com sucesso via módulo trainer&#34;)
+        return metrics
+
+    except Exception as e:
+        self.logger.exception(f&#34;Erro durante treinamento: {e!s}&#34;)
+        raise</code></pre>
+</details>
+<div class="desc"><p>Treina o modelo NER usando os dados previamente carregados.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>n_iter</code></strong> :&ensp;<code>int</code>, optional</dt>
+<dd>Número de iterações (épocas) de treinamento.
+Padrão = 20.</dd>
+<dt><strong><code>drop</code></strong> :&ensp;<code>float</code>, optional</dt>
+<dd>Taxa de <em>dropout</em> aplicada durante a atualização
+dos pesos. Padrão = 0.35.</dd>
+<dt><strong><code>batch_size</code></strong> :&ensp;<code>int</code>, optional</dt>
+<dd>Tamanho da minilote utilizada nas
+atualizações. Padrão = 8.</dd>
+<dt><strong><code>validation_split</code></strong> :&ensp;<code>float</code>, optional</dt>
+<dd>Fração (0-1) dos dados reservada
+para validação. Se 0, todo o conjunto é usado para treinamento.
+Padrão = 0.2.</dd>
+<dt><strong><code>initial_base_frac</code></strong> :&ensp;<code>float</code>, optional</dt>
+<dd>Fração inicial do conjunto de
+treinamento usada para compor o lote de exemplos passado a
+<code>nlp.initialize()</code>. Padrão = 1.0.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>ValueError</code></dt>
+<dd>Se <code>self.training_data</code> estiver vazio.</dd>
+<dt><code>Exception</code></dt>
+<dd>Repassa qualquer exceção gerada durante o processo de
+treinamento.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>dict[str, Any]</code></dt>
+<dd>Dicionário com métricas de treinamento incluindo
+'final_loss', 'iterations' e 'examples_count'.</dd>
+</dl></div>
+</dd>
+<dt id="anonimizar.sei_anonimizar_treino.SeiAnonimizarNERTrainer.val_data_to_evaluation"><code class="name flex">
+<span>def <span class="ident">val_data_to_evaluation</span></span>(<span>self) ‑> tuple[pandas.core.frame.DataFrame, pandas.core.frame.DataFrame]</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def val_data_to_evaluation(self) -&gt; tuple[pd.DataFrame, pd.DataFrame]:
+    &#34;&#34;&#34;Converte para o formato do SeiAnonimizarEvaluation.
+
+    Converte o conjunto de validação interno (`self.val_data`) para o
+    formato requerido pelo ``SeiAnonimizarEvaluation``.
+
+    Estrutura de saída
+    A função devolve **duas** tabelas `pandas.DataFrame`:
+
+    1. **df_texts**
+    • colunas: ``id``, ``text``
+    • cada linha contém o texto bruto que será avaliado.
+
+    2. **df_ground_truth**
+    • colunas: ``id``, ``tp_entidade``, ``start_entidade``, ``end_entidade``
+    • cada linha representa **uma** entidade de referência
+        (ground-truth) pertencente ao texto de mesmo ``id``.
+
+    O par (df_texts, df_ground_truth) pode ser passado diretamente a
+    ``SeiAnonimizarEvaluation.load_data()`` sem necessidade de ajustes
+    adicionais.
+
+    Returns:
+        tuple[pd.DataFrame, pd.DataFrame]
+        - **df_texts**        - DataFrame com os textos a validar
+        - **df_ground_truth** - DataFrame com as entidades de verdade-terreno
+
+    Raises:
+        ValueError
+        Se ``self.val_data`` ainda não tiver sido gerado (ou seja, o
+        método `split_data` não foi chamado ou não há dados
+        suficientes para divisão).
+
+    Example:
+    &gt;&gt;&gt; trainer.split_data(train_ratio=0.8)           # cria self.val_data
+    &gt;&gt;&gt; df_texts, df_gt = trainer.val_data_to_evaluation()
+    &gt;&gt;&gt; evaluator = SeiAnonimizarEvaluation()
+    &gt;&gt;&gt; evaluator.load_data(df_texts, df_gt)
+    &gt;&gt;&gt; evaluator.extract_predictions(anonymizer)
+    &gt;&gt;&gt; evaluator.evaluate_model()
+    &#34;&#34;&#34;
+    if not getattr(self, &#34;val_data&#34;, None):
+        msg = &#34;Não existem dados de validação. Execute split_data() antes de chamar val_data_to_evaluation().&#34;
+        self.logger.exception(msg)
+        raise ValueError(msg)
+
+    return data_loader.val_data_to_evaluation(self.val_data, self.logger)</code></pre>
+</details>
+<div class="desc"><p>Converte para o formato do SeiAnonimizarEvaluation.</p>
+<p>Converte o conjunto de validação interno (<code>self.val_data</code>) para o
+formato requerido pelo <code>SeiAnonimizarEvaluation</code>.</p>
+<p>Estrutura de saída
+A função devolve <strong>duas</strong> tabelas <code>pandas.DataFrame</code>:</p>
+<ol>
+<li>
+<p><strong>df_texts</strong>
+• colunas: <code>id</code>, <code>text</code>
+• cada linha contém o texto bruto que será avaliado.</p>
+</li>
+<li>
+<p><strong>df_ground_truth</strong>
+• colunas: <code>id</code>, <code>tp_entidade</code>, <code>start_entidade</code>, <code>end_entidade</code>
+• cada linha representa <strong>uma</strong> entidade de referência
+(ground-truth) pertencente ao texto de mesmo <code>id</code>.</p>
+</li>
+</ol>
+<p>O par (df_texts, df_ground_truth) pode ser passado diretamente a
+<code>SeiAnonimizarEvaluation.load_data()</code> sem necessidade de ajustes
+adicionais.</p>
+<h2 id="returns">Returns</h2>
+<p>tuple[pd.DataFrame, pd.DataFrame]
+- <strong>df_texts</strong>
+- DataFrame com os textos a validar
+- <strong>df_ground_truth</strong> - DataFrame com as entidades de verdade-terreno</p>
+<h2 id="raises">Raises</h2>
+<p>ValueError
+Se <code>self.val_data</code> ainda não tiver sido gerado (ou seja, o
+método <code>split_data</code> não foi chamado ou não há dados
+suficientes para divisão).
+Example:</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; trainer.split_data(train_ratio=0.8)           # cria self.val_data
+&gt;&gt;&gt; df_texts, df_gt = trainer.val_data_to_evaluation()
+&gt;&gt;&gt; evaluator = SeiAnonimizarEvaluation()
+&gt;&gt;&gt; evaluator.load_data(df_texts, df_gt)
+&gt;&gt;&gt; evaluator.extract_predictions(anonymizer)
+&gt;&gt;&gt; evaluator.evaluate_model()
+</code></pre></div>
+</dd>
+<dt id="anonimizar.sei_anonimizar_treino.SeiAnonimizarNERTrainer.validate_entities"><code class="name flex">
+<span>def <span class="ident">validate_entities</span></span>(<span>self, text: str, entities: list[tuple[int, int, str]]) ‑> bool</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def validate_entities(self, text: str, entities: list[tuple[int, int, str]]) -&gt; bool:
+    &#34;&#34;&#34;Valida entidades anotadas com base no texto.
+
+    Retorna True se todas estiverem corretas,
+    ou False se houver qualquer erro (offset inválido, label não suportado, desalinhamento BILUO etc.).
+
+    Args:
+        text (str): Texto completo a ser inspecionado.
+        entities (list[tuple[int, int, str]]): Lista de tuplas (start, end, label).
+
+    Returns:
+        bool: True se todas as entidades forem válidas, False caso contrário.
+
+    Examples:
+        Validar entidades corretas:
+
+            &gt;&gt;&gt; trainer = SeiAnonimizarNERTrainer(labels=[&#34;CPF&#34;])
+            &gt;&gt;&gt; text = &#34;CPF: 123.456.789-00&#34;
+            &gt;&gt;&gt; entities = [(5, 19, &#34;CPF&#34;)]  # 14 caracteres: 123.456.789-00
+            &gt;&gt;&gt; trainer.validate_entities(text, entities)
+            True
+
+        Validar entidades com problemas:
+
+            &gt;&gt;&gt; # Offset com espaços extras
+            &gt;&gt;&gt; text = &#34;CPF: 123.456.789-00  &#34;
+            &gt;&gt;&gt; entities = [(5, 21, &#34;CPF&#34;)]  # Inclui espaços extras
+            &gt;&gt;&gt; trainer.validate_entities(text, entities)
+            False
+
+            &gt;&gt;&gt; # Offset desalinhado aos tokens
+            &gt;&gt;&gt; text = &#34;EMAIL: teste@exemplo.com&#34;
+            &gt;&gt;&gt; entities = [(14, 21, &#34;EMAIL&#34;)]  # Não alinhado ao token
+            &gt;&gt;&gt; trainer.validate_entities(text, entities)
+            False
+    &#34;&#34;&#34;
+    return data_validator.validate_entities(text, entities, self.supported_labels, self.nlp, self.logger)</code></pre>
+</details>
+<div class="desc"><p>Valida entidades anotadas com base no texto.</p>
+<p>Retorna True se todas estiverem corretas,
+ou False se houver qualquer erro (offset inválido, label não suportado, desalinhamento BILUO etc.).</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>text</code></strong> :&ensp;<code>str</code></dt>
+<dd>Texto completo a ser inspecionado.</dd>
+<dt><strong><code>entities</code></strong> :&ensp;<code>list[tuple[int, int, str]]</code></dt>
+<dd>Lista de tuplas (start, end, label).</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>bool</code></dt>
+<dd>True se todas as entidades forem válidas, False caso contrário.</dd>
+</dl>
+<h2 id="examples">Examples</h2>
+<p>Validar entidades corretas:</p>
+<pre><code>&gt;&gt;&gt; trainer = SeiAnonimizarNERTrainer(labels=["CPF"])
+&gt;&gt;&gt; text = "CPF: 123.456.789-00"
+&gt;&gt;&gt; entities = [(5, 19, "CPF")]  # 14 caracteres: 123.456.789-00
+&gt;&gt;&gt; trainer.validate_entities(text, entities)
+True
+</code></pre>
+<p>Validar entidades com problemas:</p>
+<pre><code>&gt;&gt;&gt; # Offset com espaços extras
+&gt;&gt;&gt; text = "CPF: 123.456.789-00  "
+&gt;&gt;&gt; entities = [(5, 21, "CPF")]  # Inclui espaços extras
+&gt;&gt;&gt; trainer.validate_entities(text, entities)
+False
+
+&gt;&gt;&gt; # Offset desalinhado aos tokens
+&gt;&gt;&gt; text = "EMAIL: teste@exemplo.com"
+&gt;&gt;&gt; entities = [(14, 21, "EMAIL")]  # Não alinhado ao token
+&gt;&gt;&gt; trainer.validate_entities(text, entities)
+False
+</code></pre></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="anonimizar" href="index.html">anonimizar</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="anonimizar.sei_anonimizar_treino.SeiAnonimizarNERTrainer" href="#anonimizar.sei_anonimizar_treino.SeiAnonimizarNERTrainer">SeiAnonimizarNERTrainer</a></code></h4>
+<ul class="">
+<li><code><a title="anonimizar.sei_anonimizar_treino.SeiAnonimizarNERTrainer.add_data" href="#anonimizar.sei_anonimizar_treino.SeiAnonimizarNERTrainer.add_data">add_data</a></code></li>
+<li><code><a title="anonimizar.sei_anonimizar_treino.SeiAnonimizarNERTrainer.clean_entities" href="#anonimizar.sei_anonimizar_treino.SeiAnonimizarNERTrainer.clean_entities">clean_entities</a></code></li>
+<li><code><a title="anonimizar.sei_anonimizar_treino.SeiAnonimizarNERTrainer.cross_validate" href="#anonimizar.sei_anonimizar_treino.SeiAnonimizarNERTrainer.cross_validate">cross_validate</a></code></li>
+<li><code><a title="anonimizar.sei_anonimizar_treino.SeiAnonimizarNERTrainer.debug_entities" href="#anonimizar.sei_anonimizar_treino.SeiAnonimizarNERTrainer.debug_entities">debug_entities</a></code></li>
+<li><code><a title="anonimizar.sei_anonimizar_treino.SeiAnonimizarNERTrainer.detect_entity_conflicts" href="#anonimizar.sei_anonimizar_treino.SeiAnonimizarNERTrainer.detect_entity_conflicts">detect_entity_conflicts</a></code></li>
+<li><code><a title="anonimizar.sei_anonimizar_treino.SeiAnonimizarNERTrainer.load_from_doccano_jsonl" href="#anonimizar.sei_anonimizar_treino.SeiAnonimizarNERTrainer.load_from_doccano_jsonl">load_from_doccano_jsonl</a></code></li>
+<li><code><a title="anonimizar.sei_anonimizar_treino.SeiAnonimizarNERTrainer.make_folds_by_id" href="#anonimizar.sei_anonimizar_treino.SeiAnonimizarNERTrainer.make_folds_by_id">make_folds_by_id</a></code></li>
+<li><code><a title="anonimizar.sei_anonimizar_treino.SeiAnonimizarNERTrainer.make_stratified_folds_by_id" href="#anonimizar.sei_anonimizar_treino.SeiAnonimizarNERTrainer.make_stratified_folds_by_id">make_stratified_folds_by_id</a></code></li>
+<li><code><a title="anonimizar.sei_anonimizar_treino.SeiAnonimizarNERTrainer.save_model" href="#anonimizar.sei_anonimizar_treino.SeiAnonimizarNERTrainer.save_model">save_model</a></code></li>
+<li><code><a title="anonimizar.sei_anonimizar_treino.SeiAnonimizarNERTrainer.save_to_doccano_jsonl" href="#anonimizar.sei_anonimizar_treino.SeiAnonimizarNERTrainer.save_to_doccano_jsonl">save_to_doccano_jsonl</a></code></li>
+<li><code><a title="anonimizar.sei_anonimizar_treino.SeiAnonimizarNERTrainer.split_data" href="#anonimizar.sei_anonimizar_treino.SeiAnonimizarNERTrainer.split_data">split_data</a></code></li>
+<li><code><a title="anonimizar.sei_anonimizar_treino.SeiAnonimizarNERTrainer.train" href="#anonimizar.sei_anonimizar_treino.SeiAnonimizarNERTrainer.train">train</a></code></li>
+<li><code><a title="anonimizar.sei_anonimizar_treino.SeiAnonimizarNERTrainer.val_data_to_evaluation" href="#anonimizar.sei_anonimizar_treino.SeiAnonimizarNERTrainer.val_data_to_evaluation">val_data_to_evaluation</a></code></li>
+<li><code><a title="anonimizar.sei_anonimizar_treino.SeiAnonimizarNERTrainer.validate_entities" href="#anonimizar.sei_anonimizar_treino.SeiAnonimizarNERTrainer.validate_entities">validate_entities</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.6</a>.</p>
+</footer>
+</body>
+</html>
