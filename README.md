@@ -1,6 +1,6 @@
 # Anonimizar-dp
 
-Ferramenta avançada para anonimização de documentos e textos, desenvolvida para proteção de dados sensíveis em conformidade com a LGPD.
+Ferramenta avançada para anonimização de documentos e textos em **português brasileiro**, desenvolvida para proteção de dados sensíveis em conformidade com a LGPD.
 
 > **Dados Fictícios:** todos os dados usados nos exemplos e no treinamento dos
 > modelos NER distribuídos no projeto são fictícios. Eles preservam somente

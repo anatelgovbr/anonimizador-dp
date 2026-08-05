@@ -1,12 +1,13 @@
 [project]
 name = "anonimizar-dp"
 version = "1.0.4"
-description = "Anonimizador de textos"
+description = "Anonimizador de dados pessoais (PII) em português brasileiro"
 authors = [{name = "Anatel", email = "seiia@anatel.gov.br"}]
 readme = "README.md"
 requires-python = ">=3.10"
 classifiers = [
     "Programming Language :: Python :: 3",
+    "Natural Language :: Portuguese",
     "Operating System :: OS Independent",
 ]
 dependencies = [
