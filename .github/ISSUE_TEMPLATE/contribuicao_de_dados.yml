@@ -1,0 +1,43 @@
+name: Contribuir com Dados Anotados
+description: Envie dados anotados no padrão Doccano (JSONL) para adicionarmos à base de treinamento
+title: "[DADOS] "
+labels:
+  - dados
+body:
+  - type: textarea
+    id: descricao
+    attributes:
+      label: Descrição dos dados
+      description: O que os textos contêm (tipos de documentos, contexto, entidades anotadas).
+    validations:
+      required: true
+  - type: input
+    id: quantidade
+    attributes:
+      label: Quantidade
+      description: Número aproximado de exemplos e de entidades anotadas.
+    validations:
+      required: false
+  - type: checkboxes
+    id: formato
+    attributes:
+      label: Formato
+      description: Confirme que os dados seguem o padrão Doccano exportado em JSONL (campos `text` e `entities`).
+      options:
+        - label: Os dados estão no padrão Doccano JSONL
+          required: true
+  - type: textarea
+    id: envio
+    attributes:
+      label: Como os dados serão disponibilizados
+      description: Descreva como você pretende enviar (link para download, anexo, repositório, etc.).
+    validations:
+      required: false
+  - type: checkboxes
+    id: privacidade
+    attributes:
+      label: Privacidade
+      description: Os textos não podem conter dados pessoais reais.
+      options:
+        - label: Os valores reais foram substituídos por dados fictícios, preservando apenas os padrões estruturais
+          required: true

@@ -1,0 +1,65 @@
+name: Reportar Bug
+description: Reporte um problema para nos ajudar a melhorar o Anonimizador-dp
+title: "[BUG] "
+labels:
+  - bug
+body:
+  - type: textarea
+    id: descricao
+    attributes:
+      label: Descreva o bug
+      description: Uma descrição clara e concisa do problema.
+      placeholder: O que aconteceu?
+    validations:
+      required: true
+  - type: textarea
+    id: reproducao
+    attributes:
+      label: Passos para reproduzir
+      description: Como reproduzir o comportamento indesejado.
+      placeholder: |
+        1. Vá para '...'
+        2. Execute '...'
+        3. Veja o erro
+    validations:
+      required: false
+  - type: textarea
+    id: esperado
+    attributes:
+      label: Comportamento esperado
+      description: O que deveria acontecer.
+    validations:
+      required: false
+  - type: textarea
+    id: atual
+    attributes:
+      label: Comportamento atual
+      description: O que aconteceu de fato.
+    validations:
+      required: false
+  - type: textarea
+    id: logs
+    attributes:
+      label: Screenshots / logs
+      description: Adicione capturas de tela ou trechos de log.
+      render: shell
+    validations:
+      required: false
+  - type: textarea
+    id: ambiente
+    attributes:
+      label: Ambiente
+      description: |
+        - Versão do pacote (`pip show anonimizador-dp`)
+        - Python (`python --version`)
+        - Sistema operacional
+        - Modelo spaCy usado (se aplicável)
+    validations:
+      required: false
+  - type: textarea
+    id: contexto
+    attributes:
+      label: Contexto adicional
+      description: Qualquer outra informação relevante.
+    validations:
+      required: false

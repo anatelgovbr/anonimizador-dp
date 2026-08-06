@@ -1,0 +1,35 @@
+name: Solicitar Funcionalidade
+description: Sugira uma ideia ou melhoria para o Anonimizador-dp
+title: "[FEATURE] "
+labels:
+  - enhancement
+body:
+  - type: textarea
+    id: problema
+    attributes:
+      label: Problema relacionado
+      description: O problema ou limitação que a funcionalidade resolve.
+      placeholder: Ex.: "não consigo detectar..."
+    validations:
+      required: true
+  - type: textarea
+    id: solucao
+    attributes:
+      label: Solução proposta
+      description: O que você gostaria que acontecesse e como a funcionalidade deveria funcionar.
+    validations:
+      required: true
+  - type: textarea
+    id: alternativas
+    attributes:
+      label: Alternativas consideradas
+      description: Soluções alternativas que você já considerou ou testou.
+    validations:
+      required: false
+  - type: textarea
+    id: contexto
+    attributes:
+      label: Contexto adicional
+      description: Qualquer outra informação relevante (exemplos, referências, casos de uso).
+    validations:
+      required: false
