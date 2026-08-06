@@ -1,7 +1,7 @@
 r"""Módulo evaluation.
 
 Este módulo oferece **ferramentas completas de avaliação** para modelos NER
-especializados em anonimização de dados sensíveis gerados pelo *Anonimizar*.
+especializados em anonimização de dados pessoais gerados pelo *Anonimizar*.
 
 Principais capacidades
 
@@ -101,10 +101,10 @@ if TYPE_CHECKING:
 
 
 class Evaluation:
-    """Classe para avaliação de modelos NER especializados em anonimização de dados sensíveis.
+    """Classe para avaliação de modelos NER especializados em anonimização de dados pessoais.
 
     Esta classe oferece funcionalidades completas para avaliar modelos de reconhecimento
-    de entidades nomeadas (NER), com foco em identificação de dados pessoais e sensíveis
+    de entidades nomeadas (NER), com foco em identificação de dados pessoais
     para anonimização.
 
     Attributes:

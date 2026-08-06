@@ -1,6 +1,6 @@
 """Módulo de anonimização de texto.
 
-Este módulo fornece funções para substituir entidades sensíveis detectadas
+Este módulo fornece funções para substituir dados pessoais detectados
 no texto por tags de anonimização.
 """
 

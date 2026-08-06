@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
 <meta name="generator" content="pdoc3 0.11.6">
 <title>anonimizar API documentation</title>
-<meta name="description" content="Ferramentas para detectar, anonimizar, treinar e avaliar entidades sensíveis …">
+<meta name="description" content="Ferramentas para detectar, anonimizar, treinar e avaliar dados pessoais …">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
@@ -36,9 +36,9 @@ el.replaceWith(d);
 <h1 class="title">Package <code>anonimizar</code></h1>
 </header>
 <section id="section-intro">
-<p>Ferramentas para detectar, anonimizar, treinar e avaliar entidades sensíveis.</p>
+<p>Ferramentas para detectar, anonimizar, treinar e avaliar dados pessoais.</p>
 <p>APIs públicas:
-- <code><a title="anonimizar.Anonimizar" href="#anonimizar.Anonimizar">Anonimizar</a></code>: extrai e anonimiza entidades sensíveis.
+- <code><a title="anonimizar.Anonimizar" href="#anonimizar.Anonimizar">Anonimizar</a></code>: extrai e anonimiza dados pessoais.
 - <code><a title="anonimizar.Trainer" href="#anonimizar.Trainer">Trainer</a></code>: treina modelos spaCy NER.
 - <code><a title="anonimizar.Evaluation" href="#anonimizar.Evaluation">Evaluation</a></code>: avalia predições de modelos NER.</p>
 <p>Nota sobre dados:
@@ -52,7 +52,7 @@ utilizado no treinamento dessa biblioteca.</p>
 O pipeline combina três fontes de extração em etapas sequenciais:</p>
 <pre><code>    1. Modelo spaCy NER — identifica entidades via aprendizado de máquina
     2. Padrões REGEX — captura padrões conhecidos (CPF, RG, email, etc.)
-    3. Tabelas Markdown — extrai colunas com cabeçalhos sensíveis
+    3. Tabelas Markdown — extrai colunas com cabeçalhos relacionados a dados pessoais
 
 Os resultados são unificados, conflitos de sobreposição são resolvidos por
 prioridade de label e cada entidade passa por um validador específico:
@@ -599,10 +599,10 @@ resultados = evaluator.evaluate_model()
         return remove_overlap_positions(entities, logger=self.logger)
 
     def extract_entities_from_markdown_tables(self, text: str, return_type: str = &#34;label_position&#34;) -&gt; list[dict]:
-        &#34;&#34;&#34;Extrai entidades de colunas sensíveis em tabelas markdown.
+        &#34;&#34;&#34;Extrai entidades de colunas com dados pessoais em tabelas markdown.
 
         Detecta automaticamente tabelas markdown no texto e extrai entidades de colunas
-        que contenham nomes relacionados a dados sensíveis (CPF, RG, Titulo, Documento).
+        que contenham nomes relacionados a dados pessoais (CPF, RG, Titulo, Documento).
 
         Args:
             text (str): Texto contendo tabelas markdown
@@ -614,7 +614,7 @@ resultados = evaluator.evaluate_model()
         return _extract_markdown_tables(text, return_type, self.logger)
 
     def extract_entities(self, text_or_path: str, return_type: str = &#34;label_position&#34;) -&gt; list[dict]:
-        r&#34;&#34;&#34;Extrai entidades sensíveis de texto usando modelo spaCy e padrões regex.
+        r&#34;&#34;&#34;Extrai dados pessoais de texto usando modelo spaCy e padrões regex.
 
         Combina detecção por modelo de Machine Learning com padrões regex personalizados
         para identificar entidades como CPF, RG, e-mail, telefone, etc. Remove sobreposições
@@ -1459,7 +1459,7 @@ para preservar as posições corretas dos caracteres.</p>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def extract_entities(self, text_or_path: str, return_type: str = &#34;label_position&#34;) -&gt; list[dict]:
-    r&#34;&#34;&#34;Extrai entidades sensíveis de texto usando modelo spaCy e padrões regex.
+    r&#34;&#34;&#34;Extrai dados pessoais de texto usando modelo spaCy e padrões regex.
 
     Combina detecção por modelo de Machine Learning com padrões regex personalizados
     para identificar entidades como CPF, RG, e-mail, telefone, etc. Remove sobreposições
@@ -1510,7 +1510,7 @@ para preservar as posições corretas dos caracteres.</p>
         normalize=self.normalize_entities,
     )</code></pre>
 </details>
-<div class="desc"><p>Extrai entidades sensíveis de texto usando modelo spaCy e padrões regex.</p>
+<div class="desc"><p>Extrai dados pessoais de texto usando modelo spaCy e padrões regex.</p>
 <p>Combina detecção por modelo de Machine Learning com padrões regex personalizados
 para identificar entidades como CPF, RG, e-mail, telefone, etc. Remove sobreposições
 automáticamente e valida entidades com base no contexto.</p>
@@ -1564,10 +1564,10 @@ pelo atributo <code>self.normalize_entities</code>.</li>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def extract_entities_from_markdown_tables(self, text: str, return_type: str = &#34;label_position&#34;) -&gt; list[dict]:
-    &#34;&#34;&#34;Extrai entidades de colunas sensíveis em tabelas markdown.
+    &#34;&#34;&#34;Extrai entidades de colunas com dados pessoais em tabelas markdown.
 
     Detecta automaticamente tabelas markdown no texto e extrai entidades de colunas
-    que contenham nomes relacionados a dados sensíveis (CPF, RG, Titulo, Documento).
+    que contenham nomes relacionados a dados pessoais (CPF, RG, Titulo, Documento).
 
     Args:
         text (str): Texto contendo tabelas markdown
@@ -1578,9 +1578,9 @@ pelo atributo <code>self.normalize_entities</code>.</li>
     &#34;&#34;&#34;
     return _extract_markdown_tables(text, return_type, self.logger)</code></pre>
 </details>
-<div class="desc"><p>Extrai entidades de colunas sensíveis em tabelas markdown.</p>
+<div class="desc"><p>Extrai entidades de colunas com dados pessoais em tabelas markdown.</p>
 <p>Detecta automaticamente tabelas markdown no texto e extrai entidades de colunas
-que contenham nomes relacionados a dados sensíveis (CPF, RG, Titulo, Documento).</p>
+que contenham nomes relacionados a dados pessoais (CPF, RG, Titulo, Documento).</p>
 <h2 id="args">Args</h2>
 <dl>
 <dt><strong><code>text</code></strong> :&ensp;<code>str</code></dt>
@@ -2380,10 +2380,10 @@ descritos abaixo.</p>
         return remove_overlap_positions(entities, logger=self.logger)
 
     def extract_entities_from_markdown_tables(self, text: str, return_type: str = &#34;label_position&#34;) -&gt; list[dict]:
-        &#34;&#34;&#34;Extrai entidades de colunas sensíveis em tabelas markdown.
+        &#34;&#34;&#34;Extrai entidades de colunas com dados pessoais em tabelas markdown.
 
         Detecta automaticamente tabelas markdown no texto e extrai entidades de colunas
-        que contenham nomes relacionados a dados sensíveis (CPF, RG, Titulo, Documento).
+        que contenham nomes relacionados a dados pessoais (CPF, RG, Titulo, Documento).
 
         Args:
             text (str): Texto contendo tabelas markdown
@@ -2395,7 +2395,7 @@ descritos abaixo.</p>
         return _extract_markdown_tables(text, return_type, self.logger)
 
     def extract_entities(self, text_or_path: str, return_type: str = &#34;label_position&#34;) -&gt; list[dict]:
-        r&#34;&#34;&#34;Extrai entidades sensíveis de texto usando modelo spaCy e padrões regex.
+        r&#34;&#34;&#34;Extrai dados pessoais de texto usando modelo spaCy e padrões regex.
 
         Combina detecção por modelo de Machine Learning com padrões regex personalizados
         para identificar entidades como CPF, RG, e-mail, telefone, etc. Remove sobreposições
@@ -3240,7 +3240,7 @@ para preservar as posições corretas dos caracteres.</p>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def extract_entities(self, text_or_path: str, return_type: str = &#34;label_position&#34;) -&gt; list[dict]:
-    r&#34;&#34;&#34;Extrai entidades sensíveis de texto usando modelo spaCy e padrões regex.
+    r&#34;&#34;&#34;Extrai dados pessoais de texto usando modelo spaCy e padrões regex.
 
     Combina detecção por modelo de Machine Learning com padrões regex personalizados
     para identificar entidades como CPF, RG, e-mail, telefone, etc. Remove sobreposições
@@ -3291,7 +3291,7 @@ para preservar as posições corretas dos caracteres.</p>
         normalize=self.normalize_entities,
     )</code></pre>
 </details>
-<div class="desc"><p>Extrai entidades sensíveis de texto usando modelo spaCy e padrões regex.</p>
+<div class="desc"><p>Extrai dados pessoais de texto usando modelo spaCy e padrões regex.</p>
 <p>Combina detecção por modelo de Machine Learning com padrões regex personalizados
 para identificar entidades como CPF, RG, e-mail, telefone, etc. Remove sobreposições
 automáticamente e valida entidades com base no contexto.</p>
@@ -3345,10 +3345,10 @@ pelo atributo <code>self.normalize_entities</code>.</li>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def extract_entities_from_markdown_tables(self, text: str, return_type: str = &#34;label_position&#34;) -&gt; list[dict]:
-    &#34;&#34;&#34;Extrai entidades de colunas sensíveis em tabelas markdown.
+    &#34;&#34;&#34;Extrai entidades de colunas com dados pessoais em tabelas markdown.
 
     Detecta automaticamente tabelas markdown no texto e extrai entidades de colunas
-    que contenham nomes relacionados a dados sensíveis (CPF, RG, Titulo, Documento).
+    que contenham nomes relacionados a dados pessoais (CPF, RG, Titulo, Documento).
 
     Args:
         text (str): Texto contendo tabelas markdown
@@ -3359,9 +3359,9 @@ pelo atributo <code>self.normalize_entities</code>.</li>
     &#34;&#34;&#34;
     return _extract_markdown_tables(text, return_type, self.logger)</code></pre>
 </details>
-<div class="desc"><p>Extrai entidades de colunas sensíveis em tabelas markdown.</p>
+<div class="desc"><p>Extrai entidades de colunas com dados pessoais em tabelas markdown.</p>
 <p>Detecta automaticamente tabelas markdown no texto e extrai entidades de colunas
-que contenham nomes relacionados a dados sensíveis (CPF, RG, Titulo, Documento).</p>
+que contenham nomes relacionados a dados pessoais (CPF, RG, Titulo, Documento).</p>
 <h2 id="args">Args</h2>
 <dl>
 <dt><strong><code>text</code></strong> :&ensp;<code>str</code></dt>
@@ -3796,10 +3796,10 @@ descritos abaixo.</p>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class Evaluation:
-    &#34;&#34;&#34;Classe para avaliação de modelos NER especializados em anonimização de dados sensíveis.
+    &#34;&#34;&#34;Classe para avaliação de modelos NER especializados em anonimização de dados pessoais.
 
     Esta classe oferece funcionalidades completas para avaliar modelos de reconhecimento
-    de entidades nomeadas (NER), com foco em identificação de dados pessoais e sensíveis
+    de entidades nomeadas (NER), com foco em identificação de dados pessoais
     para anonimização.
 
     Attributes:
@@ -4542,9 +4542,9 @@ descritos abaixo.</p>
             logger=self.logger,
         )</code></pre>
 </details>
-<div class="desc"><p>Classe para avaliação de modelos NER especializados em anonimização de dados sensíveis.</p>
+<div class="desc"><p>Classe para avaliação de modelos NER especializados em anonimização de dados pessoais.</p>
 <p>Esta classe oferece funcionalidades completas para avaliar modelos de reconhecimento
-de entidades nomeadas (NER), com foco em identificação de dados pessoais e sensíveis
+de entidades nomeadas (NER), com foco em identificação de dados pessoais
 para anonimização.</p>
 <h2 id="attributes">Attributes</h2>
 <dl>
@@ -5619,10 +5619,10 @@ para string. Defaults to <code>"parquet"</code>.</dd>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class Evaluation:
-    &#34;&#34;&#34;Classe para avaliação de modelos NER especializados em anonimização de dados sensíveis.
+    &#34;&#34;&#34;Classe para avaliação de modelos NER especializados em anonimização de dados pessoais.
 
     Esta classe oferece funcionalidades completas para avaliar modelos de reconhecimento
-    de entidades nomeadas (NER), com foco em identificação de dados pessoais e sensíveis
+    de entidades nomeadas (NER), com foco em identificação de dados pessoais
     para anonimização.
 
     Attributes:
@@ -6365,9 +6365,9 @@ para string. Defaults to <code>"parquet"</code>.</dd>
             logger=self.logger,
         )</code></pre>
 </details>
-<div class="desc"><p>Classe para avaliação de modelos NER especializados em anonimização de dados sensíveis.</p>
+<div class="desc"><p>Classe para avaliação de modelos NER especializados em anonimização de dados pessoais.</p>
 <p>Esta classe oferece funcionalidades completas para avaliar modelos de reconhecimento
-de entidades nomeadas (NER), com foco em identificação de dados pessoais e sensíveis
+de entidades nomeadas (NER), com foco em identificação de dados pessoais
 para anonimização.</p>
 <h2 id="attributes">Attributes</h2>
 <dl>
@@ -7442,11 +7442,11 @@ para string. Defaults to <code>"parquet"</code>.</dd>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class Trainer:
-    &#34;&#34;&#34;Classe para treinamento de modelos NER especializados em anonimização de dados sensíveis.
+    &#34;&#34;&#34;Classe para treinamento de modelos NER especializados em anonimização de dados pessoais.
 
     Esta classe oferece funcionalidades completas para treinar modelos de reconhecimento
     de entidades nomeadas (NER) usando spaCy, com foco em identificação de dados pessoais
-    e sensíveis para anonimização.
+    para anonimização.
 
     Attributes:
         model_name (str | None): Nome do modelo base do spaCy ou None para modelo em branco
@@ -8313,10 +8313,10 @@ para string. Defaults to <code>"parquet"</code>.</dd>
         &#34;&#34;&#34;
         return training_io.load_jsonl_to_dataframes(jsonl_path)</code></pre>
 </details>
-<div class="desc"><p>Classe para treinamento de modelos NER especializados em anonimização de dados sensíveis.</p>
+<div class="desc"><p>Classe para treinamento de modelos NER especializados em anonimização de dados pessoais.</p>
 <p>Esta classe oferece funcionalidades completas para treinar modelos de reconhecimento
 de entidades nomeadas (NER) usando spaCy, com foco em identificação de dados pessoais
-e sensíveis para anonimização.</p>
+para anonimização.</p>
 <h2 id="attributes">Attributes</h2>
 <dl>
 <dt><strong><code>model_name</code></strong> :&ensp;<code>str | None</code></dt>
@@ -9533,11 +9533,11 @@ False
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class Trainer:
-    &#34;&#34;&#34;Classe para treinamento de modelos NER especializados em anonimização de dados sensíveis.
+    &#34;&#34;&#34;Classe para treinamento de modelos NER especializados em anonimização de dados pessoais.
 
     Esta classe oferece funcionalidades completas para treinar modelos de reconhecimento
     de entidades nomeadas (NER) usando spaCy, com foco em identificação de dados pessoais
-    e sensíveis para anonimização.
+    para anonimização.
 
     Attributes:
         model_name (str | None): Nome do modelo base do spaCy ou None para modelo em branco
@@ -10404,10 +10404,10 @@ False
         &#34;&#34;&#34;
         return training_io.load_jsonl_to_dataframes(jsonl_path)</code></pre>
 </details>
-<div class="desc"><p>Classe para treinamento de modelos NER especializados em anonimização de dados sensíveis.</p>
+<div class="desc"><p>Classe para treinamento de modelos NER especializados em anonimização de dados pessoais.</p>
 <p>Esta classe oferece funcionalidades completas para treinar modelos de reconhecimento
 de entidades nomeadas (NER) usando spaCy, com foco em identificação de dados pessoais
-e sensíveis para anonimização.</p>
+para anonimização.</p>
 <h2 id="attributes">Attributes</h2>
 <dl>
 <dt><strong><code>model_name</code></strong> :&ensp;<code>str | None</code></dt>

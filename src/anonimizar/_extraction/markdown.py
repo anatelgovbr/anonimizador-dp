@@ -1,6 +1,6 @@
 """Funções para extração de entidades de tabelas markdown.
 
-Este módulo fornece funções para detectar e extrair entidades sensíveis
+Este módulo fornece funções para detectar e extrair dados pessoais
 de tabelas markdown, identificando colunas que contenham palavras-chave
 relacionadas a dados pessoais.
 """
@@ -11,7 +11,7 @@ from logging import Logger
 from anonimizar._constants import (
     MIN_TABLE_LINES,
     MIN_TABLE_PIPE_COUNT,
-    SENSITIVE_TABLE_KEYWORDS,
+    PERSONAL_DATA_TABLE_KEYWORDS,
 )
 from anonimizar._validators import valida_cnh as _valida_cnh
 from anonimizar._validators import valida_cpf as _valida_cpf
@@ -112,21 +112,21 @@ def _clean_header_numbering(header_text: str) -> str:
     return re.sub(r"^\d+(\.\d+)*\.\s*", "", header_text)
 
 
-def _find_sensitive_columns(header_cols: list[str]) -> list[tuple[int, str]]:
-    """Identifica colunas sensíveis no cabeçalho da tabela.
+def _find_personal_data_columns(header_cols: list[str]) -> list[tuple[int, str]]:
+    """Identifica colunas com dados pessoais no cabeçalho da tabela.
 
     Args:
         header_cols (list[str]): Lista de nomes de colunas
 
     Returns:
-        list[tuple[int, str]]: Lista de tuplas (índice, label) para colunas sensíveis
+        list[tuple[int, str]]: Lista de tuplas (índice, label) para colunas com dados pessoais
     """
-    sensitive_cols = []
+    personal_data_cols = []
     for idx, col_name in enumerate(header_cols):
         cleaned = _clean_header_numbering(col_name)
-        if any(keyword in cleaned.lower() for keyword in SENSITIVE_TABLE_KEYWORDS):
-            sensitive_cols.append((idx, cleaned.upper()))
-    return sensitive_cols
+        if any(keyword in cleaned.lower() for keyword in PERSONAL_DATA_TABLE_KEYWORDS):
+            personal_data_cols.append((idx, cleaned.upper()))
+    return personal_data_cols
 
 
 def _parse_table_row(row_line: str) -> list[str]:
@@ -244,7 +244,7 @@ def _process_table(  # noqa: C901, PLR0912
     logger: Logger,
     labels: set[str] | None = None,
 ) -> list[dict]:
-    """Processa uma tabela markdown e extrai entidades de colunas sensíveis.
+    """Processa uma tabela markdown e extrai entidades de colunas com dados pessoais.
 
     Args:
         tb_lines (list[str]): Linhas da tabela markdown
@@ -275,9 +275,9 @@ def _process_table(  # noqa: C901, PLR0912
                 break
 
             header_cols = _parse_table_header(tb_lines[header_line_idx])
-            sensitive_cols = _find_sensitive_columns(header_cols)
+            personal_data_cols = _find_personal_data_columns(header_cols)
 
-            if sensitive_cols:
+            if personal_data_cols:
                 data_line_idx = header_line_idx + 1
 
                 if data_line_idx < len(tb_lines):
@@ -291,7 +291,7 @@ def _process_table(  # noqa: C901, PLR0912
                             break
 
                         row_cells = _parse_table_row(row_line)
-                        for col_idx, label in sensitive_cols:
+                        for col_idx, label in personal_data_cols:
                             if col_idx < len(row_cells):
                                 cell_text = row_cells[col_idx]
                                 if cell_text:
@@ -328,10 +328,10 @@ def extract_entities_from_markdown_tables(
     logger: Logger,
     labels: set[str] | None = None,
 ) -> list[dict]:
-    """Extrai entidades de colunas sensíveis em tabelas markdown.
+    """Extrai entidades de colunas com dados pessoais em tabelas markdown.
 
     Detecta automaticamente tabelas markdown no texto e extrai entidades de colunas
-    que contenham nomes relacionados a dados sensíveis (CPF, RG, Titulo, Documento).
+    que contenham nomes relacionados a dados pessoais (CPF, RG, Titulo, Documento).
 
     Args:
         text (str): Texto contendo tabelas markdown

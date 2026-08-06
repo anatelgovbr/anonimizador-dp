@@ -161,11 +161,11 @@ permanecem com a mesma interface.
 
 ### Novas Funcionalidades
 
-- **Detecção de Entidades em Tabelas Markdown**: Suporte completo para extração de dados sensíveis em tabelas
+- **Detecção de Entidades em Tabelas Markdown**: Suporte completo para extração de dados pessoais em tabelas
     - Novo método `extract_entities_from_markdown_tables()` para processar tabelas markdown
-    - Detecção automática de colunas sensíveis por palavras-chave (CPF, RG, Título, Documento, Passaporte, CNH, SIAPE)
+    - Detecção automática de colunas com dados pessoais por palavras-chave (CPF, RG, Título, Documento, Passaporte, CNH, SIAPE)
     - Identificação automática de tabelas markdown no texto (linhas com `|` e separador `---`)
-    - Extração de entidades de células em colunas identificadas como sensíveis
+    - Extração de entidades de células em colunas identificadas como contendo dados pessoais
     - Tag especial `detectedby: "tabela-markdown"` para rastreabilidade da origem
     - Suporte aos formatos de retorno `labelposition`, `labeltext` e `labeldetail`
 
@@ -189,8 +189,8 @@ permanecem com a mesma interface.
     - Logging de erros durante processamento de tabelas individuais
     - Rastreamento de linha onde ocorreram erros
 - **Flexibilidade de Dados**: Detecção baseada em contexto de coluna
-    - Case-insensitive na identificação de colunas sensíveis
-    - Suporte a múltiplas colunas sensíveis na mesma tabela
+    - Case-insensitive na identificação de colunas com dados pessoais
+    - Suporte a múltiplas colunas com dados pessoais na mesma tabela
     - Rótulo da coluna usado como label da entidade extraída
 
 ### Exemplos de Uso
@@ -215,7 +215,7 @@ entidades = anonymizer.extract_entities(texto, return_type="label_detail")
 ### Notas Técnicas
 
 - Tabelas são processadas após modelo e regex, mas antes da remoção de overlaps
-- Colunas sensíveis identificadas via keywords: `["cpf", "rg", "titulo", "documento", "passaporte", "cnh", "siape"]`
+- Colunas com dados pessoais identificadas via keywords: `["cpf", "rg", "titulo", "documento", "passaporte", "cnh", "siape"]`
 - Posições (`startposition`/`endposition`) são calculadas no texto original completo
 - Compatível com todos os `return_type` existentes: `labelposition`, `labeltext`, `labeldetail`
 

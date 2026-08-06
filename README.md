@@ -1,6 +1,6 @@
-# Anonimizar-dp
+# Anonimizador-dp
 
-Ferramenta avançada para anonimização de documentos e textos em **português brasileiro**, desenvolvida para proteção de dados sensíveis em conformidade com a LGPD.
+Ferramenta avançada para anonimização de documentos e textos em **português brasileiro**, desenvolvida para proteção de dados pessoais, como números de documentos pessoais, telefone, e-mail, data de nascimento, dados bancários, coordenadas geográficas e endereço.
 
 > **Dados Fictícios:** todos os dados usados nos exemplos e no treinamento dos
 > modelos NER distribuídos no projeto são fictícios. Eles preservam somente
@@ -11,7 +11,7 @@ Ferramenta avançada para anonimização de documentos e textos em **português 
 
 ## Funcionalidades
 
-- Detecção de 16 tipos de dados sensíveis (CPF, RG, CNH, CID, GEO_COORD, PIS, CNS, RESERVISTA, etc.)
+- Detecção de 16 tipos de dados pessoais (CPF, RG, CNH, CID, GEO_COORD, PIS, CNS, RESERVISTA, etc.)
 - Combinação de modelos SpaCy e expressões regulares
 - Suporte a documentos em formato Markdown
 - Processamento eficiente de grandes volumes de texto
@@ -36,7 +36,7 @@ O pipeline de detecção combina três fontes de extração em etapas sequenciai
                       │
                       ▼
     ┌─────────────────────────────┐
-    │  3. Tabelas Markdown        │  ← extrai colunas sensíveis
+    │  3. Tabelas Markdown        │  ← extrai colunas com dados pessoais
     └──────────┬──────────────────┘
                       │
                       ▼
@@ -110,8 +110,8 @@ jurídicos brasileiros:
 
 Os modelos NER distribuídos são treinados com dados fictícios, seguindo o fluxo:
 
-1. **Extração inicial** — textos públicos foram extraídos, porém apresentavam pouca presença de dados sensíveis (PII).
-2. **Fontes com PII → dados sintéticos** — foram coletados textos de processos do SEI contendo dados sensíveis; os valores PII reais foram substituídos por valores sintéticos plausíveis, preservando o formato e o contexto originais.
+1. **Extração inicial** — textos públicos foram extraídos, porém apresentavam pouca presença de dados pessoais (PII).
+2. **Fontes com PII → dados sintéticos** — foram coletados textos de processos do SEI contendo dados pessoais; os valores PII reais foram substituídos por valores sintéticos plausíveis, preservando o formato e o contexto originais.
 3. **Treinamento** — os modelos são treinados sobre a base sintética.
 4. **Avaliação em dados reais** — as métricas são calculadas sobre ground truth real (não sintético), evitando overfitting ao gerador de dados e garantindo a validade e a qualidade dos modelos em ambiente real.
 
@@ -124,7 +124,14 @@ Este projeto está licenciado sob a GNU General Public License v3.0 - veja o arq
 ### Instalação
 
 ```bash
-pip install anonimizar-dp
+pip install anonimizador-dp
+```
+
+O nome do pacote no PyPI (`anonimizador-dp`) é diferente do nome do módulo de
+import (`anonimizar`), como em `scikit-learn`/`sklearn`:
+
+```python
+from anonimizar import Anonimizar
 ```
 
 ### Modelo NER (download via GitHub Releases)
@@ -154,10 +161,10 @@ print(texto_anonimizado)  # Meu CPF é <|CPF|>.
 
 | Tipo | Cenário de Uso | Exemplo de Retorno |
 |------|----------------|-------------------|
+| `anonymize_text()` | **Processamento massivo** — substitui automaticamente todas as entidades por tags como `<\|CPF\|>`, `<\|RG\|>`, etc. Sem intervenção humana. | `"Meu CPF é <\|CPF\|>."` |
 | `label_position` | **Pré-processamento interativo** — exiba as marcações para o usuário revisar, corrigir ou complementar antes da anonimização definitiva. Ideal para sistemas de anotação humana. | `[{"label": "CPF", "start_position": 10, "end_position": 24}]` |
 | `label_text` | **Auditoria rápida** — quando você precisa apenas saber quais valores foram encontrados, sem se preocupar com coordenadas. | `[{"label": "CPF", "text": "123.456.789-09"}]` |
 | `label_detail` | **Depuração e rastreabilidade** — mostra qual método detectou cada entidade (modelo, regex ou tabela markdown). | `[{"label": "CPF", "start_position": 10, "end_position": 24, "text": "123.456.789-09", "detected_by": "regex"}]` |
-| `anonymize_text()` | **Processamento massivo** — substitui automaticamente todas as entidades por tags como `<\|CPF\|>`, `<\|RG\|>`, etc. Sem intervenção humana. | `"Meu CPF é <\|CPF\|>."` |
 
 Para adicionar um padrão customizado:
 

@@ -20,7 +20,7 @@ class TestAnonymization:
         assert "joao@email.com" not in anonymized
 
     def test_anonymize_text_empty_entities(self, anonymizer):
-        text = "Texto sem entidades sensíveis"
+        text = "Texto sem dados pessoais"
         anonymized = anonymizer.anonymize_text(text, [])
         assert anonymized == text
 

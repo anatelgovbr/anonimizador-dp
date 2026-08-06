@@ -1,7 +1,7 @@
 """Padrões regex e registro para detecção de entidades.
 
 Este módulo fornece funções para registrar padrões regex embutidos
-e customizados para detecção de diversos tipos de entidades sensíveis.
+e customizados para detecção de diversos tipos de dados pessoais.
 ``PATTERN_ADDERS`` mapeia labels com regex built-in para as funções que os
 adicionam a uma lista de padrões.
 """

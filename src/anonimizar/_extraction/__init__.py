@@ -1,6 +1,6 @@
 """Módulo de extração de entidades.
 
-Este módulo fornece funções para extrair entidades sensíveis de diferentes
+Este módulo fornece funções para extrair dados pessoais de diferentes
 formatos de texto, incluindo tabelas markdown e texto regular.
 """
 

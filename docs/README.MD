@@ -1,6 +1,6 @@
-# Anonimizar-dp
+# Anonimizador-dp
 
-O Anonimizar-dp é uma ferramenta completa para detecção e anonimização de entidades sensíveis em textos, com suporte a modelos spaCy e treinamento personalizado. O sistema combina técnicas de Machine Learning (NER) com padrões regex para identificar e substituir informações sensíveis.
+O Anonimizador-dp é uma ferramenta completa para detecção e anonimização de dados pessoais em textos, com suporte a modelos spaCy e treinamento personalizado. O sistema combina técnicas de Machine Learning (NER) com padrões regex para identificar e substituir dados pessoais, como números de documentos pessoais, telefone, e-mail, data de nascimento, dados bancários, coordenadas geográficas e endereço.
 
 > **Dados Fictícios:** todos os dados usados nos exemplos e no treinamento dos
 > modelos NER distribuídos no projeto são fictícios. Eles preservam somente
@@ -11,7 +11,7 @@ O Anonimizar-dp é uma ferramenta completa para detecção e anonimização de e
 
 ## Índice
 
-- [Anonimizar-dp](#anonimizar-dp)
+- [Anonimizador-dp](#anonimizador-dp)
   - [Entidades Suportadas](#entidades-suportadas)
   - [Como Funciona (Pipeline)](#como-funciona-pipeline)
   - [Arquitetura do Pacote](#arquitetura-do-pacote)
@@ -78,7 +78,7 @@ O pipeline de detecção combina três fontes de extração em etapas sequenciai
                       │
                       ▼
     ┌─────────────────────────────┐
-    │  3. Tabelas Markdown        │  ← colunas sensíveis
+    │  3. Tabelas Markdown        │  ← colunas com dados pessoais
     └──────────┬──────────────────┘
                       │
                       ▼
@@ -136,8 +136,11 @@ anonimizar/
 ## Instalação
 
 ```bash
-pip install anonimizar-dp
+pip install anonimizador-dp
 ```
+
+O nome do pacote no PyPI (`anonimizador-dp`) é diferente do nome do módulo de
+import (`anonimizar`), como em `scikit-learn`/`sklearn`.
 
 
 ## Uso Básico
@@ -229,12 +232,12 @@ Para mais informções, consulte a documentação completa em html [Anonimizar](
 
 ### 1. Módulo Anonimizar
 
-**Descrição:** Módulo principal que fornece funcionalidades para detecção e anonimização de entidades sensíveis em textos, utilizando modelos spaCy treinados e padrões regex personalizáveis.
+**Descrição:** Módulo principal que fornece funcionalidades para detecção e anonimização de dados pessoais em textos, utilizando modelos spaCy treinados e padrões regex personalizáveis.
 
 **Características Principais:**
 
 - Combina detecção por **Machine Learning** (spaCy NER) e **padrões regex**
-- Suporte a múltiplos tipos de entidades sensíveis
+- Suporte a múltiplos tipos de dados pessoais
 - Validação contextual de entidades detectadas
 - Anonimização por substituição com tags formatadas
 
@@ -258,7 +261,7 @@ instanciação, extração de entidades e anonimização de texto.
 
 ### 2. Módulo Trainer
 
-**Descrição:** Módulo especializado no treinamento de modelos NER (Named Entity Recognition) usando spaCy, com foco em anonimização de dados sensíveis.
+**Descrição:** Módulo especializado no treinamento de modelos NER (Named Entity Recognition) usando spaCy, com foco em anonimização de dados pessoais.
 
 **Funcionalidades:**
 

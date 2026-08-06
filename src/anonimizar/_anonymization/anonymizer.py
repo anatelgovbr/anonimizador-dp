@@ -1,6 +1,6 @@
 r"""Módulo anonymizer.
 
-Este módulo fornece funcionalidades para detecção e anonimização de entidades sensíveis
+Este módulo fornece funcionalidades para detecção e anonimização de dados pessoais
 em textos, utilizando modelos spaCy treinados e padrões regex personalizáveis. É especialmente
 útil para anonimizar documentos que contenham informações pessoais como CPF, RG, e-mails,
 telefones, dados bancários, endereços, entre outros.
@@ -10,7 +10,7 @@ O módulo combina duas abordagens:
 2. Detecção por padrões regex customizáveis
 
 **Classes:**
-    Anonimizar: Classe principal para anonimização de entidades nomeadas e sensíveis.
+    Anonimizar: Classe principal para anonimização de dados pessoais.
 
 **Exemplo básico de uso:**
 
@@ -667,10 +667,10 @@ class Anonimizar:
         return remove_overlap_positions(entities, logger=self.logger)
 
     def extract_entities_from_markdown_tables(self, text: str, return_type: str = "label_position") -> list[dict]:
-        """Extrai entidades de colunas sensíveis em tabelas markdown.
+        """Extrai entidades de colunas com dados pessoais em tabelas markdown.
 
         Detecta automaticamente tabelas markdown no texto e extrai entidades de colunas
-        que contenham nomes relacionados a dados sensíveis (CPF, RG, Titulo, Documento).
+        que contenham nomes relacionados a dados pessoais (CPF, RG, Titulo, Documento).
 
         Args:
             text (str): Texto contendo tabelas markdown
@@ -682,7 +682,7 @@ class Anonimizar:
         return _extract_markdown_tables(text, return_type, self.logger)
 
     def extract_entities(self, text_or_path: str, return_type: str = "label_position") -> list[dict]:
-        r"""Extrai entidades sensíveis de texto usando modelo spaCy e padrões regex.
+        r"""Extrai dados pessoais de texto usando modelo spaCy e padrões regex.
 
         Combina detecção por modelo de Machine Learning com padrões regex personalizados
         para identificar entidades como CPF, RG, e-mail, telefone, etc. Remove sobreposições

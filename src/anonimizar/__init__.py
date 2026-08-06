@@ -1,7 +1,7 @@
-"""Ferramentas para detectar, anonimizar, treinar e avaliar entidades sensíveis.
+"""Ferramentas para detectar, anonimizar, treinar e avaliar dados pessoais.
 
 APIs públicas:
-    - ``Anonimizar``: extrai e anonimiza entidades sensíveis.
+    - ``Anonimizar``: extrai e anonimiza dados pessoais.
     - ``Trainer``: treina modelos spaCy NER.
     - ``Evaluation``: avalia predições de modelos NER.
 
@@ -18,7 +18,7 @@ Pipeline de Detecção:
 
         1. Modelo spaCy NER — identifica entidades via aprendizado de máquina
         2. Padrões REGEX — captura padrões conhecidos (CPF, RG, email, etc.)
-        3. Tabelas Markdown — extrai colunas com cabeçalhos sensíveis
+        3. Tabelas Markdown — extrai colunas com cabeçalhos relacionados a dados pessoais
 
     Os resultados são unificados, conflitos de sobreposição são resolvidos por
     prioridade de label e cada entidade passa por um validador específico:

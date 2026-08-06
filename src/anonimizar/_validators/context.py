@@ -1,4 +1,4 @@
-"""Validadores contextuais para entidades sensíveis.
+"""Validadores contextuais para dados pessoais.
 
 Este módulo fornece funções de validação que verificam o contexto textual
 ao redor de entidades detectadas para determinar se são válidas.

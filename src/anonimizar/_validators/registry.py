@@ -1,7 +1,7 @@
 """Registry de validators contextuais por tipo de entidade.
 
 Este módulo fornece a infraestrutura para registrar e acessar funções de
-validação contextual para diferentes tipos de entidades sensíveis.
+validação contextual para diferentes tipos de dados pessoais.
 """
 
 from collections.abc import Callable

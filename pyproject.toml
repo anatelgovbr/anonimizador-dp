@@ -1,5 +1,5 @@
 [project]
-name = "anonimizar-dp"
+name = "anonimizador-dp"
 version = "1.0.4"
 description = "Anonimizador de dados pessoais (PII) em português brasileiro"
 authors = [{name = "Anatel", email = "seiia@anatel.gov.br"}]

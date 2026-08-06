@@ -49,7 +49,7 @@ logging.getLogger("anonimizar").setLevel(logging.DEBUG)    # depuração detalha
 Demonstração básica das funcionalidades principais:
 
 - Carga e processamento de texto individual
-- Detecção de entidades sensíveis
+- Detecção de dados pessoais
 - Anonimização básica
 - Visualização dos resultados
 

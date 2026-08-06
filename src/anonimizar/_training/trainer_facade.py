@@ -1,7 +1,7 @@
 """Módulo trainer_facade.
 
 Este módulo fornece funcionalidades robustas para o treinamento de modelos NER (Named Entity Recognition)
-usando spaCy, com foco em anonimização de dados sensíveis do SEI (Sistema Eletrônico de Informações).
+usando spaCy, com foco em anonimização de dados pessoais.
 
 O módulo oferece validação avançada de dados, incluindo verificação de esquema BILUO, transformação
 de dados de diferentes formatos, controle flexível de erros durante o processo de treinamento, e suporte
@@ -356,11 +356,11 @@ warnings.filterwarnings("ignore", message=r"\[W030\] Some entities could not be 
 
 
 class Trainer:
-    """Classe para treinamento de modelos NER especializados em anonimização de dados sensíveis.
+    """Classe para treinamento de modelos NER especializados em anonimização de dados pessoais.
 
     Esta classe oferece funcionalidades completas para treinar modelos de reconhecimento
     de entidades nomeadas (NER) usando spaCy, com foco em identificação de dados pessoais
-    e sensíveis para anonimização.
+    para anonimização.
 
     Attributes:
         model_name (str | None): Nome do modelo base do spaCy ou None para modelo em branco

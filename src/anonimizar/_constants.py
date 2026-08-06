@@ -233,7 +233,7 @@ KEYWORDS_CID = [
 
 CID_FALSE_POSITIVES = ["A12", "B12", "C12", "D12", "E12", "F12", "G12", "H12"]
 
-SENSITIVE_TABLE_KEYWORDS = [
+PERSONAL_DATA_TABLE_KEYWORDS = [
     "cpf",
     "rg",
     "titulo",
