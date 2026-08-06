@@ -1,3 +1,7 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "anonimizador-dp"
 version = "1.0.4"
@@ -9,6 +13,7 @@ classifiers = [
     "Programming Language :: Python :: 3",
     "Natural Language :: Portuguese",
     "Operating System :: OS Independent",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
 ]
 dependencies = [
     "spacy==3.8.4",
@@ -27,8 +32,9 @@ dev = [
     "pdoc3==0.11.6"
 ]
 
-# [project.urls]
-# Homepage = "https://git.anatel.gov.br/processo_eletronico/sei-ia/sei-anonimizar"
+[project.urls]
+Homepage = "https://github.com/anatelgovbr/anonimizador-dp"
+Repository = "https://github.com/anatelgovbr/anonimizador-dp"
 
 [tool.ruff]
 # Ruff - An extremely fast Python linter, written in Rust. - https://beta.ruff.rs
