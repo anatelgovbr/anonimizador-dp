@@ -19,48 +19,6 @@ Ferramenta avançada para anonimização de documentos e textos em **português 
 - Processamento eficiente de grandes volumes de texto
 - Suporte a padrões personalizados/customizados
 
-## Como Funciona
-
-O pipeline de detecção combina três fontes de extração em etapas sequenciais:
-
-```
-               Texto de entrada
-                      │
-                      ▼
-    ┌─────────────────────────────┐
-    │  1. Modelo spaCy NER        │  ← identifica entidades via ML
-    └──────────┬──────────────────┘
-                      │
-                      ▼
-    ┌─────────────────────────────┐
-    │  2. Padrões REGEX           │  ← captura padrões conhecidos
-    └──────────┬──────────────────┘
-                      │
-                      ▼
-    ┌─────────────────────────────┐
-    │  3. Tabelas Markdown        │  ← extrai colunas com dados pessoais
-    └──────────┬──────────────────┘
-                      │
-                      ▼
-    ┌─────────────────────────────┐
-    │  4. União + Remoção de      │
-    │     sobreposições           │  ← mescla e resolve conflitos
-    └──────────┬──────────────────┘
-                      │
-                      ▼
-    ┌─────────────────────────────┐
-    │  5. Validadores             │  ← contexto + algoritmo (DV)
-    └──────────┬──────────────────┘
-                      │
-                      ▼
-               Lista final de entidades
-```
-
-Cada entidade detectada passa por um validador específico que pode ser:
-- **Validação algorítmica** — confere dígitos verificadores (CPF, CNH, TITULO_ELEITOR, PIS, CNS)
-- **Validação estrutural** — verifica formato esperado (EMAIL, CID, GEO_COORD, RG)
-- **Validação contextual** — busca palavras-chave no entorno do texto (SIAPE, TELEFONE, PASSAPORTE, etc.)
-
 ## Padrões Suportados
 
 | Padrão | Descrição | Método de Detecção |
@@ -108,7 +66,7 @@ jurídicos brasileiros:
 - Overlap threshold 0.8 e beta 2.0, mesma configuração da `Evaluation`.
 - Comparação justa com o serviço gerenciado: no recorte das 4 labels nativas do Azure Language PII (CPF, EMAIL, ENDEREÇO, TELEFONE), o Anonimizar alcança F-beta 0.9409 contra 0.5292 do Azure puro.
 
-### Dados de Treinamento
+## Dados de Treinamento
 
 Os modelos NER distribuídos são treinados com dados fictícios, seguindo o fluxo:
 
@@ -117,9 +75,6 @@ Os modelos NER distribuídos são treinados com dados fictícios, seguindo o flu
 3. **Treinamento** — os modelos são treinados sobre a base sintética.
 4. **Avaliação em dados reais** — as métricas são calculadas sobre ground truth real (não sintético), evitando overfitting ao gerador de dados e garantindo a validade e a qualidade dos modelos em ambiente real.
 
-## Licença
-
-Este projeto está licenciado sob a GNU General Public License v3.0 - veja o arquivo [LICENSE](LICENSE) para detalhes.
 
 ## Uso Rápido
 
@@ -189,6 +144,46 @@ anonymizer = Anonimizar(model_path="modelo_spacy", normalize_entities=False)
 
 O mesmo vale para `Trainer` e `Evaluation`:
 
+### Treinamento com Épocas Personalizadas
+
+O `Trainer` permite ajustar o número de épocas (iterações) do treinamento pelo parâmetro `n_iter` (padrão: 20):
+
+```python
+from anonimizar import Trainer
+
+trainer = Trainer(
+    model_name="pt_core_news_sm",
+    output_dir="./meu_modelo_ner",
+    labels=["CPF", "RG", "EMAIL"],
+)
+
+dados = [
+    {
+        "text": "João Silva, CPF 123.456.789-00, email: joao@email.com",
+        "entities": [(12, 26, "CPF"), (35, 50, "EMAIL")],
+    }
+]
+trainer.add_data(dados, errors="coerce")
+
+# n_iter define o número de épocas; aumente para melhorar o ajuste do modelo
+trainer.train(n_iter=30, validation_split=0.2)
+
+trainer.save_model()
+```
+
+No `cross_validate`, as épocas e demais hiperparâmetros são passados via `train_params`:
+
+```python
+train_params = {"n_iter": 30, "drop": 0.2, "batch_size": 8}
+
+reports, summaries, results, holdout = trainer.cross_validate(
+    df_entidades=df_entidades,
+    df_textos=df_textos,
+    n_splits=5,
+    train_params=train_params,
+)
+```
+
 ### Exemplo completo
 Para exemplos completos consulte: [Exemplos](./examples/README.md)
 
@@ -201,7 +196,7 @@ Consulte nossa [documentação](./docs/README.md) detalhada para:
 - Exemplos avançados de uso
 - Configuração de logging
 
-## Configuração de Logging
+### Configuração de Logging
 
 O pacote usa o módulo padrão `logging` do Python. Configure conforme o cenário:
 
@@ -218,31 +213,82 @@ logging.getLogger("anonimizar").setLevel(logging.INFO)
 logging.getLogger("anonimizar").setLevel(logging.DEBUG)
 ```
 
+## Como Funciona
+
+O pipeline de detecção combina três fontes de extração em etapas sequenciais:
+
+```
+               Texto de entrada
+                      │
+                      ▼
+    ┌─────────────────────────────┐
+    │  1. Modelo spaCy NER        │  ← identifica entidades via ML
+    └──────────┬──────────────────┘
+                      │
+                      ▼
+    ┌─────────────────────────────┐
+    │  2. Padrões REGEX           │  ← captura padrões conhecidos
+    └──────────┬──────────────────┘
+                      │
+                      ▼
+    ┌─────────────────────────────┐
+    │  3. Tabelas Markdown        │  ← extrai colunas com dados pessoais
+    └──────────┬──────────────────┘
+                      │
+                      ▼
+    ┌─────────────────────────────┐
+    │  4. União + Remoção de      │
+    │     sobreposições           │  ← mescla e resolve conflitos
+    └──────────┬──────────────────┘
+                      │
+                      ▼
+    ┌─────────────────────────────┐
+    │  5. Validadores             │  ← contexto + algoritmo (DV)
+    └──────────┬──────────────────┘
+                      │
+                      ▼
+               Lista final de entidades
+```
+
+Cada entidade detectada passa por um validador específico que pode ser:
+- **Validação algorítmica** — confere dígitos verificadores (CPF, CNH, TITULO_ELEITOR, PIS, CNS)
+- **Validação estrutural** — verifica formato esperado (EMAIL, CID, GEO_COORD, RG)
+- **Validação contextual** — busca palavras-chave no entorno do texto (SIAPE, TELEFONE, PASSAPORTE, etc.)
+
+## Licença
+
+Este projeto está licenciado sob a GNU General Public License v3.0 - veja o arquivo [LICENSE](LICENSE) para detalhes.
+
 ## Contribuição
 
 Siga estas etapas para contribuir com o projeto:
 
-1. Fork o repositório
+1. Abra uma Issue descrevendo o problema, a melhoria ou a nova funcionalidade proposta.
 
-2. Crie uma branch para sua feature:
+   Se a sua contribuição envolver dados, você pode disponibilizá-los anotados no
+   padrão do Doccano (JSONL) para adicionarmos à nossa base de treinamento.
+
+2. Fork o repositório
+
+3. Crie uma branch para sua feature:
 
 ```bash
 git checkout -b feature/nova-funcionalidade
 ```
 
-3. Commit suas alterações:
+4. Commit suas alterações:
 
 ```bash
 git commit -m "Adiciona nova funcionalidade"
 ```
 
-4. Push para a branch:
+5. Push para a branch:
 
 ```bash
 git push origin feature/nova-funcionalidade
 ```
 
-5. Abra um Pull Request
+6. Abra um Pull Request
 
 ### Padrões de Código
 
