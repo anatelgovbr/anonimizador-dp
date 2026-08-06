@@ -50,12 +50,12 @@ Legenda:
 > **Nota de validade:** os números abaixo referem-se a uma rodada específica de benchmark, realizada com o modelo NER distribuído na época dessa análise.
 > O comparativo deve ser refeito conforme novos modelos forem publicados; os resultados não garantem o desempenho em versões futuras.
 
-Comparativo do Anonimizar com outras soluções de anonimização em documentos
+Comparativo do Anonimizador-dp com outras soluções de anonimização em documentos
 jurídicos brasileiros:
 
 | Sistema | Qtd. labels | F-beta | Precisão | Recall |
 |---|---:|---:|---:|---:|
-| **Anonimizar** | **16** | **0.8748** | **0.9222** | **0.8637** |
+| **Anonimizador-dp** | **16** | **0.8748** | **0.9222** | **0.8637** |
 | Microsoft Presidio | 16 | 0.5378 | 0.5197 | 0.5425 |
 | Azure Language PII + patterns | 16 | 0.5458 | 0.5230 | 0.5518 |
 | GLiNER (gliner_multi_pii-v1) | 16 | 0.5419 | 0.6691 | 0.5173 |
@@ -64,7 +64,7 @@ jurídicos brasileiros:
 - 97 documentos e 1.071 entidades de ground truth (usando dados fictícios).
 - 16 labels avaliados.
 - Overlap threshold 0.8 e beta 2.0, mesma configuração da `Evaluation`.
-- Comparação justa com o serviço gerenciado: no recorte das 4 labels nativas do Azure Language PII (CPF, EMAIL, ENDEREÇO, TELEFONE), o Anonimizar alcança F-beta 0.9409 contra 0.5292 do Azure puro.
+- Comparação justa com o serviço gerenciado: no recorte das 4 labels nativas do Azure Language PII (CPF, EMAIL, ENDEREÇO, TELEFONE), o Anonimizador-dp alcança F-beta 0.9409 contra 0.5292 do Azure puro.
 
 ## Dados de Treinamento
 
