@@ -1,5 +1,7 @@
 # Anonimizador-dp
 
+Anonimizador-dp é uma biblioteca Python open source, desenvolvida pela Anatel, que combina aprendizado de máquina tradicional (NER) com expressões regulares para detectar e anonimizar dados pessoais em textos em português brasileiro.
+
 Ferramenta avançada para anonimização de documentos e textos em **português brasileiro**, desenvolvida para proteção de dados pessoais, como números de documentos pessoais, telefone, e-mail, data de nascimento, dados bancários, coordenadas geográficas e endereço.
 
 > **Dados Fictícios:** todos os dados usados nos exemplos e no treinamento dos
@@ -188,11 +190,11 @@ anonymizer = Anonimizar(model_path="modelo_spacy", normalize_entities=False)
 O mesmo vale para `Trainer` e `Evaluation`:
 
 ### Exemplo completo
-Para exemplos completos consulte: [Exemplos](./examples/README.MD)
+Para exemplos completos consulte: [Exemplos](./examples/README.md)
 
 ### Documentação Completa
 
-Consulte nossa [documentação](./docs/README.MD) detalhada para:
+Consulte nossa [documentação](./docs/README.md) detalhada para:
 
 - Guia de instalação completa
 - Lista de entidades suportadas

@@ -228,8 +228,6 @@ print(texto_anonimizado)  # Ex: "Meu CPF é <|CPF|>."
 
 Esta seção apresenta uma visão detalhada dos três módulos principais do sistema.
 
-Para mais informções, consulte a documentação completa em html [Anonimizar](./anonimizar/index.html).
-
 ### 1. Módulo Anonimizar
 
 **Descrição:** Módulo principal que fornece funcionalidades para detecção e anonimização de dados pessoais em textos, utilizando modelos spaCy treinados e padrões regex personalizáveis.
