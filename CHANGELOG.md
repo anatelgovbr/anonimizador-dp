@@ -1,5 +1,16 @@
 # Changelog - Biblioteca Anonimizar
 
+## v1.0.6
+
+### Correções
+
+- **Dependência `click` declarada explicitamente**: o `click` (8.1.8) passa a
+  ser dependência direta do pacote, garantindo sua instalação mesmo quando o
+  `spacy`/`typer` não o resolvem no ambiente do usuário.
+- **Versão interna corrigida**: `__version__` em `anonimizar/__init__.py`
+  alinhado à versão do pacote (a 1.0.5 publicada reportava 1.0.4 e foi
+  removida do PyPI).
+
 ## v1.0.4
 
 ### Mudanças Estruturais

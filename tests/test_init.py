@@ -4,7 +4,7 @@ from anonimizar import Anonimizar, Evaluation, Trainer, __version__
 
 
 def test_version():
-    assert __version__ == "1.0.4"
+    assert __version__ == "1.0.6"
 
 
 def test_imports():
