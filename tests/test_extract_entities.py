@@ -557,6 +557,18 @@ class TestConselhoProfissionalAsRg:
         rgs = [r for r in result if r["label"] == "RG"]
         assert len(rgs) >= 1
 
+    @pytest.mark.rg
+    def test_oab_com_uf(self, anonymizer):
+        result = anonymizer.extract_entities("OAB/DF 123456", return_type="label_detail")
+        rgs = [r for r in result if r["label"] == "RG"]
+        assert len(rgs) >= 1
+
+    @pytest.mark.rg
+    def test_oab_sem_uf(self, anonymizer):
+        result = anonymizer.extract_entities("OAB 123456", return_type="label_detail")
+        rgs = [r for r in result if r["label"] == "RG"]
+        assert len(rgs) >= 1
+
 
 # =============================================================================
 # B-28 — Forward window: keywords pós-entidade são detectadas

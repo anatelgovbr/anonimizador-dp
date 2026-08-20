@@ -70,6 +70,15 @@ Exemplo completo de pipeline de treinamento, validação e uso:
 - Validação e avaliação
 - Aplicação prática em textos fictícios com padrões estruturais realistas
 
+### 4. [exemplo_curriculum.ipynb](exemplo_curriculum.ipynb)
+
+Exemplo de treinamento por **curriculum learning** (fases sequenciais de dificuldade, janelas `w0`/`full`/`w00`):
+
+- Fluxo end-to-end: `train_curriculum()` com `df_textos` + `df_entidades` e fases por `dataset`
+- Fluxo separado: datasets gerados com `build_curriculum_datasets` e persistidos em joblib (`save`/`load`)
+- Fluxo misto (`data` pronto + `dataset` gerado no mesmo curriculum)
+- Dados 100% fictícios
+
 ### Outros exemplos
 
 - [exemplos_de_uso.md](exemplos_de_uso.md): guia textual de extração, anonimização, treino, JSONL e cross-validation.

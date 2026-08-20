@@ -1,7 +1,8 @@
 """Testes unitários para módulo _training/trainer.py.
 
 Este módulo testa a função train_ner_model() que realiza o treinamento
-de modelos NER usando spaCy com dados em formato padronizado.
+de modelos NER usando spaCy com dados em formato padronizado, além da
+função train_ner_model_curriculum() de curriculum learning por fases.
 """
 
 import logging
@@ -10,9 +11,9 @@ import numpy as np
 import pytest
 import spacy
 
-from anonimizar._training.trainer import train_ner_model
+from anonimizar._training.trainer import train_ner_model, train_ner_model_curriculum
 
-__all__ = ["TestTrainNERModel"]
+__all__ = ["TestTrainNERModel", "TestTrainNERModelCurriculum"]
 
 # Constantes para testes
 _N_ITER_BASIC = 5
@@ -275,3 +276,103 @@ class TestTrainNERModel:
         )
 
         assert metrics["examples_count"] == _N_EXAMPLES, f"Com split=0, deve usar todos os {_N_EXAMPLES} exemplos"
+
+
+class TestTrainNERModelCurriculum:
+    """Suite de testes para função train_ner_model_curriculum()."""
+
+    @pytest.fixture
+    def blank_model(self) -> object:
+        """Cria modelo spaCy blank com componente NER e labels pré-adicionados."""
+        nlp = spacy.blank("pt")
+        if "ner" not in nlp.pipe_names:
+            nlp.add_pipe("ner")
+        ner = nlp.get_pipe("ner")
+        ner.add_label("CPF")
+        ner.add_label("EMAIL")
+        return nlp
+
+    @pytest.fixture
+    def phases(self) -> list[dict]:
+        """Curriculum com duas fases (CPF e EMAIL em datasets separados)."""
+        return [
+            {
+                "name": "fase_cpf",
+                "train_data": [("joao tem CPF 123.456.789-09", {"entities": [(13, 27, "CPF")]})],
+                "epochs": 2,
+            },
+            {
+                "name": "fase_email",
+                "train_data": [
+                    ("email joao@mail.com para contato", {"entities": [(6, 19, "EMAIL")]}),
+                    ("outro email maria@mail.com fim", {"entities": [(12, 26, "EMAIL")]}),
+                ],
+                "epochs": 3,
+            },
+        ]
+
+    def test_curriculum_treina_fases_em_ordem(self, blank_model: object, phases: list[dict]) -> None:
+        """Treina 2 fases e verifica estrutura de métricas e totalizações."""
+        nlp_trained, metrics = train_ner_model_curriculum(
+            nlp=blank_model,
+            phases=phases,
+            logger=logging.getLogger(__name__),
+        )
+
+        assert nlp_trained is not None
+        assert metrics["iterations"] == 5, "Soma das épocas (2 + 3)"
+        assert metrics["total_epochs"] == metrics["iterations"]
+        assert metrics["examples_count"] == 3, "Soma dos exemplos (1 + 2)"
+
+        detalhes = metrics["phases"]
+        assert len(detalhes) == 2
+        assert detalhes[0]["name"] == "fase_cpf"
+        assert detalhes[0]["epochs"] == 2
+        assert detalhes[0]["examples_count"] == 1
+        assert detalhes[1]["name"] == "fase_email"
+        assert detalhes[1]["epochs"] == 3
+        assert detalhes[1]["examples_count"] == 2
+        assert isinstance(metrics["final_loss"], float | np.floating)
+        assert "final_loss" in detalhes[-1]
+
+    def test_curriculum_sem_fases_levanta_valueerror(self, blank_model: object) -> None:
+        """phases vazio levanta ValueError."""
+        with pytest.raises(ValueError, match="Nenhuma fase"):
+            train_ner_model_curriculum(nlp=blank_model, phases=[], logger=logging.getLogger(__name__))
+
+    def test_curriculum_fase_sem_train_data_levanta_valueerror(self, blank_model: object) -> None:
+        """Fase sem train_data levanta ValueError mencionando a fase."""
+        with pytest.raises(ValueError, match="Fase 1"):
+            train_ner_model_curriculum(
+                nlp=blank_model,
+                phases=[{"name": "vazia", "train_data": [], "epochs": 2}],
+                logger=logging.getLogger(__name__),
+            )
+
+    def test_curriculum_epochs_invalidos_levantam_valueerror(self, blank_model: object) -> None:
+        """epochs 0, negativo ou não inteiro levantam ValueError."""
+        for epochs in (0, -1, 2.5, "3"):
+            with pytest.raises(ValueError, match="epochs"):
+                train_ner_model_curriculum(
+                    nlp=blank_model,
+                    phases=[{"train_data": [("cpf 123.456.789-09", {"entities": [(4, 18, "CPF")]})], "epochs": epochs}],
+                    logger=logging.getLogger(__name__),
+                )
+
+    def test_curriculum_com_compounding(self, blank_model: object, phases: list[dict]) -> None:
+        """batch_compounding gera minilotes crescentes sem erro."""
+        _, metrics = train_ner_model_curriculum(
+            nlp=blank_model,
+            phases=phases,
+            batch_compounding=(2.0, 4.0, 1.01),
+            logger=logging.getLogger(__name__),
+        )
+        assert metrics["iterations"] == 5
+
+    def test_curriculum_fase_unica(self, blank_model: object) -> None:
+        """Curriculum com uma única fase funciona como treino simples."""
+        fases = [{"train_data": [("cpf 123.456.789-09", {"entities": [(4, 18, "CPF")]})], "epochs": 2}]
+        _, metrics = train_ner_model_curriculum(nlp=blank_model, phases=fases, logger=logging.getLogger(__name__))
+        assert metrics["iterations"] == 2
+        assert len(metrics["phases"]) == 1
+        assert metrics["phases"][0]["name"] == "fase 1"

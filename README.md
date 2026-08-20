@@ -18,6 +18,7 @@ Ferramenta avançada para anonimização de documentos e textos em **português 
 - Suporte a documentos em formato Markdown
 - Processamento eficiente de grandes volumes de texto
 - Suporte a padrões personalizados/customizados
+- Treinamento por curriculum learning com janelas de dificuldade (`w0`/`w1`/`w2`/`full`/`w00`)
 
 ## Padrões Suportados
 
@@ -183,6 +184,54 @@ reports, summaries, results, holdout = trainer.cross_validate(
     train_params=train_params,
 )
 ```
+
+### Curriculum Learning com Janelas de Dificuldade
+
+O `Trainer` também suporta curriculum learning: o modelo é treinado por fases
+sequenciais, começando por exemplos fáceis (entidade isolada ou parágrafo) e
+evoluindo para o documento completo — padrão validado nos experimentos da
+estória 942. Há dois fluxos de entrada, misturáveis entre fases:
+
+1. **End-to-end**: informe `df_textos` + `df_entidades` (ou um caminho
+   `.jsonl`) e referencie cada fase pelo nome da janela em `dataset` (`w0`,
+   `w1`, `w2`, `full` ou `w00`). As janelas são geradas internamente, uma
+   única vez.
+2. **Separado**: informe dados prontos em `dataset` (dicts no formato do
+   `add_data`, tuplas `(texto, {"entities": [...]})` ou caminho `.jsonl`).
+
+Valor string de `dataset` que não termina em `.jsonl` é tratado como nome de
+janela (fluxo e2e); qualquer outro valor é dado pronto (fluxo separado).
+
+```python
+from anonimizar import Trainer
+
+trainer = Trainer(labels=["CPF", "EMAIL"])
+
+# Fluxo end-to-end: dois DataFrames (ou um .jsonl em df_textos)
+metrics = trainer.train_curriculum(
+    df_textos=df_textos,
+    df_entidades=df_entidades,
+    phases=[
+        {"name": "w0", "dataset": "w0", "epochs": 2},
+        {"name": "full", "dataset": "full", "epochs": 8},
+    ],
+)
+
+# Fluxo separado: dados já preparados por fase (ex.: joblibs da 942)
+metrics = trainer.train_curriculum(
+    phases=[
+        {"dataset": datasets["sujo"]["w0"], "epochs": 2},
+        {"dataset": datasets["ouro"]["full"], "epochs": 8},
+    ],
+)
+
+trainer.save_model()
+```
+
+Janelas entre fases são geradas pelo `build_curriculum_datasets` e podem ser
+persistidas/recarregadas com `save_curriculum_datasets`/`load_curriculum_datasets`
+(formato joblib, compatível com o dos experimentos da estória 942). Labels novos
+encontrados nas fases (ex.: `PIS`, `CNS`) são registrados automaticamente.
 
 ### Exemplo completo
 Para exemplos completos consulte: [Exemplos](./examples/README.md)

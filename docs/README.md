@@ -321,6 +321,55 @@ trainer.train(n_iter=20, validation_split=0.2)
 trainer.save_model()
 ```
 
+#### Treinamento por Curriculum Learning (Janelas de Dificuldade)
+
+O `Trainer` oferece `train_curriculum()` para treinar por fases sequenciais,
+começando por exemplos fáceis e evoluindo para o documento completo — padrão
+validado nos experimentos da estória 942. Janelas disponíveis: `w0` (só o
+parágrafo), `w1`/`w2` (±1/±2 parágrafos), `full` (documento inteiro) e `w00`
+(entidade pura isolada). Dois fluxos de entrada, misturáveis entre fases:
+
+**Fluxo end-to-end**: textos e entidades são fornecidos como `df_textos` +
+`df_entidades` (ou um caminho `.jsonl` em `df_textos`) e as janelas são
+geradas internamente uma única vez:
+
+```python
+metrics = trainer.train_curriculum(
+    df_textos=df_textos,
+    df_entidades=df_entidades,
+    phases=[
+        {"name": "base", "dataset": "w0", "epochs": 2},
+        {"name": "fim", "dataset": "full", "epochs": 8},
+    ],
+)
+```
+
+**Fluxo separado**: dados prontos na chave `dataset` (dicts no formato do
+`add_data`, tuplas `(texto, {"entities": [...]})` ou caminho `.jsonl`, ex.
+joblibs da 942):
+
+```python
+metrics = trainer.train_curriculum(
+    phases=[
+        {"dataset": datasets["sujo"]["w0"], "epochs": 2},
+        {"dataset": datasets["ouro"]["full"], "epochs": 8},
+    ],
+)
+```
+
+Valor string de `dataset` que não termina em `.jsonl` é interpretado como nome
+de janela (fluxo e2e); qualquer outro valor é dado pronto (fluxo separado).
+
+- Os datasets (janelas) podem ser gerados com `build_curriculum_datasets` e
+  persistidos em joblib via `save_curriculum_datasets`/`load_curriculum_datasets`
+  (formato compatível com o dos experimentos da 942).
+- Labels novos encontrados nas fases são registrados automaticamente no modelo
+  e em `supported_labels`.
+- Cada fase admite `epochs` (int ≥ 1) e, opcionalmente, `name` e `conjunto`
+  (`default` quando o fluxo é unificado).
+- Métricas retornadas: `final_loss`, `iterations`, `examples_count`,
+  `phases` (detalhe por fase) e `total_epochs`.
+
 
 ### 3. Módulo Evaluation
 

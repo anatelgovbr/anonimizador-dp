@@ -32,6 +32,10 @@ Principais funcionalidades:
 - Salvamento de IDs de documentos por fold (fold_ids.json, train_ids.csv, val_ids.csv)
 - Salvamento de métricas detalhadas do holdout test
 - Validação adicional: start >= end e start < 0 em validate_data
+- Curriculum learning por fases (train_curriculum): progressão de dificuldade
+  (janelas w00/w0/w1/w2/full) e/ou de qualidade dos dados; fluxo end-to-end
+  (jsonl ou dois DataFrames + fases por dataset/conjunto) ou com dados prontos
+  por fase (joblib/tuplas); registro automático de labels novos
 
 Exemplos:
     Exemplo de uso básico:
@@ -298,6 +302,8 @@ Métodos principais:
     - _validate_biluo_tags: Valida entidades usando esquema BILUO do spaCy.
     - _transform_data_from_pandas: Transforma DataFrame Pandas para formato spaCy.
     - train: Executa o treinamento iterativo do modelo NER.
+    - train_curriculum: Executa treinamento por curriculum learning em fases
+      sequenciais (fluxo end-to-end com janelas ou dados prontos por fase).
     - save_model: Salva o modelo treinado em disco.
     - split_data: Divide dados em conjuntos de treino e validação.
     - val_data_to_evaluation: Transforma dados de validação para formato do Evaluation
@@ -327,6 +333,7 @@ from anonimizar._constants import (
     ALL_ENTITIES_KEY,  # noqa: F401 — kept for backward compat with existing tests
     DEFAULT_BATCH_SIZE,
     DEFAULT_BETA,  # noqa: F401 — used indirectly via cv_manager
+    DEFAULT_CURRICULUM_WINDOWS,
     DEFAULT_DROP,
     DEFAULT_INITIAL_BASE_FRAC,
     DEFAULT_N_ITER,
@@ -346,13 +353,17 @@ from anonimizar._normalization import normalize_entity
 from anonimizar._training import cross_validation as cv
 from anonimizar._training import data_loader, data_validator
 from anonimizar._training import io as training_io
+from anonimizar._training.curriculum_data import build_curriculum_datasets as _build_curriculum_datasets
 from anonimizar._training.cv_manager import NERCrossValidator as _NERCrossValidator
 from anonimizar._training.data_manager import NERDataManager as _NERDataManager
 from anonimizar._training.io_handler import load_from_doccano_jsonl as _load_jsonl
 from anonimizar._training.io_handler import save_to_doccano_jsonl as _save_jsonl
 from anonimizar._training.trainer import train_ner_model as _train_ner_model
+from anonimizar._training.trainer import train_ner_model_curriculum as _train_ner_model_curriculum
 
 warnings.filterwarnings("ignore", message=r"\[W030\] Some entities could not be aligned.*")
+
+_TAM_EXEMPLO_TUPLA = 2
 
 
 class Trainer:
@@ -599,6 +610,294 @@ class Trainer:
         else:
             return metrics
 
+    def train_curriculum(
+        self,
+        phases: list[dict],
+        *,
+        df_textos: pd.DataFrame | str | None = None,
+        df_entidades: pd.DataFrame | str | None = None,
+        windows: tuple[str, ...] | None = None,
+        include_pure: bool = False,
+        oversample: dict[str, int] | None = None,
+        drop: float = DEFAULT_DROP,
+        batch_size: int = DEFAULT_BATCH_SIZE,
+        batch_compounding: tuple[float, float, float] | None = None,
+        initial_base_frac: float = DEFAULT_INITIAL_BASE_FRAC,
+        errors: str = "raise",
+        auto_clean: bool = True,
+        strict_clean: bool = True,
+        resolve_conflicts: str = "coerce",
+        keep_empty_entities: bool = False,
+    ) -> dict[str, Any] | None:
+        """Treina o modelo NER por curriculum learning com fases sequenciais.
+
+        Cada fase treina um subconjunto de dados por um número de épocas, na
+        ordem informada — reproduzindo o padrão de curriculum learning dos
+        experimentos da estória 942 (junções de janelas de dificuldade e
+        conjuntos de qualidade). Há dois fluxos de entrada, misturáveis entre
+        fases, ambos usando a chave ``dataset``:
+
+        1. **End-to-end**: informe ``df_textos`` + ``df_entidades`` (ou um
+           caminho ``.jsonl`` em ``df_textos``) e referencie cada fase pelo
+           nome da janela em ``dataset`` (e ``conjunto`` opcional). As janelas
+           são geradas internamente e uma única vez.
+        2. **Separado**: informe dados prontos em ``dataset`` (dicts, listas,
+           DataFrames, JSONL ou tuplas ``(texto, {"entities": ...})`` do
+           formato dos joblibs da 942).
+
+        Um valor string de ``dataset`` que não termina em ``.jsonl`` é
+        interpretado como nome de janela (fluxo e2e); qualquer outro valor
+        (lista, dict, DataFrame, tuplas ou caminho ``.jsonl``) é tratado como
+        dado pronto (fluxo separado).
+
+        Labels novos encontrados nas fases (ex.: ``PIS``, ``CNS``,
+        ``RESERVISTA``) são registrados automaticamente no modelo e em
+        ``supported_labels``.
+
+        Args:
+            phases: Lista de fases. Cada fase é um dicionário com:
+                - ``dataset`` (obrigatório): dados da fase — nome da janela a
+                  usar no fluxo e2e (``w0``, ``w1``, ``w2``, ``full`` ou
+                  ``w00`` quando gerada) ou dados prontos do fluxo separado
+                  (formatos aceitos por ``add_data`` ou tuplas).
+                - ``conjunto`` (opcional, fluxo e2e): conjunto referenciado;
+                  padrão ``"default"``.
+                - ``epochs`` (int, obrigatório): épocas da fase (>= 1).
+                - ``name`` (str, opcional): nome da fase em logs e métricas.
+            df_textos: DataFrame com ``id``/``text`` ou caminho ``.jsonl``
+                (Doccano) com textos e entidades.
+            df_entidades: DataFrame com ``id``/``start``/``end``/``entidade``
+                (ou nomes da 942). Obrigatório quando ``df_textos`` é
+                DataFrame; ignore quando ``df_textos`` é ``.jsonl``.
+            windows: Janelas a gerar no fluxo e2e (padrão
+                ``("w0", "w1", "w2", "full")``); janelas referenciadas nas
+                fases são acrescentadas automaticamente.
+            include_pure: Se True no fluxo e2e, gera também a janela ``"w00"``
+                (entidade pura isolada).
+            oversample: Oversampling do ``w00`` (label → fator, ex.:
+                ``{"ENDEREÇO": 3}``).
+            drop: Taxa de dropout. Padrão = 0.35.
+            batch_size: Tamanho do minilote. Padrão = 8.
+            batch_compounding: Tupla ``(start, stop, rate)`` para minilotes
+                crescentes (ex.: ``(8.0, 32.0, 1.001)`` da 942).
+            initial_base_frac: Fração da 1ª fase usada em ``nlp.initialize()``.
+            errors: Política de erro do preparo dos dados ('raise', 'coerce',
+                'ignore').
+            auto_clean: Se True, aplica limpeza automática nas entidades.
+            strict_clean: Se True, descarta exemplos com entidades removidas.
+            resolve_conflicts: Como resolver conflitos de entidades.
+            keep_empty_entities: Se True, mantém textos sem entidades válidas.
+
+        Raises:
+            ValueError: Se ``phases`` for vazio, fase sem ``data``/``dataset``,
+                ``epochs`` inválido, ``dataset`` sem fonte de dados, janela/
+                conjunto inexistente ou fase vazia após o preparo.
+
+        Returns:
+            dict[str, Any]: Métricas com 'final_loss', 'iterations',
+                'examples_count', 'total_epochs' e 'phases' (detalhe por fase).
+
+        Example:
+            Fluxo end-to-end (jsonl ou dois DataFrames + fases por janela)::
+
+                >>> trainer = Trainer()
+                >>> trainer.train_curriculum(
+                ...     df_textos="./anotacoes.jsonl",
+                ...     phases=[
+                ...         {"dataset": "w0", "epochs": 2},
+                ...         {"dataset": "w1", "epochs": 1},
+                ...         {"conjunto": "default", "dataset": "full", "epochs": 8},
+                ...     ],
+                ... )
+
+            Fluxo separado (joblib preparado fora)::
+
+                >>> datasets = load_curriculum_datasets("./datasets_treino_2.joblib")
+                >>> trainer.train_curriculum(
+                ...     phases=[
+                ...         {"dataset": datasets["sujo"]["w0"], "epochs": 2},
+                ...         {"dataset": datasets["ouro"]["full"], "epochs": 8,
+                ...          "name": "ouro/full"},
+                ...     ],
+                ... )
+        """
+        if not phases:
+            msg = "Nenhuma fase de curriculum informada"
+            self.logger.exception(msg)
+            raise ValueError(msg)
+
+        precisa_e2e = any(
+            isinstance(fase.get("dataset"), str) and not fase["dataset"].endswith(".jsonl") for fase in phases
+        )
+        datasets = None
+        if precisa_e2e:
+            if df_textos is None:
+                msg = (
+                    "Fases referenciam janelas de 'dataset', mas df_textos/df_entidades (ou jsonl) não foram informados"
+                )
+                self.logger.exception(msg)
+                raise ValueError(msg)
+            df_t, df_e = self._carregar_fontes_curriculum(df_textos, df_entidades)
+            janelas_pedidas = list(windows) if windows else list(DEFAULT_CURRICULUM_WINDOWS)
+            for fase in phases:
+                janela = fase.get("dataset")
+                if isinstance(janela, str) and not janela.endswith(".jsonl") and janela not in janelas_pedidas:
+                    janelas_pedidas.append(janela)
+            datasets = _build_curriculum_datasets(
+                df_t,
+                df_e,
+                windows=tuple(janelas_pedidas),
+                include_pure=include_pure,
+                oversample=oversample,
+                logger=self.logger,
+            )
+
+        dados_resolvidos = [
+            (fase, self._resolver_dados_fase_curriculum(idx, fase, datasets))
+            for idx, fase in enumerate(phases, start=1)
+        ]
+        self._registrar_labels_curriculum(dados_resolvidos)
+        fases_treino = self._preparar_fases_treino_curriculum(
+            dados_resolvidos,
+            errors=errors,
+            keep_empty_entities=keep_empty_entities,
+            auto_clean=auto_clean,
+            strict_clean=strict_clean,
+            resolve_conflicts=resolve_conflicts,
+        )
+
+        try:
+            self.logger.info("Delegando curriculum para módulo trainer especializado")
+            self.nlp, metrics = _train_ner_model_curriculum(
+                nlp=self.nlp,
+                phases=fases_treino,
+                drop=drop,
+                batch_size=batch_size,
+                batch_compounding=batch_compounding,
+                initial_base_frac=initial_base_frac,
+                logger=self.logger,
+                other_pipes=self.other_pipes,
+            )
+            self.logger.info("Curriculum concluído com sucesso via módulo trainer")
+        except Exception as e:
+            msg = f"Erro durante treinamento por curriculum: {e!s}"
+            self.logger.exception(msg)
+            raise e  # noqa: TRY201
+        else:
+            return metrics
+
+    def _carregar_fontes_curriculum(
+        self,
+        df_textos: pd.DataFrame | str | None,
+        df_entidades: pd.DataFrame | None,
+    ) -> tuple[pd.DataFrame, pd.DataFrame]:
+        """Valida e carrega as fontes de dados do fluxo e2e do curriculum."""
+        if isinstance(df_textos, str):
+            if df_entidades is not None:
+                msg = "Quando df_textos é um caminho .jsonl, df_entidades deve ser None"
+                self.logger.exception(msg)
+                raise ValueError(msg)
+            return self._load_jsonl_to_dataframes(df_textos)
+        if isinstance(df_textos, pd.DataFrame) and df_entidades is None:
+            msg = "df_entidades é obrigatório quando df_textos é um DataFrame"
+            self.logger.exception(msg)
+            raise ValueError(msg)
+        return df_textos, df_entidades
+
+    def _resolver_dados_fase_curriculum(
+        self,
+        idx: int,
+        fase: dict,
+        datasets: dict[str, dict[str, list]] | None,
+    ) -> object:
+        """Resolve os dados de uma fase do curriculum: dado pronto ou nome de janela e2e."""
+        epochs = fase.get("epochs")
+        if not isinstance(epochs, int) or epochs < 1:
+            msg = f"Fase {idx} deve ter epochs inteiro >= 1, recebido: {epochs}"
+            self.logger.exception(msg)
+            raise ValueError(msg)
+        if "data" in fase:
+            msg = f"Fase {idx}: a chave 'data' foi unificada em 'dataset'"
+            self.logger.exception(msg)
+            raise ValueError(msg)
+        tem_dataset = "dataset" in fase
+        if tem_dataset:
+            valor = fase["dataset"]
+            if isinstance(valor, str) and not valor.endswith(".jsonl"):
+                if datasets is None:
+                    msg = (
+                        f"Fase {idx} referencia a janela {valor!r}, mas df_textos/df_entidades "
+                        "(ou jsonl) não foram informados"
+                    )
+                    self.logger.exception(msg)
+                    raise ValueError(msg)
+                conjunto = str(fase.get("conjunto", "default"))
+                janela = valor
+                if conjunto not in datasets:
+                    conjuntos = sorted(datasets)
+                    msg = f"Fase {idx}: conjunto {conjunto!r} inexistente. Disponíveis: {conjuntos}"
+                    self.logger.exception(msg)
+                    raise ValueError(msg)
+                if janela not in datasets[conjunto]:
+                    janelas = sorted(datasets[conjunto])
+                    msg = f"Fase {idx}: dataset {janela!r} inexistente no conjunto {conjunto!r}. Disponíveis: {janelas}"
+                    self.logger.exception(msg)
+                    raise ValueError(msg)
+                dados = datasets[conjunto][janela]
+            else:
+                dados = valor
+        else:
+            msg = f"Fase {idx} deve informar 'dataset'"
+            self.logger.exception(msg)
+            raise ValueError(msg)
+        if not dados:
+            msg = f"Fase {idx} sem dados"
+            self.logger.exception(msg)
+            raise ValueError(msg)
+        return dados
+
+    def _registrar_labels_curriculum(self, dados_resolvidos: list[tuple[dict, object]]) -> None:
+        """Registra labels novos encontrados nas fases antes do preparo (estilo labels_do_curriculum da 942)."""
+        labels_descob: set[str] = set()
+        for _, dados in dados_resolvidos:
+            for _, annotations in self._convert_to_tuples(dados, errors="coerce"):
+                for _, _, label in annotations.get("entities", []):
+                    labels_descob.add(str(label))
+        for label in sorted(labels_descob - set(self.supported_labels)):
+            self.ner.add_label(label)
+            self.supported_labels.append(label)
+            self.logger.info("Label novo do curriculum registrado: %s", label)
+
+    def _preparar_fases_treino_curriculum(
+        self,
+        dados_resolvidos: list[tuple[dict, object]],
+        *,
+        errors: str,
+        keep_empty_entities: bool,
+        auto_clean: bool,
+        strict_clean: bool,
+        resolve_conflicts: str,
+    ) -> list[dict]:
+        """Prepara os dados de cada fase (normalizar + auto_clean + validar BILUO)."""
+        fases_treino: list[dict] = []
+        for idx, (fase, dados) in enumerate(dados_resolvidos, start=1):
+            preparados = self._prepare_data(
+                dados,
+                errors=errors,
+                keep_empty_entities=keep_empty_entities,
+                auto_clean=auto_clean,
+                strict_clean=strict_clean,
+                resolve_conflicts=resolve_conflicts,
+            )
+            if not preparados:
+                msg = f"Fase {idx} ficou sem exemplos válidos após o preparo"
+                self.logger.exception(msg)
+                raise ValueError(msg)
+            fases_treino.append(
+                {"name": fase.get("name") or f"Fase {idx}", "train_data": preparados, "epochs": int(fase["epochs"])}
+            )
+        return fases_treino
+
     def _format_time(self, seconds: float) -> str:
         """Formata tempo em segundos para formato legível.
 
@@ -702,14 +1001,116 @@ class Trainer:
             self.logger.warning("Nenhum dado fornecido para adicionar.")
             return
 
-        # Converter dados de entrada para formato interno
-        new_data = data_loader.convert_input_data(
+        validated_data = self._prepare_data(
+            data,
+            errors=errors,
+            keep_empty_entities=keep_empty_entities,
+            auto_clean=auto_clean,
+            strict_clean=strict_clean,
+            resolve_conflicts=resolve_conflicts,
+            normalize_entities=normalize_entities,
+        )
+
+        self.training_data.extend(validated_data)
+        # Sincronizar com o gerenciador de dados centralizado
+        self._data_manager.training_data = list(self.training_data)
+        msg = (
+            f"Dados adicionados com sucesso. Exemplos válidos adicionados: {len(validated_data)}. "
+            f"Total de exemplos no conjunto de treinamento: {len(self.training_data)}"
+        )
+        self.logger.debug(msg)
+
+    def _convert_to_tuples(self, data: list | dict | pd.DataFrame | str | tuple, errors: str = "raise") -> list:
+        """Converte dados de entrada em tuplas ``(texto, {"entities": [...]})`` sem validar.
+
+        Além dos formatos aceitos por ``data_loader.convert_input_data``
+        (dict, lista de dicts, DataFrame, caminho JSONL), aceita tuplas
+        ``(texto, {"entities": [...]})`` — formato usado nos joblibs dos
+        experimentos da estória 942 — isolando-as antes da conversão dos
+        demais itens.
+
+        Args:
+            data: Dados em qualquer formato aceito.
+            errors: Política de erro para a conversão ('raise', 'coerce',
+                'ignore').
+
+        Returns:
+            list: Lista de tuplas (texto, {"entities": [...]}).
+        """
+
+        def _eh_tupla_exemplo(item: object) -> bool:
+            return (
+                isinstance(item, tuple)
+                and len(item) == _TAM_EXEMPLO_TUPLA
+                and isinstance(item[0], str)
+                and isinstance(item[1], dict)
+            )
+
+        if isinstance(data, tuple) and _eh_tupla_exemplo(data):
+            return [data]
+        if isinstance(data, list):
+            tuplas = []
+            restantes = []
+            for item in data:
+                if _eh_tupla_exemplo(item):
+                    tuplas.append(item)
+                else:
+                    restantes.append(item)
+            if restantes:
+                tuplas.extend(
+                    data_loader.convert_input_data(
+                        data=restantes,
+                        logger=self.logger,
+                        transform_pandas_fn=lambda df: data_loader.transform_data_from_pandas(df, self.logger),
+                        load_jsonl_fn=training_io.load_doccano_jsonl,
+                        errors=errors,
+                    )
+                )
+            return tuplas
+        return data_loader.convert_input_data(
             data=data,
             logger=self.logger,
             transform_pandas_fn=lambda df: data_loader.transform_data_from_pandas(df, self.logger),
             load_jsonl_fn=training_io.load_doccano_jsonl,
             errors=errors,
         )
+
+    def _prepare_data(
+        self,
+        data: list | dict | pd.DataFrame | str | tuple | None,
+        *,
+        errors: str = "raise",
+        keep_empty_entities: bool = False,
+        auto_clean: bool = True,
+        strict_clean: bool = True,
+        resolve_conflicts: str = "coerce",
+        normalize_entities: bool | None = None,
+    ) -> list:
+        """Converte, normaliza, limpa e valida dados para o formato de treinamento.
+
+        Pipeline compartilhado entre ``add_data`` e ``train_curriculum``:
+        conversão para tuplas → normalização de entidades → limpeza automática
+        (opcional) → validação (labels, offsets e BILUO).
+
+        Args:
+            data: Dados em qualquer formato aceito, incluindo tuplas.
+            errors: Política de erro ('raise', 'coerce', 'ignore').
+            keep_empty_entities: Se True, mantém textos mesmo sem entidades.
+            auto_clean: Se True, aplica limpeza automática nas entidades.
+            strict_clean: Se True, descarta exemplos com entidades removidas.
+            resolve_conflicts: Como resolver conflitos ('raise', 'ignore',
+                'coerce').
+            normalize_entities: Se True, normaliza entidades removendo
+                prefixos/sufixos. Se None, usa ``self.normalize_entities``.
+
+        Returns:
+            list: Dados validados como ``(texto, {"entities": [...]})``.
+
+        Raises:
+            ValueError: Quando ``errors="raise"`` e entidades são perdidas
+                durante a limpeza.
+        """
+        new_data = self._convert_to_tuples(data, errors=errors)
 
         # Normalizar entidades (remover prefixos/sufixos)
         do_normalize = self.normalize_entities if normalize_entities is None else normalize_entities
@@ -768,14 +1169,7 @@ class Trainer:
             # Validar sem limpeza
             validated_data = self._validate_data(new_data, errors=errors, keep_empty_entities=keep_empty_entities)
 
-        self.training_data.extend(validated_data)
-        # Sincronizar com o gerenciador de dados centralizado
-        self._data_manager.training_data = list(self.training_data)
-        msg = (
-            f"Dados adicionados com sucesso. Exemplos válidos adicionados: {len(validated_data)}. "
-            f"Total de exemplos no conjunto de treinamento: {len(self.training_data)}"
-        )
-        self.logger.debug(msg)
+        return validated_data
 
     def _validate_data(
         self,

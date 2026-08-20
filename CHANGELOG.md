@@ -1,5 +1,48 @@
 # Changelog - Biblioteca Anonimizar
 
+## v1.1.0
+
+### Novidades
+
+- **Curriculum learning no `Trainer`**: novo método `Trainer.train_curriculum()`
+  treina o modelo por fases sequenciais com janelas de dificuldade
+  (`w0`/`w1`/`w2`/`full`/`w00`), reproduzindo o padrão validado nos
+  experimentos da estória 942. Dois fluxos de entrada, misturáveis entre
+  fases, ambos com a chave `dataset`: end-to-end (`df_textos` + `df_entidades`
+  ou `.jsonl`, fases pelo nome da janela em `dataset`/`conjunto`) e separado
+  (dados prontos em `dataset`, incluindo tuplas `(texto, {"entities": [...]})`
+  dos joblibs da 942). String que não termina em `.jsonl` é tratada como nome
+  de janela; qualquer outro valor é dado pronto.
+- **Novo módulo `anonimizar._training.curriculum_data`**: geração de datasets
+  por janela de contexto (`build_context_window_dataset` com `window` int ≥ 0
+  ou `"full"`), documento completo (`build_full_text_dataset`), entidade pura
+  isolada com oversampling (`build_pure_entity_dataset`) e o conjunto completo
+  (`build_curriculum_datasets`); persistência joblib compatível com os
+  datasets da 942 (`save_curriculum_datasets`/`load_curriculum_datasets`).
+- **Filtros herdados da 942**: documentos com `TEM_ERRO == True` removidos por
+  completo, entidades com label `_remover` descartadas, deduplicação e spans
+  inválidos (`start >= end`) removidos.
+- **`train_ner_model_curriculum`** em `anonimizar._training.trainer`:
+  núcleo de treinamento em fases com `batch_compounding` opcional
+  (minilotes crescentes) e `nlp.initialize()` na 1ª fase.
+- **Labels novos registrados automaticamente**: labels encontradas nas fases
+  fora de `supported_labels` (ex.: `PIS`, `CNS`) são adicionadas ao modelo e
+  ao `supported_labels` antes do treino.
+- Nova constante `DEFAULT_CURRICULUM_WINDOWS` em `_constants/thresholds.py` e
+  novos exports públicos em `anonimizar._training`.
+
+### Testes e Qualidade
+
+- Novo `tests/test_training_curriculum_data.py` (18 testes): janelas
+  w0/w1/w2/full, entidade pura, oversampling, filtros da 942, persistência
+  joblib e conversão do formato 942.
+- `tests/test_training_trainer.py`: suíte `TestTrainNERModelCurriculum` para
+  `train_ner_model_curriculum` (ordem das fases, validações, compounding).
+- `tests/test_sei_anonimizar_training.py`: suíte `TestTrainerCurriculum` para
+  os fluxos e2e/separado do `train_curriculum`, erros de validação e registro
+  de labels novos.
+- README, `docs/README.md` e pdoc3 atualizados com o curriculum learning.
+
 ## v1.0.6
 
 ### Correções

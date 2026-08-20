@@ -182,12 +182,12 @@ def add_pattern_rg(patterns: list[dict], logger: logging.Logger) -> None:
                 )
             },
         },
-        # Conselhos profissionais (CRM, CRO, CRP, CREA, etc.) como RG
+        # Conselhos profissionais (CRM, CRO, CRP, CREA, OAB, etc.) como RG
         {
             "label": "RG",
             "pattern": {
                 "REGEX": (
-                    rf"(?i)(?:CRM|CRO|CRP|CREA|CRF|CRESS|CRECI|COREN|CRMV)"
+                    rf"(?i)(?:CRM|CRO|CRP|CREA|CRF|CRESS|CRECI|COREN|CRMV|OAB)"
                     rf"[-/\s]*{BRAZIL_UF_PATTERN}[-/\s]*\d{{2,10}}"
                 )
             },
@@ -197,7 +197,7 @@ def add_pattern_rg(patterns: list[dict], logger: logging.Logger) -> None:
             "pattern": {
                 "REGEX": (
                     rf"(?i)\d{{2,10}}\s*[-/]\s*"
-                    rf"(?:CRM|CRO|CRP|CREA|CRF|CRESS|CRECI|COREN|CRMV)"
+                    rf"(?:CRM|CRO|CRP|CREA|CRF|CRESS|CRECI|COREN|CRMV|OAB)"
                     rf"\s*/?\s*{BRAZIL_UF_PATTERN}"
                 )
             },
@@ -206,7 +206,7 @@ def add_pattern_rg(patterns: list[dict], logger: logging.Logger) -> None:
             "label": "RG",
             "pattern": {
                 "REGEX": (
-                    r"(?i)(?:CRM|CRO|CRP|CREA|CRF|CRESS|CRECI|COREN|CRMV)"
+                    r"(?i)(?:CRM|CRO|CRP|CREA|CRF|CRESS|CRECI|COREN|CRMV|OAB)"
                     r"[-:\s]*\d{2,10}(?!\d)"
                 )
             },
