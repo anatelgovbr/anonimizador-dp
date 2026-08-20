@@ -28,6 +28,8 @@ DEFAULT_VALIDATION_SPLIT = 0.2
 DEFAULT_TRAIN_RATIO = 0.8
 #: Fração inicial padrão da base de treinamento.
 DEFAULT_INITIAL_BASE_FRAC = 1.0
+#: Janelas de dificuldade padrão do curriculum learning.
+DEFAULT_CURRICULUM_WINDOWS = ("w0", "w1", "w2", "full")
 #: Número padrão de processos paralelos.
 DEFAULT_N_JOBS = 1
 #: Diretório padrão para modelos treinados.
@@ -58,6 +60,7 @@ __all__ = [
     "DEFAULT_BATCH_SIZE",
     "DEFAULT_BETA",
     "DEFAULT_BETA_VALUES",
+    "DEFAULT_CURRICULUM_WINDOWS",
     "DEFAULT_DROP",
     "DEFAULT_INITIAL_BASE_FRAC",
     "DEFAULT_N_ITER",

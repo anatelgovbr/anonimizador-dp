@@ -100,7 +100,7 @@ def _has_rg_context_term(text: str, start: int, end: int, terms: tuple[str, ...]
     return any(term in contexto_rg or term in short_before for term in terms)
 
 
-CONSELHO_PROFISSIONAL_PATTERN = r"(?:CRM|CRO|CRP|CREA|CRF|CRESS|CRECI|COREN|CRMV)"
+CONSELHO_PROFISSIONAL_PATTERN = r"(?:CRM|CRO|CRP|CREA|CRF|CRESS|CRECI|COREN|CRMV|OAB)"
 
 
 def _validate_rg_issuer(rg_text: str, logger: Logger) -> bool | None:

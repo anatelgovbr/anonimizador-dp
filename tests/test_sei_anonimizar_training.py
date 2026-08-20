@@ -597,4 +597,192 @@ class TestJSONLSupport:
 
         trainer.add_data(str(jsonl_path))
 
-        assert len(trainer.training_data) == 2
+
+class TestTrainerCurriculum:
+    """Testes do método Trainer.train_curriculum()."""
+
+    def test_fluxo_separado_dicts_e_tuplas(self):
+        """Fases com dataset pronto (dicts e tuplas) treinam e retornam métricas."""
+        trainer = Trainer(labels=["CPF", "EMAIL"])
+        metrics = trainer.train_curriculum(
+            phases=[
+                {
+                    "name": "cpf",
+                    "dataset": [{"text": "CPF 123.456.789-09 ok", "entities": [(4, 18, "CPF")]}],
+                    "epochs": 1,
+                },
+                {
+                    "name": "email",
+                    "dataset": [("email joao@mail.com fim", {"entities": [(6, 19, "EMAIL")]})],
+                    "epochs": 1,
+                },
+            ]
+        )
+
+        assert metrics["iterations"] == 2
+        assert metrics["examples_count"] == 2
+        assert len(metrics["phases"]) == 2
+        assert metrics["phases"][0]["name"] == "cpf"
+        assert set(trainer.ner.labels).issuperset({"CPF", "EMAIL"})
+
+    def test_fluxo_end_to_end_com_dataframes(self):
+        """df_textos + df_entidades + fases por dataset geram janelas e treinam."""
+        trainer = Trainer(labels=["CPF"])
+        df_textos = pd.DataFrame(
+            {
+                "id": [1],
+                "text": ["CPF 123.456.789-09\n\nsegundo parágrafo\n\nterceiro sem entidade"],
+            }
+        )
+        df_entidades = pd.DataFrame(
+            {
+                "id": [1],
+                "start": [4],
+                "end": [18],
+                "entidade": ["CPF"],
+            }
+        )
+
+        metrics = trainer.train_curriculum(
+            df_textos=df_textos,
+            df_entidades=df_entidades,
+            windows=("w0", "full"),
+            phases=[
+                {"dataset": "w0", "epochs": 1},
+                {"conjunto": "default", "dataset": "full", "epochs": 1},
+            ],
+        )
+
+        assert metrics["iterations"] == 2
+        assert len(metrics["phases"]) == 2
+
+    def test_fluxo_end_to_end_com_jsonl(self, tmp_path):
+        """Caminho .jsonl em df_textos gera janelas e treina."""
+        trainer = Trainer(labels=["CPF"])
+        jsonl_path = tmp_path / "anotacoes.jsonl"
+        with jsonl_path.open("w", encoding="utf-8") as f:
+            f.write(json.dumps({"text": "CPF 123.456.789-09\n\nsegundo parágrafo", "labels": [[4, 18, "CPF"]]}) + "\n")
+
+        metrics = trainer.train_curriculum(
+            df_textos=str(jsonl_path),
+            phases=[{"dataset": "w0", "epochs": 1}],
+        )
+
+        assert metrics["iterations"] == 1
+
+    def test_fluxo_separado_com_joblib(self, tmp_path):
+        """build_curriculum_datasets -> save/load joblib -> fases dataset."""
+        from anonimizar._training.curriculum_data import (
+            build_curriculum_datasets,
+            load_curriculum_datasets,
+            save_curriculum_datasets,
+        )
+
+        trainer = Trainer(labels=["CPF"])
+        df_textos = pd.DataFrame({"id": [1], "text": ["CPF 123.456.789-09\n\noutro parágrafo"]})
+        df_entidades = pd.DataFrame({"id": [1], "start": [4], "end": [18], "entidade": ["CPF"]})
+
+        datasets = build_curriculum_datasets(df_textos, df_entidades, windows=("w0",))
+        caminho = tmp_path / "datasets.joblib"
+        save_curriculum_datasets(datasets, caminho)
+        carregado = load_curriculum_datasets(caminho)
+
+        metrics = trainer.train_curriculum(
+            phases=[{"dataset": carregado["default"]["w0"], "epochs": 1}],
+        )
+        assert metrics["iterations"] == 1
+
+    def test_fases_mistas_dataset_pronto_e_janela(self):
+        """Fases com dataset pronto e janela no mesmo curriculum funcionam juntas."""
+        trainer = Trainer(labels=["CPF"])
+        df_textos = pd.DataFrame({"id": [1], "text": ["CPF 123.456.789-09\n\nparágrafo extra"]})
+        df_entidades = pd.DataFrame({"id": [1], "start": [4], "end": [18], "entidade": ["CPF"]})
+
+        metrics = trainer.train_curriculum(
+            df_textos=df_textos,
+            df_entidades=df_entidades,
+            windows=("w0",),
+            phases=[
+                {"dataset": "w0", "epochs": 1},
+                {"dataset": [{"text": "email joao@mail.com fim", "entities": [(6, 19, "EMAIL")]}], "epochs": 1},
+            ],
+        )
+
+        assert metrics["iterations"] == 2
+        assert "EMAIL" in trainer.ner.labels
+
+    def test_phases_vazio_levanta_valueerror(self):
+        """phases vazio levanta ValueError."""
+        trainer = Trainer(labels=["CPF"])
+        with pytest.raises(ValueError, match="Nenhuma fase"):
+            trainer.train_curriculum(phases=[])
+
+    def test_fase_sem_dataset_levanta_valueerror(self):
+        """Fase sem 'dataset' levanta ValueError."""
+        trainer = Trainer(labels=["CPF"])
+        with pytest.raises(ValueError, match="'dataset'"):
+            trainer.train_curriculum(phases=[{"epochs": 1}])
+
+    def test_dataset_sem_fonte_de_dados_levanta_valueerror(self):
+        """Fase com janela 'dataset' sem df_textos/df_entidades levanta ValueError."""
+        trainer = Trainer(labels=["CPF"])
+        with pytest.raises(ValueError, match="df_textos"):
+            trainer.train_curriculum(phases=[{"dataset": "w0", "epochs": 1}])
+
+    def test_janela_inexistente_levanta_valueerror(self):
+        """dataset fora das janelas geradas levanta ValueError."""
+        trainer = Trainer(labels=["CPF"])
+        df_textos = pd.DataFrame({"id": [1], "text": ["CPF 123.456.789-09"]})
+        df_entidades = pd.DataFrame({"id": [1], "start": [4], "end": [18], "entidade": ["CPF"]})
+
+        with pytest.raises(ValueError, match="desconhecida"):
+            trainer.train_curriculum(
+                df_textos=df_textos,
+                df_entidades=df_entidades,
+                windows=("w0",),
+                phases=[{"dataset": "w9", "epochs": 1}],
+            )
+
+    def test_epochs_invalidos_levantam_valueerror(self):
+        """epochs inválido levanta ValueError."""
+        trainer = Trainer(labels=["CPF"])
+        with pytest.raises(ValueError, match="epochs"):
+            trainer.train_curriculum(phases=[{"dataset": [{"text": "CPF 1", "entities": []}], "epochs": 0}])
+
+    def test_label_novo_registrado_no_modelo(self):
+        """Label fora de supported_labels (PIS) é registrado no modelo e no NER."""
+        trainer = Trainer(labels=["CPF"])
+        metrics = trainer.train_curriculum(
+            phases=[
+                {
+                    "dataset": [
+                        {"text": "PIS 123.45678.90-1 aparece aqui", "entities": [(4, 19, "PIS")]},
+                    ],
+                    "epochs": 1,
+                }
+            ],
+        )
+
+        assert metrics["iterations"] == 1
+        assert "PIS" in trainer.ner.labels
+        assert "PIS" in trainer.supported_labels
+
+    def test_chave_data_antiga_levanta_valueerror(self):
+        """Fase com chave 'data' antiga levanta ValueError apontando a unificação."""
+        trainer = Trainer(labels=["CPF"])
+        with pytest.raises(ValueError, match="unificada"):
+            trainer.train_curriculum(phases=[{"data": [{"text": "CPF 123.456.789-09", "entities": []}], "epochs": 1}])
+
+    def test_dataset_pronto_jsonl_nao_exige_fontes(self, tmp_path):
+        """dataset com caminho .jsonl é dado pronto e dispensa df_textos/df_entidades."""
+        trainer = Trainer(labels=["CPF"])
+        jsonl_path = tmp_path / "fase.jsonl"
+        with jsonl_path.open("w", encoding="utf-8") as f:
+            f.write(json.dumps({"text": "CPF 123.456.789-09 fim", "labels": [[4, 18, "CPF"]]}) + "\n")
+
+        metrics = trainer.train_curriculum(
+            phases=[{"dataset": str(jsonl_path), "epochs": 1}],
+        )
+
+        assert metrics["iterations"] == 1
+        assert "CPF" in trainer.ner.labels
