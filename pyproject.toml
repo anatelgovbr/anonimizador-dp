@@ -27,6 +27,7 @@ license-files = ["LICENSE*"]
 [project.optional-dependencies]
 dev = [
     "pytest==9.0.3",
+    "pytest-cov>=6.0",
     "ruff==0.11.6",
     "pdoc3==0.11.6"
 ]
@@ -87,6 +88,15 @@ convention = "google"
 [tool.ruff.lint.per-file-ignores]
 # Ignore specific rules for test files.
 "tests/*.py" = ["S101", "ANN", "D", "INP001", "PLR2004"]
+
+[tool.coverage.run]
+source = ["anonimizar"]
+branch = true
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true
+omit = ["tests/*"]
 
 [tool.ruff.format]
 quote-style = "double"
