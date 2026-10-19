@@ -79,6 +79,8 @@ SUFIXOS: dict[str, list[str]] = {
         r"/\s*[A-ZÁ-Ú]{2,}\s*$",
     ],
     "CNH": [r"\s+DETRAN(\s*[/\-]?\s*[A-ZÁ-Ú]{2})?\s*$"],
+    # Pontuação de fim de frase não faz parte do endereço ("..., Brasília." -> "..., Brasília").
+    "ENDEREÇO": [r"[\s.,;:]+$"],
 }
 
 # ─── funções públicas ───────────────────────────────────
