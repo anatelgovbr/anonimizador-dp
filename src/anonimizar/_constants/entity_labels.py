@@ -52,6 +52,11 @@ ALL_MODEL_LABELS = {
 #: Labels genéricos de modelos spaCy que são descartados na extração.
 IGNORE_LABELS = ["LOC", "MISC", "ORG", "PER"]
 
+#: Label emitido pela detecção opcional de nomes de pessoas (parâmetro ``names_model``).
+#: Não faz parte de ``DEFAULT_SUPPORTED_LABELS``/``ALL_MODEL_LABELS``: não há regex nem
+#: treinamento associado, apenas a conversão de ``PER`` de um modelo spaCy genérico.
+NAME_LABEL = "NOME"
+
 # =============================================================================
 # PRIORIDADE DE PROCESSAMENTO
 # =============================================================================
@@ -74,6 +79,8 @@ ENTITY_PRIORITY_LIST = [
     "PIS",
     "CNS",
     "RESERVISTA",
+    # Nomes ficam por último: em empate de span, dado estruturado sempre vence.
+    "NOME",
 ]
 
 # =============================================================================
@@ -116,4 +123,5 @@ __all__ = [
     "DEFAULT_SUPPORTED_LABELS",
     "ENTITY_PRIORITY_LIST",
     "IGNORE_LABELS",
+    "NAME_LABEL",
 ]

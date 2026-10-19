@@ -46,7 +46,7 @@ O módulo combina duas abordagens:
         'start_position': 35,
         'end_position': 49,
         'text': '075.834.649-27',
-        'detected_by': re.compile(r'\\d{3}[.]\\d{3}[.]\\d{3}[-.\\/]\\d{2}', re.UNICODE)}]
+        'detected_by': 'regex'}]
 
     **Exemplo 2: Detecção por modelo sem labels específicos**
 
@@ -162,7 +162,7 @@ O módulo combina duas abordagens:
         'start_position': 35,
         'end_position': 49,
         'text': '000.000.000-00',
-        'detected_by': re.compile(r'\\d{3}[.]\\d{3}[.]\\d{3}[-.\\/]\\d{2}', re.UNICODE)}]
+        'detected_by': 'regex'}]
 
 
 **Métodos principais:**
@@ -314,6 +314,8 @@ class Anonimizar:
         use_cnh_validator: bool = True,
         auto_patterns: bool = True,
         normalize_entities: bool = True,
+        prefer_recall: bool = False,
+        names_model: str | None = None,
         logger: logging.Logger | None = None,
     ) -> None:
         """Inicializa o anonimizador com um modelo spaCy.
@@ -342,11 +344,21 @@ class Anonimizar:
                 Se False, o usuário deve chamar add_apply_patterns() manualmente.
             normalize_entities (bool): Se True (padrão), normaliza entidades removendo prefixos
                 e sufixos textuais (ex: "RG: 1234567 SSP/DF" vira "1234567").
+            prefer_recall (bool): Se True, prioriza não deixar dado pessoal passar, ao custo de
+                mais falsos positivos. Hoje relaxa duas regras: CPF com dígito verificador
+                inválido é aceito quando há palavra-chave de CPF no contexto (provável erro de
+                digitação) e telefone em formato inequívoco (DDD entre parênteses ou ``+55``) é
+                aceito sem palavra-chave. Padrão False (comportamento anterior).
+            names_model (str, optional): Nome ou caminho de um modelo spaCy genérico em português
+                (ex.: ``"pt_core_news_sm"``) usado para detectar nomes de pessoas, emitidos com o
+                label ``NOME``. Padrão None: nomes não são detectados. Exige o modelo instalado
+                (``python -m spacy download pt_core_news_sm``) e roda um segundo pipeline spaCy
+                por texto.
             logger (logging.Logger, optional): Logger personalizado para usar.
 
         Raises:
             ValueError: Se model_path estiver vazio ou não especificado.
-            OSError: Se o modelo especificado não puder ser carregado.
+            OSError: Se o modelo especificado (ou ``names_model``) não puder ser carregado.
 
         Note:
         - O limite máximo de caracteres por texto é definido como 3.000.000
@@ -378,6 +390,14 @@ class Anonimizar:
             self.use_titulo_validator = use_titulo_validator
             self.use_cnh_validator = use_cnh_validator
             self.normalize_entities = normalize_entities
+            self.prefer_recall = prefer_recall
+            self.names_model = names_model
+            self.nlp_names = None
+            if names_model:
+                # Só NER e classe gramatical são usados; parser e lemmatizer apenas custam tempo.
+                self.nlp_names = spacy.load(names_model, exclude=["parser", "lemmatizer"])
+                self.nlp_names.max_length = 3000000
+                self.logger.debug("Modelo de nomes carregado: %s", names_model)
             if labels is None or len(labels) == 0:
                 if "ner" in self.nlp_trained.pipe_names:
                     model_labels = list(self.nlp_trained.get_pipe("ner").labels)
@@ -650,6 +670,7 @@ class Anonimizar:
             use_cpf_validator=self.use_cpf_validator,
             use_cnh_validator=self.use_cnh_validator,
             use_titulo_validator=self.use_titulo_validator,
+            prefer_recall=self.prefer_recall,
         )
 
     def remove_overlap_positions(self, entities: list[dict]) -> list[dict]:
@@ -731,6 +752,7 @@ class Anonimizar:
             self.verify_entities_unified,
             self.logger,
             normalize=self.normalize_entities,
+            nlp_names=self.nlp_names,
         )
 
     def extract_entities_regex_re(self, text: str, return_type: str = "label_position") -> list[dict]:

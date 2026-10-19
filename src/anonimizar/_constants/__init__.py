@@ -23,6 +23,7 @@ from anonimizar._constants.entity_labels import (
     DEFAULT_SUPPORTED_LABELS,
     ENTITY_PRIORITY_LIST,
     IGNORE_LABELS,
+    NAME_LABEL,
 )
 from anonimizar._constants.formats import (
     ALL_ENTITIES_KEY,
@@ -193,6 +194,7 @@ __all__ = [
     "MIN_SPLIT_EXAMPLES",
     "MIN_TABLE_LINES",
     "MIN_TABLE_PIPE_COUNT",
+    "NAME_LABEL",
     "OVERLAP_BINS",
     "OVERLAP_BIN_LABELS",
     "PERCENT_MULTIPLIER",

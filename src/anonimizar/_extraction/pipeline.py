@@ -13,6 +13,7 @@ from typing import Any
 from anonimizar._common.overlap import remove_overlap_positions
 from anonimizar._extraction.markdown import extract_entities_from_markdown_tables
 from anonimizar._extraction.model import extract_from_model
+from anonimizar._extraction.names import extract_names
 from anonimizar._extraction.regex import extract_entities_regex_re
 from anonimizar._normalization import normalize_entity
 
@@ -151,8 +152,9 @@ def extract_entities(
     logger: Logger,
     *,
     normalize: bool = True,
+    nlp_names: Any = None,  # noqa: ANN401
 ) -> list[dict]:
-    """Extrai entidades combinando modelo spaCy, regex e tabelas markdown.
+    """Extrai entidades combinando modelo spaCy, regex, tabelas markdown e (opcionalmente) nomes.
 
     Args:
         nlp_trained (Any): Modelo spaCy treinado
@@ -164,6 +166,8 @@ def extract_entities(
         verify_fn (Callable): Função de verificação contextual
         logger (Logger): Logger para debug
         normalize (bool): Se True, remove prefixos/sufixos das entidades.
+        nlp_names (Any): Modelo spaCy genérico opcional cujas entidades ``PER`` são
+            convertidas em ``NOME``. Se ``None`` (padrão), nomes não são detectados.
 
     Returns:
         list[dict]: Lista de entidades extraídas e validadas
@@ -201,16 +205,18 @@ def extract_entities(
     entities_from_model = extract_from_model(nlp_trained, text, labels, "label_detail", verify_fn, logger)
     entities_from_regex = extract_entities_regex_re(text, patterns, "label_detail", verify_fn, logger)
     entities_from_tables = extract_entities_from_markdown_tables(text, "label_detail", logger, labels)
+    entities_from_names = extract_names(nlp_names, text, logger) if nlp_names is not None else []
 
     logger.debug(
-        "Detecções: modelo=%d regex=%d tabelas=%d",
+        "Detecções: modelo=%d regex=%d tabelas=%d nomes=%d",
         len(entities_from_model),
         len(entities_from_regex),
         len(entities_from_tables),
+        len(entities_from_names),
     )
 
     # Combinar e remover sobreposições
-    all_entities = entities_from_model + entities_from_regex + entities_from_tables
+    all_entities = entities_from_model + entities_from_regex + entities_from_tables + entities_from_names
     all_entities = _split_entities_by_newline(all_entities, text)
     if normalize:
         _limpar_prefixos_entidades(all_entities)
