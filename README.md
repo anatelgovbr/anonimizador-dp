@@ -145,6 +145,34 @@ anonymizer = Anonimizar(model_path="modelo_spacy", normalize_entities=False)
 
 O mesmo vale para `Trainer` e `Evaluation`:
 
+### Reduzindo dados pessoais não detectados (`prefer_recall` e nomes)
+
+Por padrão a biblioteca prioriza precisão: um número só é anonimizado se passar nos validadores.
+Para usos em que **deixar um dado passar é pior que anonimizar a mais** (ex.: enviar texto a um LLM
+externo), há duas opções, ambas desligadas por padrão:
+
+```python
+anonymizer = Anonimizar(
+    model_path="modelo_spacy",
+    prefer_recall=True,             # relaxa regras de CPF e telefone (abaixo)
+    names_model="pt_core_news_sm",  # detecta nomes de pessoas (label NOME)
+)
+```
+
+- `prefer_recall=True`:
+  - **CPF** com dígito verificador inválido é aceito quando há palavra-chave de CPF no contexto
+    (provável erro de digitação). Sem contexto, continua rejeitado.
+  - **TELEFONE** em formato inequívoco (`(61) 99999-1234`, `+55 61 99999-1234`) é aceito sem
+    palavra-chave. Sequências soltas de dígitos continuam exigindo contexto.
+- `names_model`: usa um modelo spaCy genérico em português (`python -m spacy download pt_core_news_sm`)
+  para detectar nomes, que o modelo NER do pacote não cobre. Entidades `PER` viram `NOME` e perdem
+  para qualquer dado estruturado em caso de sobreposição. Palavras comuns marcadas como pessoa (ex.:
+  "Encaminhe" no início de frase) são descartadas pela classe gramatical. Roda um segundo pipeline
+  spaCy, então o tempo por texto aumenta (cerca de 2x nos testes feitos).
+
+> **Atenção:** os dois modos aumentam o recall e podem aumentar falsos positivos. Avalie com o
+> `Evaluation` no seu corpus antes de adotá-los em produção.
+
 ### Treinamento com Épocas Personalizadas
 
 O `Trainer` permite ajustar o número de épocas (iterações) do treinamento pelo parâmetro `n_iter` (padrão: 20):

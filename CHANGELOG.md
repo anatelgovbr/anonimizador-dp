@@ -1,5 +1,28 @@
 # Changelog - Biblioteca Anonimizar
 
+## Não lançado
+
+### Novidades
+
+- **`Anonimizar(prefer_recall=True)`** (padrão `False`): prioriza não deixar dado pessoal passar.
+  CPF com dígito verificador inválido é aceito quando há palavra-chave de CPF no contexto, e
+  TELEFONE em formato inequívoco (DDD entre parênteses ou `+55`) é aceito sem palavra-chave.
+- **`Anonimizar(names_model="pt_core_news_sm")`** (padrão `None`): detecção opcional de nomes de
+  pessoas via modelo spaCy genérico, emitidos com o label `NOME` (`NAME_LABEL`). Palavras comuns
+  marcadas como `PER` são descartadas pela classe gramatical. Novo módulo `_extraction/names.py`.
+
+### Correções
+
+- **`detected_by` serializável**: entidades detectadas por regex passam a trazer `"regex"` em vez do
+  objeto `re.Pattern`, o que quebrava `json.dumps` em `label_detail` e divergia do README.
+- **ENDEREÇO**: a pontuação de fim de frase (`.`, `,`, `;`, `:`) deixa de fazer parte da entidade
+  (antes, `"... Brasília."` consumia o ponto final do texto anonimizado). Vale para
+  `normalize_entities=True`.
+
+### Testes e Qualidade
+
+- Novo `tests/test_privacy_improvements.py` (39 testes).
+
 ## v1.1.0
 
 ### Novidades

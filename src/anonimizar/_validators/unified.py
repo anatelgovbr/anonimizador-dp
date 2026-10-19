@@ -20,6 +20,7 @@ def verify_entities_unified(
     use_cpf_validator: bool = True,
     use_cnh_validator: bool = True,
     use_titulo_validator: bool = True,
+    prefer_recall: bool = False,
 ) -> bool | str:
     """Valida uma entidade detectada usando contexto textual e regras por tipo.
 
@@ -36,6 +37,9 @@ def verify_entities_unified(
         use_cpf_validator (bool): Se True, aplica validação algorítmica de CPF
         use_cnh_validator (bool): Se True, aplica validação algorítmica de CNH
         use_titulo_validator (bool): Se True, aplica validação algorítmica de Título
+        prefer_recall (bool): Se True, validadores que suportam o modo relaxam critérios
+            para reduzir dados pessoais não detectados (ver ``validate_cpf_context`` e
+            ``validate_telefone_context``).
 
     Returns:
         bool | str:
@@ -73,6 +77,8 @@ def verify_entities_unified(
         kwargs["use_cnh_validator"] = use_cnh_validator
     if "use_titulo_validator" in validator.__code__.co_varnames:
         kwargs["use_titulo_validator"] = use_titulo_validator
+    if "prefer_recall" in validator.__code__.co_varnames:
+        kwargs["prefer_recall"] = prefer_recall
 
     return validator(
         text,

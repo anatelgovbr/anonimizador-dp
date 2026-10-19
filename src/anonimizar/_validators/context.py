@@ -76,6 +76,29 @@ RG_AUX_CONTEXT_TERMS = ("documento", "identificacao", "orgao", "emissor")
 RG_SIX_DIGIT_CONTEXT_TERMS = ("rg", "identidade", "registro geral", "documento de identidade")
 
 
+CPF_DIGITS = 11
+
+#: Telefone brasileiro em formato inequívoco: DDD entre parênteses (com ou sem ``+55``)
+#: ou ``+55`` seguido de DDD. Dígitos soltos (``1234567890``) ficam de fora de propósito.
+_TELEFONE_FORMATO_FORTE = re.compile(
+    r"^(?:(?:\+55[\s-]?)?\(\d{2}\)\s?9?\d{4}[-\s]?\d{4}|\+55[\s-]?\d{2}[\s-]?9?\d{4}[-\s]?\d{4})$"
+)
+
+
+def _parece_cpf(text_entity: str) -> bool:
+    """Indica se o texto tem 11 dígitos não todos iguais (formato de CPF, DV à parte).
+
+    Args:
+        text_entity (str): Texto da entidade, com ou sem pontuação.
+
+    Returns:
+        bool: True se há exatamente 11 dígitos e não são todos o mesmo dígito
+        (``111.111.111-11`` é marcador de preenchimento, não dado pessoal).
+    """
+    digitos = re.sub(r"\D", "", text_entity)
+    return len(digitos) == CPF_DIGITS and len(set(digitos)) > 1
+
+
 def _get_context_window(text: str, start: int, end: int, label: str) -> str:
     """Extrai a janela de contexto para um label.
 
@@ -204,6 +227,7 @@ def validate_cpf_context(
     logger: Logger,
     *,
     use_cpf_validator: bool = True,
+    prefer_recall: bool = False,
 ) -> bool | str:
     """Valida entidade CPF/FISTEL por contexto e algoritmo.
 
@@ -214,6 +238,9 @@ def validate_cpf_context(
         text_entity (str): Texto da entidade
         logger (Logger): Logger
         use_cpf_validator (bool): Se deve usar validador algorítmico
+        prefer_recall (bool): Se True, um número com 11 dígitos e dígito verificador inválido
+            é aceito quando há palavra-chave de CPF no contexto (provável erro de digitação,
+            ainda assim dado pessoal). Sem contexto explícito, a rejeição é mantida.
 
     Returns:
         bool | str: True (válido), False (inválido), ou "CNH" (reclassificação)
@@ -228,8 +255,10 @@ def validate_cpf_context(
             logger.debug("CPF rejeitado por tamanho inválido no span (%d chars)", end_char - start_char)
             return False
         if use_cpf_validator and not valida_cpf(text_entity):
-            logger.debug("CPF rejeitado por validação algorítmica: %s", text_entity)
-            return False
+            if not (prefer_recall and _parece_cpf(text_entity)):
+                logger.debug("CPF rejeitado por validação algorítmica: %s", text_entity)
+                return False
+            logger.debug("CPF com DV inválido aceito (prefer_recall com contexto explícito)")
         logger.debug("CPF aceito (contexto e validação ok)")
         return True
 
@@ -393,8 +422,10 @@ def validate_telefone_context(
     text: str,
     start_char: int,
     end_char: int,
-    text_entity: str,  # noqa: ARG001
+    text_entity: str,
     logger: Logger,
+    *,
+    prefer_recall: bool = False,
 ) -> bool:
     """Valida entidade TELEFONE por contexto.
 
@@ -402,14 +433,20 @@ def validate_telefone_context(
         text (str): Texto completo
         start_char (int): Posição inicial
         end_char (int): Posição final
-        text_entity (str): Texto da entidade (não usado)
+        text_entity (str): Texto da entidade (usado apenas com ``prefer_recall``)
         logger (Logger): Logger
+        prefer_recall (bool): Se True, aceita sem palavra-chave os formatos inequívocos de
+            telefone brasileiro: DDD entre parênteses (``(61) 99999-1234``) ou prefixo
+            ``+55``. Sequências de dígitos soltas continuam exigindo contexto.
 
     Returns:
         bool: True se válido, False caso contrário
     """
     contexto = _get_context_window(text, start_char, end_char, "TELEFONE")
     ok = any(p in contexto for p in KEYWORDS_TELEFONE)
+    if not ok and prefer_recall and _TELEFONE_FORMATO_FORTE.match(text_entity.strip()):
+        ok = True
+        logger.debug("TELEFONE aceito por formato inequívoco (prefer_recall)")
     logger.debug("TELEFONE contexto_ok=%s", ok)
     return ok
 

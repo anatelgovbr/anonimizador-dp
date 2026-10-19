@@ -34,7 +34,6 @@ def _create_entity_dict(
     start: int,
     end: int,
     text: str,
-    regex_obj: re.Pattern,
     return_type: str,
 ) -> dict:
     """Cria dicionário de entidade no formato solicitado.
@@ -44,7 +43,6 @@ def _create_entity_dict(
         start (int): Posição inicial
         end (int): Posição final
         text (str): Texto da entidade
-        regex_obj (re.Pattern): Objeto regex usado
         return_type (str): Formato de retorno
 
     Returns:
@@ -60,7 +58,9 @@ def _create_entity_dict(
         "start_position": start,
         "end_position": end,
         "text": text,
-        "detected_by": regex_obj,
+        # Texto (e não o ``re.Pattern``) para que ``label_detail`` seja serializável em JSON
+        # e coerente com os demais métodos ("modelo", "tabela_markdown").
+        "detected_by": "regex",
     }
 
 
@@ -106,7 +106,6 @@ def extract_entities_regex_re(
                     "start_char": start,
                     "end_char": end,
                     "text": match.group().strip(),
-                    "regex": match.re,
                 }
             )
 
@@ -132,7 +131,6 @@ def extract_entities_regex_re(
                     entidade_regex["start_char"],
                     entidade_regex["end_char"],
                     entidade_regex["text"],
-                    entidade_regex["regex"],
                     return_type,
                 )
                 resultado.append(entity_dict)
